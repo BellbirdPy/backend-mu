@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'configuracion',
     'animal',
     'lote',
+    'mortandad',
+    'nutricion'
 ]
 
 MIDDLEWARE_CLASSES = [

@@ -4,6 +4,7 @@ from django.db import models
 from configuracion.models import *
 from lote.models import *
 from establecimiento.models import *
+from mortandad.models import *
 
 # Create your models here.
 class Animal(models.Model):
@@ -28,6 +29,7 @@ class Animal(models.Model):
     peso_especifico = models.FloatField(null=True,blank=True)
     is_hembra = models.BooleanField(default=False)
     lote = models.ForeignKey(Lote, related_name="animales", null=True, on_delete=models.SET_NULL)
+    mortandad = models.ForeignKey(Mortandad, related_name="animales", null=True, on_delete=models.SET_NULL)
     establecimiento = models.ForeignKey(Establecimiento,related_name="animales")
 
     def __unicode__(self):

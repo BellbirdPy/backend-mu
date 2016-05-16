@@ -21,6 +21,8 @@ from potrero.views import PotreroViewSet
 from configuracion.views import CategoriaViewSet, RazaViewSet
 from animal.views import AnimalViewSet
 from lote.views import LoteViewSet
+from mortandad.views import MortandadViewSet
+from nutricion.views import NutricionViewSet
 
 router = DefaultRouter()
 router.register(r'potrero' ,PotreroViewSet,base_name='potrero')
@@ -29,6 +31,8 @@ router.register(r'categoria' ,CategoriaViewSet,base_name='categoria')
 router.register(r'raza' ,RazaViewSet,base_name='raza')
 router.register(r'animal' ,AnimalViewSet,base_name='animal')
 router.register(r'lote' ,LoteViewSet,base_name='lote')
+router.register(r'mortandad' ,MortandadViewSet,base_name='mortandad')
+router.register(r'nutricion' ,NutricionViewSet,base_name='nutricion')
 
 
 
