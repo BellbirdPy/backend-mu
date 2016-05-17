@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'configuracion',
     'animal',
     'lote',
+    'compra',
 ]
 
 MIDDLEWARE_CLASSES = [
