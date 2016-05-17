@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'animal',
     'lote',
     'mortandad',
-    'nutricion'
+    'nutricion',
     'compra',
 ]
 
