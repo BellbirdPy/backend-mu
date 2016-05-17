@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from compra.views import CompraViewSet, DetalleCompraViewSet
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework.routers import DefaultRouter
@@ -33,6 +34,8 @@ router.register(r'animal' ,AnimalViewSet,base_name='animal')
 router.register(r'lote' ,LoteViewSet,base_name='lote')
 router.register(r'mortandad' ,MortandadViewSet,base_name='mortandad')
 router.register(r'nutricion' ,NutricionViewSet,base_name='nutricion')
+router.register(r'compra',CompraViewSet,base_name='compra')
+router.register(r'detalle_compra',DetalleCompraViewSet,base_name='detalle_compra')
 
 
 

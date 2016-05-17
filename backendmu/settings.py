@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'lote',
     'mortandad',
     'nutricion'
+    'compra',
 ]
 
 MIDDLEWARE_CLASSES = [
