@@ -98,7 +98,7 @@ WSGI_APPLICATION = 'backendmu.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
+'''
 DATABASES = {
  'default': {
      'ENGINE': 'django.db.backends.postgresql',
@@ -108,6 +108,14 @@ DATABASES = {
      'HOST': 'ec2-54-243-199-161.compute-1.amazonaws.com',
      'PORT': '5432',
  }
+}
+'''
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
 
 # Password validation
