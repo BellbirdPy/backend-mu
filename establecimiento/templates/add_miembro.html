@@ -1,0 +1,40 @@
+{% extends "base.html"%}
+{% block content %}
+{% load staticfiles %}
+<div class="row intro">
+    <div class="container" >
+        <div class="section">
+            <!--   Icon Section   -->
+            <div class="row" style="padding-top:5%;padding-bottom:5%;">
+                <div class="col s12 m10 l6 offset-l3 offset-m1">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="icon-block">
+                                <h2 class="center light-green-text"><i class="material-icons">home</i></h2>
+                                <h5 class="center">Añadir miembro</h5>
+                                <br>
+                                <form role="form" method="post" autocomplete="off">{% csrf_token %}
+                                    <div class="input-field" >
+                                        <label for="mail">Email</label>
+                                        <input type="text" class="validate" id="mail" name="mail" required>
+                                        <p class="red">{{form.mail.errors.0}}</p>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <center><button class="btn waves-effect waves-light light-green" type="submit" name="action">Añadir</button></center>
+                                        </div>
+                                    </div>
+                                </form>
+                                <br>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

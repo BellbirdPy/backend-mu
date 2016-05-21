@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>Sistema MU</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+<nav class="white" role="navigation">
+    <div class="nav-wrapper">
+        <a id="logo-container" href="/" class="brand-logo" style="margin-left:15%;"><img class="hide-on-med-and-down" src="{% static 'images/logo.png' %}" height="62px" style="padding-right:8px;"/><div class="right green-text text-darken-2"> Sistema MU</div></a>
+        {% if user.is_authenticated %}
+        <ul id="dropdown1" class="dropdown-content">
+            <li><a href="/cuenta/" class="light-green-text">Mi Cuenta</a></li>
+            <li><a href="/logout/" class="light-green-text">Logout</a></li>
+        </ul>
+        {% endif %}
+
+        <ul class="right hide-on-med-and-down">
+            {% if user.is_authenticated %}
+            <li><a href="/" class="light-green white-text btn">Acceder al sistema</a></li>
+             <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons left">person</i>{{user}}<i class="material-icons right">arrow_drop_down</i></a></li>
+            {% else %}
+            <li><a href="/register/">Regístrate</a></li>
+            <li><a href="/login/">Login</a></li>
+            {% endif %}
+        </ul>
+        <ul id="nav-mobile" class="side-nav">
+            {% if user.is_authenticated %}
+            <li><a href="/" class="light-green white-text">Acceder al sistema</a></li>
+            <li><a href="/logout/">Logout</a></li>
+            {% else %}
+            <li><a href="/register/">Regístrate</a></li>
+            <li><a href="/login/">Login</a></li>
+            {% endif %}
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons green-text">menu</i></a>
+    </div>
+</nav>
+{% block content %}
+{% endblock %}
+<footer class="page-footer green">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">Company Bio</h5>
+                <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+
+
+            </div>
+            <div class="col l3 s12">
+                <h5 class="white-text">Settings</h5>
+                <ul>
+                    <li><a class="white-text" href="#!">Link 1</a></li>
+                    <li><a class="white-text" href="#!">Link 2</a></li>
+                    <li><a class="white-text" href="#!">Link 3</a></li>
+                    <li><a class="white-text" href="#!">Link 4</a></li>
+                </ul>
+            </div>
+            <div class="col l3 s12">
+                <h5 class="white-text">Connect</h5>
+                <ul>
+                    <li><a class="white-text" href="#!">Link 1</a></li>
+                    <li><a class="white-text" href="#!">Link 2</a></li>
+                    <li><a class="white-text" href="#!">Link 3</a></li>
+                    <li><a class="white-text" href="#!">Link 4</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            Made by <a class="grey-text text-lighten-3" href="http://bellbird.com.py">Bellbird</a>
+        </div>
+    </div>
+</footer>
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="{% static 'js/materialize.js' %}"></script>
+<script src="{% static 'js/init.js' %}"></script>
+</body>
+</html>

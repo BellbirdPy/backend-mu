@@ -1,0 +1,9 @@
+{% load i18n %}{% blocktrans %}Hola {{ username }},{% endblocktrans %}
+
+{% blocktrans with domain=site.domain %}Usted ha solicitado recuperar tu contraseña en {{ domain }}.{% endblocktrans %}
+
+{% trans "Usted puede introducir una nueva contraseña haciendo click en este link:" %}
+
+http{% if secure %}s{% endif %}://{{ site.domain }}{% url "password_reset_reset" token %}
+
+{% trans "Si usted no hizo este pedido de recuperación, simplemente ignore este email y quedara sin cambios." %}

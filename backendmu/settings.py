@@ -42,14 +42,18 @@ INSTALLED_APPS = [
     'rest_auth',
     'crispy_forms',
     'corsheaders',
+    'password_reset',
     #apps
+    'home',
     'establecimiento',
     'potrero',
     'configuracion',
     'animal',
     'lote',
     'mortandad',
-    'nutricion'
+    'nutricion',
+    'compra',
+    'sanitacion',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -77,7 +81,7 @@ ROOT_URLCONF = 'backendmu.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -126,9 +130,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-py'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Asuncion'
 
 USE_I18N = True
 
@@ -136,8 +140,19 @@ USE_L10N = True
 
 USE_TZ = True
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.zoho.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'gmacchi@bellbird.com.py'
+EMAIL_HOST_PASSWORD = 'cerrop1912'
+DEFAULT_FROM_EMAIL = 'gmacchi@bellbird.com.py'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+SERVER_EMAIL = 'gmacchi@bellbird.com.py'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)

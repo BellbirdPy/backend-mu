@@ -1,0 +1,48 @@
+{% extends "base.html"%}
+{% block content %}
+{% load staticfiles %}
+<div class="container" >
+    <div class="section">
+        <!--   Icon Section   -->
+        <div class="row" style="padding-top:5%;padding-bottom:5%;">
+            <div class="col s12 m12 l12">
+                <h3 class="header green-text darken-3">Mi cuenta</h3>
+                <br>
+                <p class="caption">Nombre de usuario: {{user}}</p>
+                <p>Email: {{user.email}}</p>
+                <p>Nombre: {{user.first_name}}</p>
+                <p>Apellidos: {{user.last_name}}</p>
+                {% if establecimientos %}<h5>Establecimientos:</h5>
+                <a href="/establecimiento/add/" class="btn btn-flat light-green-text white">Agregar nuevo establecimiento</a>
+                <br>
+                <div class="row">
+                    {% for e in establecimientos %}
+                    <div class="col m4 s6">
+                        <div class="card grey lighten-3">
+                            <div class="card-content">
+                                <span class="card-title">{{e.nombre}}</span>
+                                {% if e.owner == user %}<p>Usted es el propietario de este establecimiento.</p>{% else %}<p>Usted es miembro de este establecimiento.</p>{% endif %}
+                                <p>Estado: {% if e.estado == 'A' and not e.is_expired %}<span class="green-text">Activo</span>{% else %}<span class="red-text">Expirado</span>{% endif %}</p>
+                                <p>Fecha de expiración: {{e.fecha_expiracion}}</p>
+                                <p>Expira en ({{e.dias_restantes}} días.)</p>
+
+                                <a href="/establecimiento/detail/{{e.id}}/" class="light-green white-text btn {% if e.owner != user %}disabled{% endif %}" {% if e.owner != user %}disabled{% endif %} >Ver más</a>
+
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <a href="/" class="light-green white-text btn">Registrar nuevo establecimiento</a>
+                {% endif %}
+
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

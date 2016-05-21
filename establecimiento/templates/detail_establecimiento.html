@@ -1,0 +1,62 @@
+{% extends "base.html"%}
+{% block content %}
+{% load staticfiles %}
+<div class="row intro">
+    <div class="container" >
+        <div class="section">
+            <!--   Icon Section   -->
+            <div class="row" style="padding-top:5%;padding-bottom:5%;">
+                <div class="col s12 m12 l12 offset-m1">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="icon-block">
+                                <h2 class="center light-green-text"><i class="material-icons">home</i></h2>
+                                <h5 class="center">{{e.nombre}}</h5>
+                                <br>
+                                {% if e.owner == user %}<p>Usted es el propietario de este establecimiento.</p>{% else %}<p>Usted es miembro de este establecimiento.</p>{% endif %}
+                                <p>Estado: {% if e.estado == 'A' and not e.is_expired %}<span class="green-text">Activo</span>{% else %}<span class="red-text">Expirado</span>{% endif %}</p>
+                                <p>Fecha de expiración: {{e.fecha_expiracion}}</p>
+                                <p>Expira en ({{e.dias_restantes}} días.)</p>
+                                {% if e.miembros.all %}
+                                <p>Miembros: </p>
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th data-field="nombre">Nombre</th>
+                                        <th data-field="apellidos">Apellidos</th>
+                                        <th data-field="mail">Email</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {% for m in e.miembros.all %}
+                                    <tr>
+                                        <td>{{m.first_name}}</td>
+                                        <td>{{m.last_name}}</td>
+                                        <td>{{m.email}}</td>
+                                        <td><a href="/establecimiento/{{e.id}}/miembro/delete/{{m.id}}/" class="btn btn-flat white red-text"><i class="material-icons left">delete</i>Eliminar</a></td>
+                                    </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                                {% else %}
+                                <p>No tiene ningún miembro</p>
+                                {% endif %}
+                                <br>
+                                <a href="#" class="light-green white-text btn {% if e.owner != user %}disabled{% endif %}" {% if e.owner != user %}disabled{% endif %} >Acceder al pago</a>
+                                <a href="/establecimiento/{{e.id}}/miembro/add/" class="grey lighten-1 white-text btn {% if e.owner != user %}disabled{% endif %}" {% if e.owner != user %}disabled{% endif %} >Añadir miembro</a>
+                                <a href="/establecimiento/delete/{{e.id}}/" class="red white-text btn {% if e.owner != user %}disabled{% endif %}" {% if e.owner != user %}disabled{% endif %} >Dar de baja</a>
+                                <br>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

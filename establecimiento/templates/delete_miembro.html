@@ -1,0 +1,34 @@
+{% extends "base.html"%}
+{% block content %}
+{% load staticfiles %}
+<div class="row intro">
+    <div class="container" >
+        <div class="section">
+            <!--   Icon Section   -->
+            <div class="row" style="padding-top:5%;padding-bottom:5%;">
+                <div class="col s12 m6 l6 offset-m3 offset-l3 ">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="icon-block">
+                                <h2 class="center light-green-text"><i class="material-icons">home</i></h2>
+                                <h5 class="center">{{e.nombre}}</h5>
+                                <br>
+                                <p>¿Está usted seguro que quiere dar de baja a <strong>{{m.email}}</strong> como miembro del establecimiento?</p>
+                                <br>
+                                <form method="post">{% csrf_token %}
+                                    <input type="hidden" name="post" value="yes">
+                                    <button class="btn red" type="submit">Sí, estoy seguro</button>
+                                    <a href="#" onclick="window.history.back(); return false;" class="btn grey lighten-1">No, llévame atrás</a>
+                                </form>
+                                <br>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

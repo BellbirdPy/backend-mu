@@ -1,0 +1,47 @@
+{% extends "base.html"%}
+{% block content %}
+{% load staticfiles %}
+<div class="row intro">
+    <div class="container" >
+        <div class="section">
+            <!--   Icon Section   -->
+            <div class="row" style="padding-top:5%;padding-bottom:5%;">
+                <div class="col s12 m10 l6 offset-l3 offset-m1">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="icon-block">
+                                <h2 class="center light-green-text"><i class="material-icons">person</i></h2>
+                                <h5 class="center">Login</h5>
+                                <br>
+                                <form role="form" action="index.html" method="post" autocomplete="off">{% csrf_token %}
+                                    <div class="input-field" >
+                                        <label for="username">Nombre de usuario</label>
+                                        <input type="text" class="validate" id="username" name="username" required>
+                                    </div>
+                                    <div class="input-field">
+                                        <label for="Password1">Contraseña</label>
+                                        <input type="password" class="validate" id="Password1" name="password" required>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col s12">
+                                            <center><button class="btn waves-effect waves-light light-green" type="submit" name="action">Entrar</button></center>
+                                        </div>
+                                    </div>
+                                </form>
+                                {% if state %}<p class="red-text">{{state}}</p>{% endif %}
+                                <br>
+                                <div class="card-action">
+                                    <p><a href="/password/recover">olvidaste tu contraseña?</a></p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
