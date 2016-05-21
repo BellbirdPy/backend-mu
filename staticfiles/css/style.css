@@ -7,7 +7,7 @@
  */
 
 .intro {
-	background: url('/static/images/background6.jpg') no-repeat center center;
+	background: url('/staticfiles/images/background6.jpg') no-repeat center center;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
