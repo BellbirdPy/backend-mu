@@ -8,6 +8,7 @@ django-password-reset==0.8.2
 django-rest-auth==0.7.0
 djangorestframework==3.3.3
 gunicorn==19.5.0
+psycopg2==2.6.1
 six==1.10.0
 static3==0.7.0
 wsgiref==0.1.2
