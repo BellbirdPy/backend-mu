@@ -9,5 +9,5 @@
  */
 angular.module('frontendmuApp')
   .factory('Categoria', function ($resource) {
-    return $resource('http://localhost:8000/api/categoria/:id/',null);
+    return $resource('/api/categoria/:id/',null);
   });

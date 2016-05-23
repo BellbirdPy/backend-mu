@@ -11,9 +11,9 @@ angular.module('frontendmuApp')
   .controller('MainCtrl', function ($scope, ServerData, Establecimiento, $location) {
     $scope.establecimientos = [];
     $scope.obj = ServerData;
-    Establecimiento.query(function (data) {
-      $scope.establecimientos = data;
-    });
+    $scope.establecimientos = Establecimiento.get(function(response){
+    $scope.establecimientos = response.results;
+   });
 
     $scope.seleccionar = function(e){
       $scope.obj.establecimiento = e;

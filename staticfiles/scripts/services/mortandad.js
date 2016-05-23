@@ -9,7 +9,7 @@
  */
 angular.module('frontendmuApp')
   .factory('Mortandad', function ($resource) {
-    return $resource('http://localhost:8000/api/mortandad/:id/',null,{
+    return $resource('/api/mortandad/:id/',null,{
       'update': { method:'PUT' },
       'delete': {method:'DELETE'}
     });

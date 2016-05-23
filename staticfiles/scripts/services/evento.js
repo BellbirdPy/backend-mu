@@ -9,5 +9,5 @@
  */
 angular.module('frontendmuApp')
   .factory('Evento', function ($resource) {
-    return $resource('http://localhost:8000/api/sanitacion/eventos/:id/',null);
+    return $resource('/api/sanitacion/eventos/:id/',null);
   });
