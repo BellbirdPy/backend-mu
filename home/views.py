@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
 from forms import *
 from establecimiento.models import Establecimiento
 
@@ -58,3 +59,8 @@ def cuenta_view(request):
 
     return render(request,'cuenta.html',{'user':user,'establecimientos':establecimientos})
 
+@csrf_protect
+@ensure_csrf_cookie
+@login_required(None, 'login', '/login/')
+def index(request):
+    return render(request, 'angular.html')

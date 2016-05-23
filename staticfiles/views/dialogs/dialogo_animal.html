@@ -1,0 +1,78 @@
+
+<md-dialog layout="column" aria-label="Cliente" style="min-width: 800px; min-height: 600px">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2 class="white-text">Detalle Animal</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" aria-label="cancel" ng-click="cancel()"></md-button>
+    </div>
+  </md-toolbar>
+  <md-content layout-padding>
+  <form ng-show="razas.length >= 1 && categorias.length >= 1"  >
+
+    <md-input-container class="md-accent-1 md-block">
+          <label>Caravana</label>
+          <input ng-model="newAnimal.caravana" >
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Categoria</label>
+          <md-select ng-model="newAnimal.categoria">
+            <md-option ng-repeat="cat in categorias" value="[[cat.id]]">
+              [[cat.nombre]]
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Carimbo</label>
+          <input ng-model="newAnimal.carimbo" type="number">
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Raza</label>
+          <md-select ng-model="newAnimal.raza">
+            <md-option ng-repeat="raza in razas" value=[[raza.id]]>
+              [[raza.nombre]]
+            </md-option>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Estado Sanitario</label>
+          <md-select ng-model="newAnimal.estado_sanitario">
+            <md-option value="E">
+              En fecha
+            </md-option>
+            <md-option value="N">
+              No esta en fecha
+            </md-option>
+            <md-option value="D">
+              Desconocido
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Lote</label>
+          <md-select ng-model="newAnimal.lote" aria-label="Lote">
+            <md-option value="">
+              No asignar
+            </md-option>
+            <md-option ng-repeat="lote in lotes" value=[[lote.id]]>
+              [[lote.nombre]]
+            </md-option>
+              </md-select>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Peso</label>
+          <input ng-model="newAnimal.peso_especifico" type="number">
+        </md-input-container>
+
+    <md-dialog-actions layout="row" >
+      <!--<div class="md-actions"><a href="#" flex>Informe</a></div>-->
+      <span flex></span>
+      <md-button flex-order="1" ng-click="answer('guardar')" class="md-primary">Guardar</md-button>
+      <md-button ng-click="cancel()" >Cancelar</md-button>
+    </md-dialog-actions>
+  </form>
+
+  <div layout="row" layout-sm="column" layout-align="center center" ng-hide="razas.length >= 1 && categorias.length >= 1" layout-align="space-around">
+    <md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular>
+  </div>
+  </md-content>
+</md-dialog>

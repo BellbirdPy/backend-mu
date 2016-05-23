@@ -1,0 +1,44 @@
+
+<md-dialog layout="column" aria-label="Lote" style="min-width: 800px; ">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2 class="white-text">Sanitación</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" aria-label="cancel" ng-click="cancel()"></md-button>
+    </div>
+  </md-toolbar>
+  <form>
+    <md-dialog-content layout-padding>
+      <div layout="column">
+        <md-input-container>
+          <label>Descripción</label>
+          <input type="text" ng-model="newEvento.nombre" required>
+        </md-input-container>
+        <md-input-container>
+          <label>Veterinario</label>
+          <input type="text" ng-model="newEvento.veterinario" required>
+        </md-input-container>
+
+        <md-input-container ng-hide="newEvento.start && !newEvento.id">
+          <label>Fecha de Inicio</label>
+          <input type="date" ng-model="newEvento.start" required>
+        </md-input-container>
+        <md-input-container ng-hide="newEvento.end && !newEvento.id">
+          <label>Fecha de Fin</label>
+          <input type="date" ng-model="newEvento.end" required>
+        </md-input-container>
+
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" >
+      <!--<div class="md-actions"><a href="#" flex>Informe</a></div>-->
+      <span flex></span>
+
+      <md-button ng-show="newEvento.id" ng-click="deleteEvento(newEvento)" class="red-text">Eliminar</md-button>
+      <md-button ng-click="cancel()" >Cancelar</md-button>
+      <md-button ng-click="answer('guardar')" class="md-primary">Guardar</md-button>
+
+    </md-dialog-actions>
+  </form>
+</md-dialog>

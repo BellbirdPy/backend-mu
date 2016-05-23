@@ -12,4 +12,4 @@ class AnimalSerializer(serializers.ModelSerializer):
         model = Animal
         fields = ['id', 'caravana', 'lote', 'lote_nombre', 'establecimiento', 'raza', 'categoria', 'raza_nombre',
                   'categoria_nombre', 'carimbo', 'estado_sanitario_display', 'estado_sanitario', 'peso_especifico',
-                  'origen','detalle_compra']
+                  'origen','detalle_compra','estado']

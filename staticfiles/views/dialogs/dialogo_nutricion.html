@@ -1,0 +1,76 @@
+
+<md-dialog layout="column" aria-label="Lote" style="min-width: 800px; ">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2 class="white-text">Detalle Nutrición</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" aria-label="cancel" ng-click="cancel()"></md-button>
+    </div>
+  </md-toolbar>
+  <form>
+    <md-dialog-content layout-padding >
+      <div layout="column">
+        <md-input-container >
+          <label>Tipo</label>
+          <md-select ng-model="newNutricion.tipo_nutricion">
+            <md-option value="Cría">
+              Cría
+            </md-option>
+            <md-option value="Engorde">
+              Engorde
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container >
+          <label>Tipo de Alimento</label>
+          <md-select ng-model="newNutricion.tipo_comida">
+            <md-option ng-repeat="alimento in alimentos" value="[[alimento]]">
+              [[alimento]]
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container ng-show="newNutricion.tipo_comida == 'Otros'" >
+          <label>Tipo de Alimento (Otro)</label>
+          <input ng-model="form.tipo_comida" required >
+        </md-input-container>
+        <md-input-container>
+          <label>Descripcion de Alimento</label>
+          <input ng-model="newNutricion.descripcion_comida" >
+        </md-input-container>
+        <md-input-container>
+          <label>Fecha de Inicio</label>
+          <input type="date" ng-model="newNutricion.fecha_inicio" required>
+        </md-input-container>
+        <md-input-container>
+          <label>Fecha de Fin</label>
+          <input type="date" ng-model="newNutricion.fecha_fin" required>
+        </md-input-container>
+        <div layout="row" ng-show="newNutricion.fecha_inicio && newNutricion.fecha_fin">
+          <md-input-container flex >
+            <label>Gramos por Día (p/cabeza)</label>
+            <input ng-model="form.gramos" required ng-change="calculo_kilos(form.gramos)">
+          </md-input-container>
+          <md-input-container flex>
+            <label>Total kilos (p/cabeza)</label>
+            <input ng-model="form.kilos" required ng-change="calculo_kilos(form.kilos)" >
+          </md-input-container>
+        </div>
+        <md-input-container >
+          <label>Lotes</label>
+          <md-select multiple ng-model="newNutricion.lotes">
+            <md-option ng-repeat="lote in lotes" value="[[lote.id]]">
+              [[lote.nombre]]
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" >
+      <!--<div class="md-actions"><a href="#" flex>Informe</a></div>-->
+      <span flex></span>
+      <md-button flex-order="1" ng-click="answer('guardar')" class="md-primary">Guardar</md-button>
+      <md-button ng-click="cancel()" >Cancelar</md-button>
+    </md-dialog-actions>>
+  </form>
+</md-dialog>

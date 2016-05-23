@@ -6,5 +6,7 @@ from models import *
 class PotreroViewSet(viewsets.ModelViewSet):
     serializer_class = PotreroSerializer
     queryset = Potrero.objects.all()
-    filter_backends = (filters.DjangoFilterBackend,)
-    filter_fields = ('establecimiento',)
+    filter_backends = (filters.DjangoFilterBackend,filters.OrderingFilter)
+    filter_fields = ('establecimiento','lote')
+    ordering_fields = '__all__'
+    ordering = ('nombre',)

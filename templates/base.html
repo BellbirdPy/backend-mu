@@ -24,7 +24,7 @@
 
         <ul class="right hide-on-med-and-down">
             {% if user.is_authenticated %}
-            <li><a href="/" class="light-green white-text btn">Acceder al sistema</a></li>
+            <li><a href="/sistema/" class="light-green white-text btn">Acceder al sistema</a></li>
              <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons left">person</i>{{user}}<i class="material-icons right">arrow_drop_down</i></a></li>
             {% else %}
             <li><a href="/register/">Regístrate</a></li>
@@ -33,7 +33,7 @@
         </ul>
         <ul id="nav-mobile" class="side-nav">
             {% if user.is_authenticated %}
-            <li><a href="/" class="light-green white-text">Acceder al sistema</a></li>
+            <li><a href="/sistema/" class="light-green white-text">Acceder al sistema</a></li>
             <li><a href="/logout/">Logout</a></li>
             {% else %}
             <li><a href="/register/">Regístrate</a></li>

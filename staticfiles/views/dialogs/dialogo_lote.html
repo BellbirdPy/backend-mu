@@ -1,0 +1,44 @@
+
+<md-dialog layout="column" aria-label="Lote" style="min-width: 800px; ">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2 class="white-text">Detalle Lote</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" aria-label="cancel" ng-click="cancel()"></md-button>
+    </div>
+  </md-toolbar>
+  <form layout="column" layout-padding ng-show="potreros.length >= 1">
+
+        <md-input-container>
+          <label>Nombre</label>
+          <input ng-model="newLote.nombre" >
+        </md-input-container>
+        <md-input-container >
+          <label>Potrero</label>
+          <md-select ng-model="newLote.potrero">
+            <md-option ng-repeat="potrero in potreros" value="[[potrero.id]]">
+              [[potrero.nombre]]
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container>
+          <label>Peso Promedio</label>
+          <input ng-model="newLote.peso_promedio" >
+        </md-input-container>
+        <md-input-container>
+          <label>Cantidad</label>
+          <input ng-model="newLote.animales.length" disabled >
+        </md-input-container>
+
+
+    <md-dialog-actions layout="row" >
+      <!--<div class="md-actions"><a href="#" flex>Informe</a></div>-->
+      <span flex></span>
+      <md-button flex-order="1" ng-click="answer('guardar')" class="md-primary">Guardar</md-button>
+      <md-button ng-click="cancel()" >Cancelar</md-button>
+    </md-dialog-actions>
+  </form>
+  <div layout="row" layout-sm="column" layout-align="center center" ng-hide="potreros.length >= 1">
+    <md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular>
+  </div>
+</md-dialog>

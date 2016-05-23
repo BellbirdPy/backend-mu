@@ -1,0 +1,44 @@
+<div layout-padding>
+  <h1 class="md-display-1 green-text">Nutrición</h1>
+</div>
+<section>
+  <md-card layout="column">
+    <md-toolbar class="">
+      <div class="md-toolbar-tools white-text">
+        <h2 class="md-title">Dietas Activas</h2>
+      </div>
+    </md-toolbar>
+    <md-content>
+      <br>
+      <md-button  ng-hide="selection.length" ng-click="cargarNutricion()" class="lime-text">Agregar</md-button>
+      <br><br>
+      <center>
+        <p ng-hide="dietas.length">No tienes dietas activas. </p>
+      </center>
+      <table class="table table-responsive centered" ng-show="dietas.length > 0" right-click="selectAll()">
+        <thead>
+        <tr>
+          <th>Periodo</th>
+          <th>Tipo de Nutrición</th>
+          <th>Tipo de Alimento</th>
+          <th>Descrip. de Alimento</th>
+          <th>Total kg.(p/cabeza)</th>
+          <th>Lotes</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr ng-repeat="dieta in dietas" >
+          <td style="padding: 10px !important;">[[dieta.fecha_inicio | date:'dd/MM/yyyy']] - [[dieta.fecha_fin | date:'dd/MM/yyyy']]</td>
+          <td>[[dieta.tipo_nutricion]]</td>
+          <td>[[dieta.tipo_comida]]</td>
+          <td>[[dieta.descripcion_comida]]</td>
+          <td>[[dieta.kilos]]</td>
+          <td><div ng-repeat="lote in dieta.lotes_completo">[[lote.nombre]]</div></td>
+          <td><i class="material-icons action" ng-click="cargarNutricion(dieta)">mode_edit</i> <i class="material-icons action" ng-click="deleteNutricion(dieta)">delete</i></td>
+        </tr>
+        </tbody>
+      </table>
+    </md-content>
+  </md-card>
+</section>
