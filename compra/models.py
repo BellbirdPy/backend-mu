@@ -22,7 +22,7 @@ class DetalleCompra(models.Model):
     cantidad = models.PositiveIntegerField()
     caravana_inicial = models.PositiveIntegerField(default=0)
 
-    compra = models.ForeignKey(Compra, related_name="detalle_compra")
+    compra = models.ForeignKey(Compra, related_name="detalle_compra", on_delete=models.CASCADE)
     categoria = models.ForeignKey(Categoria, null=True, on_delete=models.SET_NULL, related_name="detalle_compra")
     raza = models.ForeignKey(Raza, null=True, on_delete=models.SET_NULL, related_name="detalle_compra")
 
