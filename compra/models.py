@@ -18,11 +18,13 @@ class Compra(models.Model):
 
 
 class DetalleCompra(models.Model):
-    compra = models.ForeignKey(Compra, related_name="detalle_compra")
-    categoria = models.ForeignKey(Categoria, null=True, on_delete=models.SET_NULL)
     carimbo = models.PositiveIntegerField()
-    raza = models.ForeignKey(Raza, null=True, on_delete=models.SET_NULL)
     cantidad = models.PositiveIntegerField()
+    caravana_inicial = models.PositiveIntegerField(default=0)
+
+    compra = models.ForeignKey(Compra, related_name="detalle_compra")
+    categoria = models.ForeignKey(Categoria, null=True, on_delete=models.SET_NULL, related_name="detalle_compra")
+    raza = models.ForeignKey(Raza, null=True, on_delete=models.SET_NULL, related_name="detalle_compra")
 
     def __unicode__(self):
         return unicode(self.categoria.nombre + ' ' + self.cantidad.__str__())
