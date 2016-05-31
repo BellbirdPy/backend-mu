@@ -1,0 +1,54 @@
+
+<md-dialog layout="column" aria-label="Lote" style="min-width: 800px; ">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2 class="white-text">Detalle Archivo</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" aria-label="cancel" ng-click="cancel()"></md-button>
+        </div>
+    </md-toolbar>
+    <div layout="column" layout-padding>
+
+        <md-card>
+        <md-toolbar class="md-table-toolbar md-default">
+            <div class="md-toolbar-tools">
+                <span>Animales</span>
+            </div>
+        </md-toolbar>
+        <!-- exact table from live demo -->
+        <md-table-container>
+            <table md-table>
+                <thead md-head>
+                <tr md-row>
+                    <th md-column><span>Caravana</span></th>
+                    <th md-column><span>Categoria</span></th>
+                    <th md-column>Carimbo</th>
+                    <th md-column>Raza</th>
+                    <th md-column>Peso Específico (Kg.)</th>
+                    <th md-column>Estado Sanitario</th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row ng-repeat="animal in archivo | limitTo: query.limit : (query.page -1) * query.limit">
+                    <td md-cell md-numeric>[[animal.caravana]]</td>
+                    <td md-cell>[[animal.categoria_nombre]]</td>
+                    <td md-cell md-numeric>[[animal.carimbo]]</td>
+                    <td md-cell>[[animal.raza_nombre]]</td>
+                    <td md-cell md-numeric>[[animal.peso_especifico]]</td>
+                    <td md-cell>[[animal.estado_sanitario_display]]</td>
+                </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+        <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="[[archivo.length]]" md-page-select="options.pageSelect" md-on-paginate="logPagination"></md-table-pagination>
+        </md-card>
+        <md-dialog-actions layout="row" >
+            <!--<div class="md-actions"><a href="#" flex>Informe</a></div>-->
+            <span flex></span>
+            <md-button flex-order="1" ng-click="answer('guardar')" class="md-primary">Guardar</md-button>
+            <md-button ng-click="cancel()" >Cancelar</md-button>
+        </md-dialog-actions>
+
+    </div>
+
+</md-dialog>

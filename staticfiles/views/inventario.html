@@ -68,6 +68,9 @@
     </md-card>
   </section>
   <!-- ANIMALES -->
+  <div layout="row" layout-sm="column" layout-align="space-around" ng-show="onLoadExcel">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+  </div>
   <section>
     <div layout-padding>
     <h2 class="md-headline green-text">Animales</h2>
@@ -135,6 +138,13 @@
       <md-toolbar class="md-table-toolbar md-default" ng-hide="selectedAnimales.length">
         <div class="md-toolbar-tools">
           <span>Animales</span>
+          <span flex></span>
+          <md-button>
+            <label for="file">
+              <md-icon><i class="material-icons">file_upload</i> </md-icon>Importar
+            </label>
+          </md-button>
+          <input id="file" type="file" ng-model="model.file" change="handleFile(model)" hidden="true" />
           <md-menu md-position-mode="target-right target" >
             <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu($event)">
               <md-icon><i class="material-icons">more_vert</i> </md-icon>
@@ -157,6 +167,9 @@
             <md-icon><i class="material-icons green-text text-darken-4">edit</i> </md-icon>
           </md-button>
           <md-button class="md-icon-button green-text text-darken-4" ng-show="selectedAnimales.length == 1" ng-click="deleteAnimal(selectedAnimales[0])"  aria-label="Delete Animal">
+            <md-icon><i class="material-icons green-text text-darken-4">delete</i> </md-icon>
+          </md-button>
+          <md-button class="md-icon-button green-text text-darken-4" ng-show="selectedAnimales.length > 1" ng-click="deleteListaAnimal(selectedAnimales)"  aria-label="Delete Animal">
             <md-icon><i class="material-icons green-text text-darken-4">delete</i> </md-icon>
           </md-button>
           <md-menu md-position-mode="target-right target" >
@@ -197,24 +210,25 @@
         <table md-table md-row-select multiple ng-model="selectedAnimales" md-progress="promiseAnimales">
           <thead md-head md-order="queryAnimales.ordering" md-on-reorder="getAnimales">
           <tr md-row md-select-id="id">
-            <th md-column md-numeric md-order-by="caravana"><span>Caravana</span></th>
+            <th md-column md-order-by="lote__nombre">Lote</th>
             <th md-column md-order-by="categoria__nombre"><span>Categoria</span></th>
             <th md-column md-numeric md-order-by="carimbo">Carimbo</th>
-            <th md-column md-order-by="raza__nombre">Raza</th>
             <th md-column md-numeric md-order-by="peso_especifico">Peso específico (Kg.)</th>
             <th md-column md-order-by="estado_sanitario">Estado Sanitario</th>
-            <th md-column md-order-by="lote__nombre">Lote</th>
+            <th md-column md-numeric md-order-by="caravana"><span>Caravana</span></th>
+            <th md-column md-order-by="raza__nombre">Raza</th>
           </tr>
           </thead>
           <tbody md-body>
           <tr md-row md-select="animal" md-select-id="id" md-auto-select ng-repeat="animal in animales.results">
-            <td md-cell>[[animal.caravana]]</td>
+
+            <td md-cell>[[animal.lote_nombre || 'No asignado']]</td>
             <td md-cell>[[animal.categoria_nombre]]</td>
             <td md-cell>[[animal.carimbo]]</td>
-            <td md-cell>[[animal.raza_nombre]]</td>
             <td md-cell>[[animal.peso_especifico]]</td>
             <td md-cell>[[animal.estado_sanitario_display]]</td>
-            <td md-cell>[[animal.lote_nombre || 'No asignado']]</td>
+            <td md-cell>[[animal.caravana]]</td>
+            <td md-cell>[[animal.raza_nombre]]</td>
           </tr>
           </tbody>
         </table>

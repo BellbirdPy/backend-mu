@@ -8,7 +8,7 @@
  * Controller of the frontendmuApp
  */
 angular.module('frontendmuApp')
-  .controller('InventarioCtrl', function ($scope,$filter,$mdDialog,Animal,Lote, ServerData,Categoria,Raza) {
+  .controller('InventarioCtrl', function ($scope,$filter,$mdDialog,$mdMedia,Animal,Lote, ServerData,Categoria,Raza) {
     var obj = ServerData;
     $scope.estados_sanitarios = [{c:'E',display:'En fecha'},{c:'N',display:'No esta en fecha'},{c:'D',display:'En fecha'}]
 
@@ -26,7 +26,7 @@ angular.module('frontendmuApp')
 
 
   //-----------------------------------ANIMALES---------------------------------------------------
-  $scope.queryAnimales = {establecimiento: ServerData.establecimiento.id,estado:'V',ordering: 'caravana',page: 1};
+  $scope.queryAnimales = {establecimiento: ServerData.establecimiento.id,estado:'V',ordering: 'lote__nombre',page: 1};
   $scope.selectedAnimales = [];
 
   function successAnimales(animales) {
@@ -138,6 +138,48 @@ angular.module('frontendmuApp')
        console.log('Cancelaste');
       });
     };
+
+     $scope.deleteListaAnimal = function(lista) {
+      $mdDialog.show({
+        templateUrl: '/staticfiles/views/dialogs/dialogo_eliminar.html',
+        targetEvent: null,
+        controller: ['$scope','$mdDialog','Animal','$filter' ,function ($scope, $mdDialog, Animal,$filter) {
+            $scope.lista = lista;
+          $scope.hide = function () {
+            $mdDialog.hide();
+          };
+
+          $scope.cancel = function () {
+            $mdDialog.cancel();
+          };
+
+          $scope.answer = function (answer) {
+            if (answer === 'guardar'){
+              if (lista.length >= 1){
+                angular.forEach(lista, function(animalSeleccionado){
+                  Animal.delete({id:animalSeleccionado.id},animalSeleccionado,function(data){
+                    console.log("eliminado: " + data.caravana);
+                  });
+                });
+                }
+                $mdDialog.hide(lista);
+              }else{
+                $mdDialog.hide(lista);
+              }
+          };
+
+        }]
+      })
+        .then(function(lista) {
+          if (lista !== true) {
+            $scope.getAnimales();
+            $scope.getLotes();
+          }
+        }, function() {
+          $scope.alert = 'You cancelled the dialog.';
+        });
+    };
+
 
   $scope.mudarAnimales = function(lista) {
       $mdDialog.show({
@@ -421,7 +463,7 @@ angular.module('frontendmuApp')
       });
     };
 
-    $scope.editLote = function(loteSeleccionado) {
+  $scope.editLote = function(loteSeleccionado) {
 
       $mdDialog.show({
         templateUrl: '/staticfiles/views/dialogs/dialogo_lote.html',
@@ -493,5 +535,145 @@ angular.module('frontendmuApp')
           $scope.alert = 'You cancelled the dialog.';
         });
     };
+
+
+  //------------------------------------MANEJO DE ARCHIVOS---------------
+var X = XLSX;
+$scope.archivo = {};
+$scope.cargarArchivo = function(result) {
+
+      $mdDialog.show({
+        templateUrl: '/staticfiles/views/dialogs/dialogo_archivo.html',
+        targetEvent: null,
+        controller: ['$scope','$mdDialog','Animal','ServerData' ,function ($scope, $mdDialog, Animal,ServerData) {
+
+
+            $scope.options = {
+                pageSelect: true
+              };
+              $scope.logPagination = function (page, limit) {
+                console.log('page: ', page);
+                console.log('limit: ', limit);
+                }
+
+              $scope.query = {
+                limit: 20,
+                page: 1
+              };
+            $scope.archivo = result;
+            var categorias = {'1':'Toro','2':'Vaca','3':'Desmamante','4':'Ternero'};
+            var razas = {'1':'Brahman','2':'Angus','3':'Brangus','4':'Nelore'};
+
+            var rename = function (obj,oldName, newName) {
+                // Do nothing if the names are the same
+                if (oldName == newName) {
+                    return obj;
+                }
+                // Check for the old property name to avoid a ReferenceError in strict mode.
+                if (obj.hasOwnProperty(oldName)) {
+                obj[newName] = obj[oldName];
+                delete obj[oldName];
+                }
+                return obj;
+            };
+            angular.forEach($scope.archivo, function(animal){
+             animal = rename(animal,'Caravana','caravana');
+             animal = rename(animal,'Carimbo','carimbo');
+             animal = rename(animal,'Categoria','categoria');
+             animal = rename(animal,'Raza','raza');
+             animal = rename(animal,'Peso especifico','peso_especifico');
+             animal = rename(animal,'Estado sanitario','estado_sanitario');
+             animal.estado = 'V';
+             animal.establecimiento = ServerData.establecimiento.id;
+             if (animal.estado_sanitario.toString() === 'En fecha'){
+                animal.estado_sanitario = 'E'
+                animal.estado_sanitario_display = 'En fecha'
+             }else if (animal.estado_sanitario.toString() === 'No esta en fecha'){
+                animal.estado_sanitario = 'N'
+               animal.estado_sanitario_display = 'No esta en fecha'
+             }else if (animal.estado_sanitario.toString() === 'Desconocido'){
+                animal.estado_sanitario = 'D'
+                animal.estado_sanitario_display = 'Desconocido'
+             }else {
+                animal.estado_sanitario = 'E'
+                animal.estado_sanitario_display = 'En fecha'
+             }
+             animal.raza_nombre = razas[animal.raza];
+             animal.categoria_nombre = categorias[animal.categoria];
+
+
+
+            });
+
+
+          $scope.hide = function () {
+            $mdDialog.hide();
+          };
+
+          $scope.cancel = function () {
+            $mdDialog.cancel();
+          };
+
+          $scope.answer = function (answer) {
+            if (answer === 'guardar'){
+                angular.forEach($scope.archivo, function(animal){
+                var nuevo = new Animal(animal);
+                console.log(nuevo);
+
+                nuevo.$save(function () {
+
+                }, function (error) {
+                  console.log(error);
+                });
+
+
+                });
+                $mdDialog.hide();
+
+            }
+          };
+
+        }]
+      })
+        .then(function() {
+        $scope.getAnimales();
+        }, function() {
+          $scope.alert = 'You cancelled the dialog.';
+        });
+    };
+
+    var to_json = function (workbook) {
+	    var result = {};
+            var roa = X.utils.sheet_to_row_object_array(workbook.Sheets[workbook.SheetNames[0]]);
+            if(roa.length > 0){
+                result = roa;
+            }
+	$scope.cargarArchivo(result);
+	$scope.model = {};
+}
+
+ $scope.handleFile = function(e) {
+  console.log(e);
+
+  var files = [e.file];
+  var i,f;
+  for (i = 0, f = files[i]; i != files.length; ++i) {
+    var reader = new FileReader();
+    var name = f.name;
+    reader.onload = function(e) {
+      var data = e.target.result;
+
+      var workbook = X.read(data, {type: 'binary'});
+      console.log('ok');
+      to_json(workbook);
+
+      /* DO SOMETHING WITH workbook HERE */
+
+    };
+    reader.readAsBinaryString(f);
+  }
+}
+
+
 
   });
