@@ -1,4 +1,7 @@
 from __future__ import unicode_literals
+
+from django.template.defaultfilters import register
+from django.utils import timezone
 from lote.models import *
 from django.db import models
 
@@ -15,3 +18,10 @@ class Nutricion(models.Model):
 
     def __unicode__(self):
         return unicode(self.tipo_nutricion)
+
+    def is_activo(self):
+        ahora = timezone.now()
+        if ahora >= self.fecha_inicio and ahora <= self.fecha_fin:
+            return True
+        else:
+            return False

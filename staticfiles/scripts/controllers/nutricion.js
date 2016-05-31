@@ -8,14 +8,41 @@
  * Controller of the frontendmuApp
  */
 angular.module('frontendmuApp')
-  .controller('NutricionCtrl', function ($scope,$mdDialog,Nutricion,$filter,ServerData) {
-    $scope.dietas = [];
+  .controller('NutricionCtrl', function ($scope,$mdDialog,Nutricion,$filter,ServerData,Lote) {
 
-    Nutricion.query({establecimiento:ServerData.establecimiento.id},function(response) {
-      $scope.dietas = response;
-    });
+    $scope.queryLotes = {establecimiento: ServerData.establecimiento.id,ordering: 'nombre',page: 1};
 
-    $scope.deleteNutricion = function(ev) {
+      function successLotes(lotes) {
+        $scope.lotes = lotes;
+      }
+
+  $scope.getLotes = function () {
+    $scope.promiseLotes = Lote.get($scope.queryLotes,successLotes).$promise;
+  };
+
+  $scope.getLotes();
+
+    $scope.queryDietas = {establecimiento: ServerData.establecimiento.id,ordering: 'fecha_inicio',page: 1};
+    $scope.selectedDietas = [];
+
+  function successDietas(dietas) {
+    $scope.dietas = dietas;
+  }
+
+  $scope.getDietas = function () {
+  if ($scope.queryDietas.lotes){
+    if ($scope.queryDietas.lotes.toString() === 'todos'){
+        delete $scope.queryDietas["lotes"];
+    }
+    }
+
+    $scope.promiseDietas = Nutricion.get($scope.queryDietas,successDietas).$promise;
+    $scope.selectedDietas = [];
+  };
+
+  $scope.getDietas();
+
+    $scope.deleteDieta = function(ev) {
       // Appending dialog to document.body to cover sidenav in docs app
       console.log(ev);
       var confirm = $mdDialog.confirm()
@@ -24,13 +51,14 @@ angular.module('frontendmuApp')
         'Tipo de alimento: ' + ev.tipo_comida + '<br>' +
         'Periodo: ' + $filter('date')(new Date(ev.fecha_inicio), "dd/MM/yyyy")   + ' - '+ $filter('date')(new Date(ev.fecha_fin), "dd/MM/yyyy") + '<br>' )
         .ariaLabel('Delete potrero')
-        .targetEvent(ev)
+        .targetEvent(null)
         .ok('Sí, estoy seguro')
         .cancel('Cancelar');
       $mdDialog.show(confirm).then(function() {
         Nutricion.delete({id:ev.id},ev,function(data){
           console.log(data);
-          $scope.dietas.splice($scope.dietas.indexOf(ev),1);
+          $scope.dietas.results.splice($scope.dietas.results.indexOf(ev),1);
+          $scope.selectedDietas = [];
         });
       }, function() {
         $scope.status = 'Se eliminó correctamente.';
@@ -39,7 +67,7 @@ angular.module('frontendmuApp')
     };
 
 
-    $scope.cargarNutricion = function(nutricion_modificar) {
+    $scope.editDieta = function(nutricion_modificar) {
 
       $mdDialog.show({
         templateUrl: '/staticfiles/views/dialogs/dialogo_nutricion.html',
@@ -68,8 +96,8 @@ angular.module('frontendmuApp')
           };
 
           $scope.lotes = [];
-          Lote.query({establecimiento:ServerData.establecimiento.id},function(response) {
-            $scope.lotes = response;
+          Lote.get({establecimiento:ServerData.establecimiento.id},function(response) {
+            $scope.lotes = response.results;
           });
 
 

@@ -236,5 +236,46 @@
       <md-table-pagination md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}" md-limit="20" md-page="queryAnimales.page" md-total="[[animales.count]]" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="getAnimales" md-page-select></md-table-pagination>
     </md-card>
   </section>
+    <!-- MORTANDAD & ABIGEO
+    <section>
+        <div layout-padding>
+            <h2 class="md-headline green-text">Mortandad y Abigeo</h2>
+        </div>
+        <md-card>
+            <md-toolbar class="md-table-toolbar md-default" ng-hide="selectedMortandad.length">
+                <div class="md-toolbar-tools">
+                    <span>Mortandad y Abigeo</span>
+                </div>
+            </md-toolbar>
+            <md-table-container>
+                <table md-table md-progress="promiseMortandad">
+                    <thead md-head md-order="queryMortandad.ordering" md-on-reorder="getMortandad">
+                    <tr md-row>
+                        <th md-column md-order-by="lote__nombre">Lote</th>
+                        <th md-column md-order-by="categoria__nombre"><span>Categoria</span></th>
+                        <th md-column md-numeric md-order-by="carimbo">Carimbo</th>
+                        <th md-column md-numeric md-order-by="peso_especifico">Peso específico (Kg.)</th>
+                        <th md-column md-order-by="estado_sanitario">Estado Sanitario</th>
+                        <th md-column md-numeric md-order-by="caravana"><span>Caravana</span></th>
+                        <th md-column md-order-by="raza__nombre">Raza</th>
+                    </tr>
+                    </thead>
+                    <tbody md-body>
+                    <tr md-row md-select="animal" md-select-id="id" md-auto-select ng-repeat="animal in animales.results">
+
+                        <td md-cell>[[animal.lote_nombre || 'No asignado']]</td>
+                        <td md-cell>[[animal.categoria_nombre]]</td>
+                        <td md-cell>[[animal.carimbo]]</td>
+                        <td md-cell>[[animal.peso_especifico]]</td>
+                        <td md-cell>[[animal.estado_sanitario_display]]</td>
+                        <td md-cell>[[animal.caravana]]</td>
+                        <td md-cell>[[animal.raza_nombre]]</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </md-table-container>
+            <md-table-pagination md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}" md-limit="20" md-page="queryAnimales.page" md-total="[[animales.count]]" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="getAnimales" md-page-select></md-table-pagination>
+        </md-card>
+    </section>-->
 </div>
 
