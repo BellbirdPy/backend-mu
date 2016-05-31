@@ -26,7 +26,12 @@ class EstablecimientoViewSet(viewsets.ModelViewSet):
             This view should return a list of all the purchases
             for the currently authenticated user.
             """
-        return Establecimiento.objects.filter(Q(owner=self.request.user) | Q(miembros=self.request.user),estado='A')
+        #borrar esto en produccion
+
+        if self.request.user.is_authenticated():
+            return Establecimiento.objects.filter(Q(owner=self.request.user) | Q(miembros=self.request.user),estado='A')
+        else:
+            return Establecimiento.objects.all()
 
 @login_required(None,'login','/login/')
 def add_view(request):
