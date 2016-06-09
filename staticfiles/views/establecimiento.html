@@ -1,26 +1,26 @@
 <div layout-padding>
-  <h1 class="md-display-1 green-text">Establecimiento</h1>
+    <h1 class="md-display-1 green-text">Establecimiento</h1>
 </div>
-<div layout="row">
-  <md-card flex layout="column"  class="center action" ng-click="go('/potrero')">
-    <div flex class="md-toolbar-tools green darken-1">
-      <span flex></span>
-      <p class="white-text md-title" >Potreros</p>
-      <span flex></span>
+<section>
+    <div layout-padding>
+        <h2 class="md-headline green-text">Configuraciones</h2>
     </div>
-  </md-card>
-  <md-card flex layout="column"  class="center action">
-    <div flex class="md-toolbar-tools green darken-1">
-      <span flex></span>
-      <p class="white-text md-title" >Compra de animales</p>
-      <span flex></span>
+    <div layout="row">
+        <md-card flex layout="column"  class="center action" ng-click="go('/potrero')">
+            <div flex class="md-toolbar-tools green darken-1">
+                <p class="white-text md-title center" >Potreros</p>
+            </div>
+        </md-card>
+        <md-card flex layout="column"  class="center action" ng-click="go('/categoria')">
+            <div flex class="md-toolbar-tools green darken-1">
+                <p class="white-text md-title center" >Categorías personalizadas</p>
+            </div>
+        </md-card>
+        <md-card flex layout="column"  class="center action" ng-click="go('/raza')">
+            <div flex class="md-toolbar-tools green darken-1">
+                <p class="white-text md-title center" >Razas personalizadas</p>
+            </div>
+        </md-card>
     </div>
-  </md-card>
-  <md-card flex layout="column"  class="center action">
-    <div flex class="md-toolbar-tools green darken-1">
-      <span flex></span>
-      <p class="white-text md-title">Venta de animales</p>
-      <span flex></span>
-    </div>
-  </md-card>
-</div>
+</section>
+

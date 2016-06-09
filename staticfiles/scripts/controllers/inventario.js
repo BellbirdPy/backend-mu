@@ -8,7 +8,7 @@
  * Controller of the frontendmuApp
  */
 angular.module('frontendmuApp')
-  .controller('InventarioCtrl', function ($scope,$filter,$mdDialog,$mdMedia,Animal,Lote, ServerData,Categoria,Raza) {
+  .controller('InventarioCtrl', function ($scope,$filter,$mdDialog,$mdMedia,Animal,Lote, ServerData,Categoria,Raza,Mortandad,Establecimiento) {
     var obj = ServerData;
     $scope.estados_sanitarios = [{c:'E',display:'En fecha'},{c:'N',display:'No esta en fecha'},{c:'D',display:'En fecha'}]
 
@@ -26,7 +26,7 @@ angular.module('frontendmuApp')
 
 
     //-----------------------------------ANIMALES---------------------------------------------------
-    $scope.queryAnimales = {establecimiento: ServerData.establecimiento.id,estado:'V',ordering: 'lote__nombre',page: 1};
+    $scope.queryAnimales = {establecimiento: ServerData.establecimiento.id, estado:'V',ordering: 'lote__nombre',page: 1};
     $scope.selectedAnimales = [];
 
     function successAnimales(animales) {
@@ -179,7 +179,6 @@ angular.module('frontendmuApp')
           $scope.alert = 'You cancelled the dialog.';
         });
     };
-
 
     $scope.mudarAnimales = function(lista) {
       $mdDialog.show({
@@ -376,7 +375,7 @@ angular.module('frontendmuApp')
         targetEvent: null,
         controller: ['$scope','$mdDialog','Animal','Mortandad','ServerData' ,function ($scope, $mdDialog, Animal, Mortandad,ServerData) {
 
-          $scope.form = {};
+          $scope.newMortandad = {};
 
           $scope.hide = function () {
             $mdDialog.hide();
@@ -392,19 +391,12 @@ angular.module('frontendmuApp')
                 var listaId = []
                 angular.forEach(lista, function(animalSeleccionado){
                   listaId.push(animalSeleccionado.id);
-                  animalSeleccionado.estado = 'M';
-                  animalSeleccionado.lote = null;
-                  Animal.update({id:animalSeleccionado.id},animalSeleccionado,function(data){
-                  });
                 });
                 var nuevo = new Mortandad($scope.form);
                 nuevo.establecimiento = ServerData.establecimiento.id;
-                nuevo.animales = [];
+                nuevo.animales = listaId;
                 nuevo.$save(function (result) {
-                  result.animales = listaId;
-                  Mortandad.update({id:result.id},result,function(data){
-                    console.log(data);
-                  });
+                  console.log(result);
                 }, function (error) {
                   console.log(error);
                 });
@@ -454,6 +446,9 @@ angular.module('frontendmuApp')
       $mdDialog.show(confirm).then(function() {
         Lote.delete({id:lote.id},lote,function(data){
           console.log(data);
+          console.log(ServerData);
+          ServerData.establecimiento = Establecimiento.get({id:ServerData.establecimiento.id});
+          console.log(ServerData);
         });
         $scope.lotes.results.splice($scope.lotes.results.indexOf(lote),1);
         $scope.selectedLotes = []
@@ -468,7 +463,7 @@ angular.module('frontendmuApp')
       $mdDialog.show({
         templateUrl: '/staticfiles/views/dialogs/dialogo_lote.html',
         targetEvent: null,
-        controller: ['$scope','$mdDialog','Potrero','ServerData' ,function ($scope, $mdDialog, Potrero,ServerData) {
+        controller: ['$scope','$mdDialog','Potrero','ServerData','Establecimiento' ,function ($scope, $mdDialog, Potrero,ServerData,Establecimiento) {
           $scope.potreros =[];
 
           $scope.potreros = Potrero.get({establecimiento:ServerData.establecimiento.id,lote:""},function(response){
@@ -506,6 +501,9 @@ angular.module('frontendmuApp')
                 var nuevo = new Lote($scope.newLote);
 
                 nuevo.$save(function () {
+                  console.log(ServerData);
+                  ServerData.establecimiento = Establecimiento.get({id:ServerData.establecimiento.id});
+                  console.log(ServerData);
 
                 }, function (error) {
                   console.log(error);
@@ -535,6 +533,52 @@ angular.module('frontendmuApp')
           $scope.alert = 'You cancelled the dialog.';
         });
     };
+
+
+    //------------------------------------MORTANDAD Y ABIGEO---------------
+
+    $scope.editMortandad = function(mortandad) {
+      $mdDialog.show({
+        templateUrl: '/staticfiles/views/dialogs/dialogo_mortandad.html',
+        targetEvent: null,
+        controller: ['$scope','$mdDialog','Animal','Mortandad' ,function ($scope, $mdDialog, Animal, Mortandad) {
+          $scope.hola = 'hola';
+          $scope.form = {};
+          if (mortandad) {
+            $scope.form = mortandad;
+            $scope.form.fecha = new Date(mortandad.fecha);
+            console.log($scope.form);
+          }
+
+          $scope.hide = function () {
+            $mdDialog.hide();
+          };
+
+          $scope.cancel = function () {
+            $mdDialog.cancel();
+          };
+
+          $scope.answer = function (answer) {
+            if (answer === 'guardar'){
+              if (mortandad){
+
+                Mortandad.update({id:$scope.form.id},$scope.form,function(data){
+                  $scope.form = data;
+                  $mdDialog.hide($scope.form);
+                });
+              }
+            }
+          };
+
+        }]
+      })
+        .then(function(nuevo) {
+          console.log(nuevo);
+        }, function() {
+          $scope.alert = 'You cancelled the dialog.';
+        });
+    };
+
 
 
     //------------------------------------MANEJO DE ARCHIVOS---------------

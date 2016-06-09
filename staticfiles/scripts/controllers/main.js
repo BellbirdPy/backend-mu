@@ -8,7 +8,7 @@
  * Controller of the frontendmuApp
  */
 angular.module('frontendmuApp')
-  .controller('MainCtrl', function ($scope, ServerData, Establecimiento, $location) {
+  .controller('MainCtrl', function ($scope, ServerData, Establecimiento, $location,$rootScope) {
     $scope.establecimientos = [];
     $scope.obj = ServerData;
     $scope.establecimientos = Establecimiento.get(function(response){
@@ -17,8 +17,11 @@ angular.module('frontendmuApp')
 
     $scope.seleccionar = function(e){
       $scope.obj.establecimiento = e;
+      $rootScope.establecimiento = e;
       $location.path('/inventario/');
     };
+
+
 
 
 

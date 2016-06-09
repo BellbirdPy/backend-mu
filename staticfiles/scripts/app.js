@@ -17,9 +17,11 @@ angular
     'ngSanitize',
     'ngMaterial',
     'md.data.table',
-    'ur.file'
+    'ur.file',
+    'ngMaterialSidemenu'
   ])
   .config(function ($routeProvider,$mdThemingProvider,$httpProvider,$resourceProvider,$interpolateProvider) {
+
     // Force angular to use square brackets for template tag
     // The alternative is using {% verbatim %}
     $interpolateProvider.startSymbol('[[').endSymbol(']]');    // CSRF Support
@@ -82,7 +84,33 @@ angular
         controller: 'DashboardCtrl',
         controllerAs: 'dashboard'
       })
+      .when('/mortandad', {
+        templateUrl: '/staticfiles/views/mortandad.html',
+        controller: 'MortandadCtrl',
+        controllerAs: 'mortandad'
+      })
+      .when('/categoria', {
+        templateUrl: '/staticfiles/views/categoria.html',
+        controller: 'CategoriaCtrl',
+        controllerAs: 'categoria'
+      })
+      .when('/raza', {
+        templateUrl: '/staticfiles/views/raza.html',
+        controller: 'RazaCtrl',
+        controllerAs: 'raza'
+      })
       .otherwise({
         redirectTo: '/'
       });
+
+  }).run( function($rootScope, $location) {
+
+    // register listener to watch route changes
+    $rootScope.$on( "$routeChangeStart", function(event, next, current,ServerData) {
+      if ( $rootScope.establecimiento == null ) {
+          // not going to #login, we should redirect now
+          $location.path( "" );
+      }
+    });
   });
+

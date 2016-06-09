@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from models import *
+from animal.models import Animal
 
 class LoteSerializer(serializers.ModelSerializer):
     potrero_nombre = serializers.CharField(source='potrero.nombre',read_only=True)
@@ -7,3 +8,4 @@ class LoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lote
         fields = ['id','nombre','potrero','potrero_nombre','animales','peso_promedio','establecimiento']
+

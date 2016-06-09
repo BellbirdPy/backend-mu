@@ -1,6 +1,6 @@
 <div layout="column">
   <div >
-    <h1 class="md-display-1 green-text">Inventario</h1>
+    <h1 class="md-display-1 green-text">Manejo</h1>
   </div>
   <!-- LOTES -->
   <section>
@@ -32,7 +32,7 @@
           <md-button class="md-icon-button" ng-show="selectedLotes.length == 1" ng-click="editLote(selectedLotes[0])" aria-label="Editar Lote">
             <md-icon><i class="material-icons green-text text-darken-4">edit</i> </md-icon>
           </md-button>
-          <md-button class="md-icon-button green-text text-darken-4" ng-show="selectedLotes.length == 1" ng-click="deleteLote(selectedLotes[0])"  aria-label="Delete Animal">
+          <md-button class="md-icon-button green-text text-darken-4" ng-show="selectedLotes[0].animales.length == 0" ng-click="deleteLote(selectedLotes[0])"  aria-label="Delete Animal">
             <md-icon><i class="material-icons green-text text-darken-4">delete</i> </md-icon>
           </md-button>
         </div>
@@ -68,10 +68,7 @@
     </md-card>
   </section>
   <!-- ANIMALES -->
-  <div layout="row" layout-sm="column" layout-align="space-around" ng-show="onLoadExcel">
-    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-  </div>
-  <section>
+  <section ng-show="lotes.results.length">
     <div layout-padding>
     <h2 class="md-headline green-text">Animales</h2>
     </div>
@@ -236,46 +233,6 @@
       <md-table-pagination md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}" md-limit="20" md-page="queryAnimales.page" md-total="[[animales.count]]" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="getAnimales" md-page-select></md-table-pagination>
     </md-card>
   </section>
-    <!-- MORTANDAD & ABIGEO
-    <section>
-        <div layout-padding>
-            <h2 class="md-headline green-text">Mortandad y Abigeo</h2>
-        </div>
-        <md-card>
-            <md-toolbar class="md-table-toolbar md-default" ng-hide="selectedMortandad.length">
-                <div class="md-toolbar-tools">
-                    <span>Mortandad y Abigeo</span>
-                </div>
-            </md-toolbar>
-            <md-table-container>
-                <table md-table md-progress="promiseMortandad">
-                    <thead md-head md-order="queryMortandad.ordering" md-on-reorder="getMortandad">
-                    <tr md-row>
-                        <th md-column md-order-by="lote__nombre">Lote</th>
-                        <th md-column md-order-by="categoria__nombre"><span>Categoria</span></th>
-                        <th md-column md-numeric md-order-by="carimbo">Carimbo</th>
-                        <th md-column md-numeric md-order-by="peso_especifico">Peso específico (Kg.)</th>
-                        <th md-column md-order-by="estado_sanitario">Estado Sanitario</th>
-                        <th md-column md-numeric md-order-by="caravana"><span>Caravana</span></th>
-                        <th md-column md-order-by="raza__nombre">Raza</th>
-                    </tr>
-                    </thead>
-                    <tbody md-body>
-                    <tr md-row md-select="animal" md-select-id="id" md-auto-select ng-repeat="animal in animales.results">
 
-                        <td md-cell>[[animal.lote_nombre || 'No asignado']]</td>
-                        <td md-cell>[[animal.categoria_nombre]]</td>
-                        <td md-cell>[[animal.carimbo]]</td>
-                        <td md-cell>[[animal.peso_especifico]]</td>
-                        <td md-cell>[[animal.estado_sanitario_display]]</td>
-                        <td md-cell>[[animal.caravana]]</td>
-                        <td md-cell>[[animal.raza_nombre]]</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </md-table-container>
-            <md-table-pagination md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}" md-limit="20" md-page="queryAnimales.page" md-total="[[animales.count]]" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="getAnimales" md-page-select></md-table-pagination>
-        </md-card>
-    </section>-->
 </div>
 
