@@ -44,12 +44,14 @@
             <table md-table md-row-select multiple ng-model="selectedCat" md-progress="promiseCat">
                 <thead md-head md-order="queryCat.ordering" md-on-reorder="getCat">
                 <tr md-row md-select-id="id">
+                    <th md-column md-order-by="id"><span>Código</span></th>
                     <th md-column md-order-by="nombre"><span>Nombre</span></th>
                     <th md-column md-order-by="is_hembra"><span>Sexo</span></th>
                 </tr>
                 </thead>
                 <tbody md-body>
                 <tr md-row md-select="cat" md-select-id="id" ng-disabled="!cat.establecimiento" md-auto-select ng-repeat="cat in categorias.results">
+                    <td md-cell>[[cat.codigo]]</td>
                     <td md-cell>[[cat.nombre]]</td>
                     <td md-cell><span ng-show="cat.is_hembra">Hembra</span><span ng-hide="cat.is_hembra">Macho</span></td>
                 </tr>

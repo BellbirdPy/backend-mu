@@ -1,26 +1,23 @@
 <div layout-padding>
     <h1 class="md-display-1 green-text">Establecimiento</h1>
 </div>
-<section>
-    <div layout-padding>
-        <h2 class="md-headline green-text">Configuraciones</h2>
-    </div>
-    <div layout="row">
-        <md-card flex layout="column"  class="center action" ng-click="go('/potrero')">
-            <div flex class="md-toolbar-tools green darken-1">
-                <p class="white-text md-title center" >Potreros</p>
+<section layout-md="row" layout-sm="column" layout-gt-md="row">
+    <md-card flex-md flex-sm flex-gt-md="50">
+        <md-toolbar class="md-table-toolbar md-default">
+            <div class="md-toolbar-tools">
+                <span>Configuraciones</span>
             </div>
-        </md-card>
-        <md-card flex layout="column"  class="center action" ng-click="go('/categoria')">
-            <div flex class="md-toolbar-tools green darken-1">
-                <p class="white-text md-title center" >Categorías personalizadas</p>
-            </div>
-        </md-card>
-        <md-card flex layout="column"  class="center action" ng-click="go('/raza')">
-            <div flex class="md-toolbar-tools green darken-1">
-                <p class="white-text md-title center" >Razas personalizadas</p>
-            </div>
-        </md-card>
-    </div>
+        </md-toolbar>
+        <md-list>
+            <md-divider></md-divider>
+            <md-list-item ng-click="go(config.url)" ng-repeat="config in configuraciones">
+                <p> [[config.nombre]] </p>
+            </md-list-item>
+            <md-list-item ng-click="cargaAnimales()">
+                <p>Carga masiva de animales</p>
+            </md-list-item>
+        </md-list>
+
+    </md-card>
 </section>
 

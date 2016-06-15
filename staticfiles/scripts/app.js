@@ -106,11 +106,14 @@ angular
   }).run( function($rootScope, $location) {
 
     // register listener to watch route changes
-    $rootScope.$on( "$routeChangeStart", function(event, next, current,ServerData) {
+    $rootScope.$on( "$routeChangeStart", function(event, next, current,$templateCache) {
       if ( $rootScope.establecimiento == null ) {
           // not going to #login, we should redirect now
           $location.path( "" );
       }
     });
+    $rootScope.Utils = {
+      keys : Object.keys
+    }
   });
 

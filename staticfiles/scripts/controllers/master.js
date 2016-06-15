@@ -30,7 +30,6 @@ angular.module('frontendmuApp')
     vm.toggleOpen = toggleOpen;
     vm.autoFocusContent = false;
     vm.menu = menu;
-    console.log(vm);
 
     vm.status = {
       isFirstOpen: true,

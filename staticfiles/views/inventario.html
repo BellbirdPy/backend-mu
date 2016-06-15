@@ -44,6 +44,7 @@
         <table md-table md-row-select ng-model="selectedLotes" md-progress="promiseLotes">
           <thead md-head md-order="queryLotes.ordering" md-on-reorder="getLotes">
           <tr md-row md-select-id="id">
+              <th md-column md-numeric md-order-by="id"><span>Código</span></th>
             <th md-column md-order-by="nombre"><span>Nombre</span></th>
             <th md-column md-order-by="potrero__nombre"><span>Potrero</span></th>
             <th md-column md-numeric md-order-by="peso_promedio">Peso promedio (Kg.)</th>
@@ -54,7 +55,8 @@
           </thead>
           <tbody md-body>
           <tr md-row md-select="lote" md-select-id="id" md-auto-select ng-repeat="lote in lotes.results">
-            <td md-cell>[[lote.nombre]]</td>
+              <td md-cell>[[lote.id]]</td>
+              <td md-cell>[[lote.nombre]]</td>
             <td md-cell>[[lote.potrero_nombre]]</td>
             <td md-cell>[[lote.peso_promedio]]</td>
             <td md-cell>[[lote.animales.length]]</td>
@@ -207,6 +209,7 @@
         <table md-table md-row-select multiple ng-model="selectedAnimales" md-progress="promiseAnimales">
           <thead md-head md-order="queryAnimales.ordering" md-on-reorder="getAnimales">
           <tr md-row md-select-id="id">
+
             <th md-column md-order-by="lote__nombre">Lote</th>
             <th md-column md-order-by="categoria__nombre"><span>Categoria</span></th>
             <th md-column md-numeric md-order-by="carimbo">Carimbo</th>
@@ -230,7 +233,7 @@
           </tbody>
         </table>
       </md-table-container>
-      <md-table-pagination md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}" md-limit="20" md-page="queryAnimales.page" md-total="[[animales.count]]" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="getAnimales" md-page-select></md-table-pagination>
+      <md-table-pagination md-limit="queryAnimales.limit" md-limit-options="[20, 50, 100]" md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}" md-page="queryAnimales.page" md-total="[[animales.count]]" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="getAnimales"></md-table-pagination>
     </md-card>
   </section>
 

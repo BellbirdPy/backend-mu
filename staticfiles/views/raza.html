@@ -43,14 +43,16 @@
       <md-table-container>
         <table md-table md-row-select multiple ng-model="selectedRazas" md-progress="promiseRazas">
           <thead md-head md-order="queryRazas.ordering" md-on-reorder="getRazas">
-          <tr md-row md-select-id="id">
-            <th md-column md-order-by="nombre"><span>Nombre</span></th>
+          <tr md-row>
+              <th md-column md-numeric md-order-by="id"><span>Código</span></th>
+              <th md-column md-order-by="nombre"><span>Nombre</span></th>
             <th md-column md-order-by="descripcion"><span>Descripción</span></th>
           </tr>
           </thead>
           <tbody md-body>
           <tr md-row md-select="raza" md-select-id="id" ng-disabled="!raza.establecimiento" md-auto-select ng-repeat="raza in razas.results">
-            <td md-cell>[[raza.nombre]]</td>
+              <td md-cell>[[raza.id]]</td>
+              <td md-cell>[[raza.nombre]]</td>
             <td md-cell>[[raza.descripcion || "Sin descripción"]]</td>
           </tr>
           </tbody>

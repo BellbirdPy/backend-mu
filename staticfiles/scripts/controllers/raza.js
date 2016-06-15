@@ -10,7 +10,7 @@
 angular.module('frontendmuApp')
   .controller('RazaCtrl', function ($scope,Raza,$mdDialog,$filter,ServerData) {
 
-    $scope.queryRazas = {establecimiento: ServerData.establecimiento.id,ordering: 'nombre',page: 1};
+    $scope.queryRazas = {establecimiento: ServerData.establecimiento.id,ordering: 'id',page: 1};
     $scope.selectedRazas = [];
 
   function successRazas(razas) {

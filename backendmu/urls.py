@@ -49,5 +49,6 @@ urlpatterns = [
     url(r'^password/', include('password_reset.urls')),
     url(r'^', include('home.urls')),
     url(r'^establecimiento/', include('establecimiento.urls')),
+    url(r'^animal/', include('animal.urls')),
     url(r'^rest-auth/', include('rest_auth.urls')),
 ]

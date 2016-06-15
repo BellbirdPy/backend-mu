@@ -26,7 +26,7 @@ angular.module('frontendmuApp')
 
 
     //-----------------------------------ANIMALES---------------------------------------------------
-    $scope.queryAnimales = {establecimiento: ServerData.establecimiento.id, estado:'V',ordering: 'lote__nombre',page: 1};
+    $scope.queryAnimales = {establecimiento: ServerData.establecimiento.id,limit:20, estado:'V',ordering: 'lote__nombre',page: 1};
     $scope.selectedAnimales = [];
 
     function successAnimales(animales) {
@@ -34,6 +34,7 @@ angular.module('frontendmuApp')
     }
 
     $scope.getAnimales = function () {
+      console.log($scope.queryAnimales);
       $scope.promiseAnimales = Animal.get($scope.queryAnimales,successAnimales).$promise;
       $scope.selectedAnimales = [];
     };
@@ -159,10 +160,10 @@ angular.module('frontendmuApp')
                 angular.forEach(lista, function(animalSeleccionado){
                   Animal.delete({id:animalSeleccionado.id},animalSeleccionado,function(data){
                     console.log("eliminado: " + data.caravana);
+                    $mdDialog.hide(lista);
                   });
                 });
               }
-              $mdDialog.hide(lista);
             }else{
               $mdDialog.hide(lista);
             }
@@ -418,7 +419,7 @@ angular.module('frontendmuApp')
     };
 
     //-----------------------------------LOTES---------------------------------------------------
-    $scope.queryLotes = {establecimiento: ServerData.establecimiento.id,ordering: 'nombre',page: 1};
+    $scope.queryLotes = {establecimiento: ServerData.establecimiento.id,ordering: 'id',page: 1};
     $scope.selectedLotes = [];
 
     function successLotes(lotes) {
@@ -621,26 +622,27 @@ angular.module('frontendmuApp')
             return obj;
           };
           angular.forEach($scope.archivo, function(animal){
-            animal = rename(animal,'Caravana','caravana');
+            animal = rename(animal,'N° de Caravana','caravana');
+            animal = rename(animal,'Código de Raza','raza');
+            animal = rename(animal,'Código de Categoría','categoria');
             animal = rename(animal,'Carimbo','carimbo');
-            animal = rename(animal,'Categoria','categoria');
-            animal = rename(animal,'Raza','raza');
-            animal = rename(animal,'Peso especifico','peso_especifico');
+            animal = rename(animal,'N° de Caravana de la Madre','caravana_madre');
+            animal = rename(animal,'Código de Lote','lote');
             animal = rename(animal,'Estado sanitario','estado_sanitario');
             animal.estado = 'V';
             animal.establecimiento = ServerData.establecimiento.id;
             if (animal.estado_sanitario.toString() === 'En fecha'){
-              animal.estado_sanitario = 'E'
-              animal.estado_sanitario_display = 'En fecha'
+              animal.estado_sanitario = 'E';
+              animal.estado_sanitario_display = 'En fecha';
             }else if (animal.estado_sanitario.toString() === 'No esta en fecha'){
-              animal.estado_sanitario = 'N'
-              animal.estado_sanitario_display = 'No esta en fecha'
+              animal.estado_sanitario = 'N';
+              animal.estado_sanitario_display = 'No esta en fecha';
             }else if (animal.estado_sanitario.toString() === 'Desconocido'){
-              animal.estado_sanitario = 'D'
-              animal.estado_sanitario_display = 'Desconocido'
+              animal.estado_sanitario = 'D';
+              animal.estado_sanitario_display = 'Desconocido';
             }else {
-              animal.estado_sanitario = 'E'
-              animal.estado_sanitario_display = 'En fecha'
+              animal.estado_sanitario = 'E';
+              animal.estado_sanitario_display = 'En fecha';
             }
             animal.raza_nombre = razas[animal.raza];
             animal.categoria_nombre = categorias[animal.categoria];

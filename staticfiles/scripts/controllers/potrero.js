@@ -10,7 +10,7 @@
 angular.module('frontendmuApp')
   .controller('PotreroCtrl', function ($scope,Potrero,$mdDialog,$filter,ServerData,Establecimiento) {
 
-    $scope.queryPotreros = {establecimiento: ServerData.establecimiento.id,ordering: 'nombre',page: 1};
+    $scope.queryPotreros = {establecimiento: ServerData.establecimiento.id,ordering: 'id',page: 1};
     $scope.selectedPotreros = [];
 
   function successPotreros(potreros) {

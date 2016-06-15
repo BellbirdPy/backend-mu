@@ -5,6 +5,7 @@ class CategoriaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Categoria
+        fields = ('id','codigo','nombre','is_hembra','establecimiento')
 
 class RazaSerializer(serializers.ModelSerializer):
 

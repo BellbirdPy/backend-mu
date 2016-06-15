@@ -10,7 +10,7 @@
 angular.module('frontendmuApp')
   .controller('CategoriaCtrl', function ($scope,Categoria,$mdDialog,$filter,ServerData) {
 
-    $scope.queryCat = {establecimiento: ServerData.establecimiento.id,ordering: 'nombre',page: 1};
+    $scope.queryCat = {establecimiento: ServerData.establecimiento.id,ordering: 'id',page: 1};
     $scope.selectedCat = [];
 
     function successCat(categorias) {
@@ -88,6 +88,7 @@ angular.module('frontendmuApp')
           if (categoriaModificar) {
             $scope.newCategoria = categoriaModificar;
           }else{
+            $scope.newCategoria.codigo = "";
             $scope.newCategoria.nombre = "";
             $scope.newCategoria.is_hembra = false;
             $scope.newCategoria.establecimiento = ServerData.establecimiento.id;

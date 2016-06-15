@@ -44,6 +44,8 @@
         <table md-table md-row-select ng-model="selectedPotreros" md-progress="promisePotreros">
           <thead md-head md-order="queryPotreros.ordering" md-on-reorder="getPotreros">
           <tr md-row md-select-id="id">
+
+              <th md-column md-numeric md-order-by="id"><span>Código</span></th>
             <th md-column md-order-by="nombre"><span>Nombre</span></th>
             <th md-column md-numeric md-order-by="superficie"><span>Superficie (Ha.)</span></th>
             <th md-column md-order-by="uso">Uso</th>
@@ -51,6 +53,7 @@
           </thead>
           <tbody md-body>
           <tr md-row md-select="potrero" md-select-id="id" md-auto-select ng-repeat="potrero in potreros.results">
+              <td md-cell>[[potrero.id]]</td>
             <td md-cell>[[potrero.nombre]]</td>
             <td md-cell>[[potrero.superficie]]</td>
             <td md-cell>[[potrero.uso]]</td>

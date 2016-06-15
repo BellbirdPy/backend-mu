@@ -4,9 +4,11 @@ from django.db import models
 
 # Create your models here.
 class Categoria(models.Model):
+    codigo = models.CharField(max_length=20, default='')
     nombre = models.CharField(max_length=80)
     is_hembra = models.BooleanField()
-    establecimiento = models.ForeignKey(Establecimiento,related_name='categorias',null=True,default=None)
+    establecimiento = models.ForeignKey(Establecimiento,related_name='categorias',null=True,default=None,blank=True)
+
 
     def __unicode__(self):
         return unicode(self.nombre)
