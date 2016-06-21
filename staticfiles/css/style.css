@@ -6,6 +6,10 @@
  * Made By MaterializeCSS.com
  */
 
+.capitalize {
+    text-transform: capitalize;
+}
+
 .fill-height{
     display: flex;
     flex: 1;

@@ -58,14 +58,16 @@
             </md-sidemenu-group>
             <md-sidemenu-group>
                 <md-divider style="margin:0;"></md-divider>
-                <md-sidemenu-button href="#establecimiento"><md-icon><i class="material-icons">home</i></md-icon>Establecimiento</md-sidemenu-button>
+
+                <md-sidemenu-content md-icon="home" md-heading="Establecimiento" md-arrow="true">
+                    <md-sidemenu-button href="#establecimiento">Configuraciones</md-sidemenu-button>
+                    <md-sidemenu-button href="#meteorologia">Meteorología</md-sidemenu-button>
+                    <md-sidemenu-button href="#compra">Empleados y contratistas</md-sidemenu-button>
+                    <md-sidemenu-button href="#venta">Contabilidad</md-sidemenu-button>
+                    <md-sidemenu-button href="#mortandad">Resultados físicos</md-sidemenu-button>
+                </md-sidemenu-content>
             </md-sidemenu-group>
 
-            <md-sidemenu-group>
-                <md-divider style="margin:0;"></md-divider>
-                <md-sidemenu-button href="#">Menu 4</md-sidemenu-button>
-                <md-divider style="margin:0;"></md-divider>
-            </md-sidemenu-group>
         </md-sidemenu>
     </md-content>
     <footer layout-padding>
@@ -204,10 +206,13 @@
 <script src="{% static 'scripts/services/evento.js' %}"></script>
 <script src="{% static 'scripts/services/eventoestablecimiento.js' %}"></script>
 <script src="{% static 'scripts/services/menu.js' %}"></script>
+<script src="{% static 'scripts/services/meteorologia.js' %}"></script>
 <script src="{% static 'scripts/controllers/dashboard.js' %}"></script>
 <script src="{% static 'scripts/controllers/mortandad.js' %}"></script>
 <script src="{% static 'scripts/controllers/raza.js' %}"></script>
 <script src="{% static 'scripts/controllers/categoria.js' %}"></script>
+<script src="{% static 'scripts/controllers/meteorologia.js' %}"></script>
+
 <!-- endbuild -->
 </body>
 </html>

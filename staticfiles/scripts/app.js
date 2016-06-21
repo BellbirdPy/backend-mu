@@ -99,21 +99,23 @@ angular
         controller: 'RazaCtrl',
         controllerAs: 'raza'
       })
+      .when('/meteorologia', {
+        templateUrl: '/staticfiles/views/meteorologia.html',
+        controller: 'MeteorologiaCtrl',
+        controllerAs: 'meteorologia'
+      })
       .otherwise({
         redirectTo: '/'
       });
 
-  }).run( function($rootScope, $location) {
-
-    // register listener to watch route changes
+  })/*.run( function($rootScope, $location) {
     $rootScope.$on( "$routeChangeStart", function(event, next, current,$templateCache) {
       if ( $rootScope.establecimiento == null ) {
-          // not going to #login, we should redirect now
           $location.path( "" );
       }
     });
     $rootScope.Utils = {
       keys : Object.keys
     }
-  });
+  })*/;
 

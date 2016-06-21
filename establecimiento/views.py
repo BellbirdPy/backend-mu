@@ -1,8 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import urllib, json
+from lib2to3.pgen2 import parse
+
 from django.contrib.auth.decorators import login_required
 from django.core import signing
 from django.core.mail import EmailMessage
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from rest_framework import viewsets, filters
 from serializers import *
@@ -129,4 +133,3 @@ def add_miembro_view(request,pk):
                 return render(request, 'add_miembro.html', {'form': form})
 
         return render(request,'add_miembro.html',{'form':form})
-
