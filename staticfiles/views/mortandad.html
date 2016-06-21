@@ -1,0 +1,56 @@
+<div layout="column">
+    <div >
+        <h1 class="md-display-1 green-text">Manejo</h1>
+    </div>
+    <!-- MORTANDAD & ABIGEO -->
+    <section ng-show="mortandades.results">
+        <div layout-padding>
+            <h2 class="md-headline green-text">Mortandad y Abigeo</h2>
+        </div>
+        <md-card>
+            <md-toolbar class="md-table-toolbar md-default" ng-hide="selectedMortandad.length">
+                <div class="md-toolbar-tools">
+                    <span>Mortandad y Abigeo</span>
+                </div>
+            </md-toolbar>
+            <md-toolbar class="md-table-toolbar green lighten-4 green-text text-darken-4" ng-show="selectedMortandad.length">
+                <div class="md-toolbar-tools">
+                    <span>[[selectedMortandad.length]] [[selectedMortandad.length > 1 ? 'mortandad/abigeos seleccionados' : 'mortandad/abigeo seleccionado']]</span>
+                    <span flex></span>
+                    <md-button class="md-icon-button" ng-show="selectedMortandad.length == 1" ng-click="viewMortandad(selectedMortandad[0])" aria-label="Ver Mortandad">
+                        <md-icon><i class="material-icons green-text text-darken-4">visibility</i> </md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button" ng-show="selectedMortandad.length == 1" ng-click="editMortandad(selectedMortandad[0])" aria-label="Editar Mortandad">
+                        <md-icon><i class="material-icons green-text text-darken-4">edit</i> </md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button green-text text-darken-4" ng-show="selectedMortandad.length" ng-click="deleteMortandad(selectedMortandad)"  aria-label="Delete Mortandad">
+                        <md-icon><i class="material-icons green-text text-darken-4">delete</i> </md-icon>
+                    </md-button>
+                </div>
+
+            </md-toolbar>
+            <md-table-container>
+                <table md-table md-row-select multiple md-progress="promiseMortandad" ng-model="selectedMortandad">
+                    <thead md-head md-order="queryMortandad.ordering" md-on-reorder="getMortandad">
+                    <tr md-row md-select-id="id">
+                        <th md-column md-order-by="fecha">Fecha</th>
+                        <th md-column md-order-by="tipo_display"><span>Tipo</span></th>
+                        <th md-column md-order-by="razon">Razón</th>
+                        <th md-column md-numeric md-order-by="animales.length">Cantidad de Animales</th>
+                    </tr>
+                    </thead>
+                    <tbody md-body>
+                    <tr md-row md-select="mortandad" md-select-id="id" md-auto-select ng-repeat="mortandad in mortandades.results">
+
+                        <td md-cell>[[mortandad.fecha | date:'dd/MM/yyyy']]</td>
+                        <td md-cell>[[mortandad.tipo_display]]</td>
+                        <td md-cell>[[mortandad.razon]]</td>
+                        <td md-cell>[[mortandad.animales.length]]</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </md-table-container>
+            <md-table-pagination md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}" md-limit="20" md-page="queryMortandad.page" md-total="[[mortandades.count]]" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="getMortandad" md-page-select></md-table-pagination>
+        </md-card>
+    </section>
+</div>

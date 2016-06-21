@@ -1,7 +1,7 @@
 <!doctype html>
 {% load staticfiles %}
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <title>Sistema Mu</title>
     <meta name="description" content="">
@@ -11,77 +11,111 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="{% static 'bower_components/angular-material/angular-material.css' %}" />
     <link rel="stylesheet" href="{% static 'bower_components/fullcalendar/dist/fullcalendar.css' %}" />
-      <link rel="stylesheet" href="{% static 'bower_components/angular-material-data-table/dist/md-data-table.css' %}" />
+    <link rel="stylesheet" href="{% static 'bower_components/angular-material-data-table/dist/md-data-table.css' %}" />
+    <link rel="stylesheet" href="{% static 'bower_components/angular-material-sidemenu/dest/angular-material-sidemenu.css' %}">
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="{% static 'styles/main.css' %}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- endbuild -->
-  </head>
-  <body layout="row" ng-app="frontendmuApp" ng-controller="MasterCtrl" style="background-color: lightgray;">
-  <md-sidenav ng-if="obj.establecimiento" class="site-sidenav md-sidenav-left md-whiteframe-z2" style="width: 250px;" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+</head>
+<body layout="row" ng-app="frontendmuApp" ng-controller="MasterCtrl" style="background-color: lightgray;">
+
+<md-sidenav ng-if="obj.establecimiento.id" class="site-sidenav md-sidenav-left md-whiteframe-z2" style="width: 250px;" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
 
     <header class="nav-header">
-      <img src="{% static 'images/logo.jpg' %}" width="100%">
+        <img src="{% static 'images/logo.jpg' %}" width="100%">
     </header>
     <md-content flex role="navigation">
-      <div class="collection">
-        <a href="#/dashboard" class="collection-item black-text">Home</a>
-        <a ng-href="#/inventario" class="collection-item black-text">Manejo</a>
-        <a href="#/sanitacion" class="collection-item black-text">Sanitación</a>
-        <a href="#/nutricion" class="collection-item black-text">Nutrición</a>
-        <a href="#/" class="collection-item black-text">Genética</a>
-        <a href="#/establecimiento" class="collection-item black-text">Establecimiento</a>
-      </div>
+        <md-sidemenu locked="true">
+            <md-sidemenu-group ng-show="obj.establecimiento.potreros.length">
+                <md-divider style="margin:0;"></md-divider>
+                <md-sidemenu-button href="#dashboard"><md-icon><i class="material-icons">dashboard</i></md-icon>Dashboard</md-sidemenu-button>
+            </md-sidemenu-group>
+            <md-sidemenu-group ng-show="obj.establecimiento.potreros.length">
+                <md-divider style="margin:0;"></md-divider>
+                <md-sidemenu-content md-icon="assignment" md-heading="Manejo" md-arrow="true">
+                    <md-sidemenu-button ng-show="obj.establecimiento.potreros.length" href="#inventario">Inventario</md-sidemenu-button>
+                    <md-sidemenu-button ng-show="obj.establecimiento.lotes.length" href="#servicio">Servicio</md-sidemenu-button>
+                    <md-sidemenu-button ng-show="obj.establecimiento.potreros.length" href="#compra">Compra de animales</md-sidemenu-button>
+                    <md-sidemenu-button ng-show="obj.establecimiento.lotes.length" href="#venta">Venta de animales</md-sidemenu-button>
+                    <md-sidemenu-button ng-show="obj.establecimiento.lotes.length" href="#mortandad">Mortandad y Abigeo</md-sidemenu-button>
+                </md-sidemenu-content>
+            </md-sidemenu-group>
+            <md-sidemenu-group ng-show="obj.establecimiento.lotes.length">
+                <md-divider style="margin:0;"></md-divider>
+                <md-sidemenu-button href="#sanitacion"><md-icon><i class="material-icons">local_hospital</i></md-icon>Sanitación</md-sidemenu-button>
+            </md-sidemenu-group>
+            <md-sidemenu-group ng-show="obj.establecimiento.lotes.length">
+                <md-divider style="margin:0;"></md-divider>
+                <md-sidemenu-button href="#nutricion"><md-icon><i class="material-icons">restaurant</i></md-icon>Nutrición</md-sidemenu-button>
+            </md-sidemenu-group>
+            <md-sidemenu-group ng-show="obj.establecimiento.lotes.length">
+                <md-divider style="margin:0;"></md-divider>
+                <md-sidemenu-button href="#genetica"><md-icon><i class="material-icons">people</i></md-icon>Genética</md-sidemenu-button>
+            </md-sidemenu-group>
+            <md-sidemenu-group>
+                <md-divider style="margin:0;"></md-divider>
+
+                <md-sidemenu-content md-icon="home" md-heading="Establecimiento" md-arrow="true">
+                    <md-sidemenu-button href="#establecimiento">Configuraciones</md-sidemenu-button>
+                    <md-sidemenu-button href="#meteorologia">Meteorología</md-sidemenu-button>
+                    <md-sidemenu-button href="#compra">Empleados y contratistas</md-sidemenu-button>
+                    <md-sidemenu-button href="#venta">Contabilidad</md-sidemenu-button>
+                    <md-sidemenu-button href="#mortandad">Resultados físicos</md-sidemenu-button>
+                </md-sidemenu-content>
+            </md-sidemenu-group>
+
+        </md-sidemenu>
     </md-content>
     <footer layout-padding>
-      <p align="right">© 2015 Bellbird</p>
+        <p align="right">© 2015 Bellbird</p>
     </footer>
 
-  </md-sidenav>
-  <div layout="column" tabIndex="-1" role="main" flex>
+</md-sidenav>
+
+<div layout="column" tabIndex="-1" role="main" flex>
     <md-toolbar ng-hide="loginView" class="md-whiteframe-z1 green">
-      <div class="md-toolbar-tools" tabIndex="-1">
-        <md-button class="md-icon-button" aria-label="Menu"hide-gt-md ng-click="toggleLeft()">
-          <md-icon><i class="material-icons white-text">menu</i> </md-icon>
-        </md-button>
-        <div layout="row" flex class="fill-height">
-          <h2 class="md-toolbar-item md-breadcrumb md-headline">
-            <span class="md-breadcrumb-page white-text md-headline">[[obj.establecimiento.nombre || 'Seleccione un establecimiento para continuar']]</span>
-          </h2>
+        <div class="md-toolbar-tools" tabIndex="-1">
+            <md-button class="md-icon-button" aria-label="Menu"hide-gt-md ng-click="toggleLeft()">
+                <md-icon><i class="material-icons white-text">menu</i> </md-icon>
+            </md-button>
+            <div layout="row" flex class="fill-height">
+                <h2 class="md-toolbar-item md-breadcrumb md-headline">
+                    <span class="md-breadcrumb-page white-text md-headline">[[obj.establecimiento.nombre || 'Seleccione un establecimiento para continuar']]</span>
+                </h2>
+            </div>
+            <md-menu md-position-mode="target-right target" >
+
+                <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu($event)">
+                    <md-icon><i class="material-icons white-text">more_vert</i> </md-icon>
+                </md-button>
+
+                <md-menu-content width="4" >
+                    <md-menu-item ng-hide="true">
+                        <md-button>
+                            <p>Nada</p>
+                        </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-href="#/main">
+                            <p>Cambiar establecimiento</p>
+                        </md-button>
+                    </md-menu-item>
+                    <md-divider></md-divider>
+                    <md-menu-item>
+                        <md-button ng-href="#/logout">
+                            <p>Cerrar sesión</p>
+                        </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
         </div>
-        <md-menu md-position-mode="target-right target" >
-
-          <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu($event)">
-            <md-icon><i class="material-icons white-text">more_vert</i> </md-icon>
-          </md-button>
-
-          <md-menu-content width="4" >
-            <md-menu-item ng-hide="true">
-              <md-button>
-                <p>Nada</p>
-              </md-button>
-            </md-menu-item>
-            <md-menu-item>
-              <md-button ng-href="#/main">
-                <p>Cambiar establecimiento</p>
-              </md-button>
-            </md-menu-item>
-            <md-divider></md-divider>
-            <md-menu-item>
-              <md-button ng-href="#/logout">
-                <p>Cerrar sesión</p>
-              </md-button>
-            </md-menu-item>
-          </md-menu-content>
-        </md-menu>
-      </div>
     </md-toolbar>
     <md-content md-scroll-y layout="column" flex>
-      <div ng-view layout-padding flex="noshrink" ng-if="obj.establecimiento"></div>
+        <div ng-view layout-padding flex="noshrink" ng-if="obj.establecimiento"></div>
         <div layout-padding flex="noshrink" ng-if="obj.establecimiento == ''">
             <div layout="row">
                 <md-card flex="20" ng-repeat="e in establecimientos" class="green">
@@ -100,14 +134,14 @@
             </div>
         </div>
     </md-content>
-  </div>
+</div>
 
 
 
 
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+<script>
        !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
        (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
        r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
@@ -117,56 +151,68 @@
        ga('send', 'pageview');
     </script>
 
-    <!-- build:js(.) scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="{% static 'bower_components/jquery/dist/jquery.js' %}"></script>
-    <script src="{% static 'bower_components/angular/angular.js' %}"></script>
-    <script src="{% static 'bower_components/angular-animate/angular-animate.js' %}"></script>
-    <script src="{% static 'bower_components/angular-cookies/angular-cookies.js' %}"></script>
-    <script src="{% static 'bower_components/angular-resource/angular-resource.js' %}"></script>
-    <script src="{% static 'bower_components/angular-route/angular-route.js' %}"></script>
-    <script src="{% static 'bower_components/angular-sanitize/angular-sanitize.js' %}"></script>
-    <script src="{% static 'bower_components/angular-touch/angular-touch.js' %}"></script>
-    <script src="{% static 'bower_components/angular-aria/angular-aria.js' %}"></script>
-    <script src="{% static 'bower_components/angular-messages/angular-messages.js' %}"></script>
-    <script src="{% static 'bower_components/angular-material/angular-material.js' %}"></script>
-    <script src="{% static 'bower_components/moment/moment.js' %}"></script>
-    <script src="{% static 'bower_components/fullcalendar/dist/fullcalendar.js' %}"></script>
-    <script src="{% static 'bower_components/angular-material-data-table/dist/md-data-table.min.js' %}"></script>
-  <script src="{% static 'bower_components/js-xlsx/dist/xlsx.core.min.js' %}"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
-  <script src="{% static 'bower_components/fullcalendar/dist/lang/es.js' %}"></script>
-  <script src="{% static 'scripts/angular-locale_es-py.js' %}"></script>
-  <script src="{% static 'js/angular-file.js' %}"></script>
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="{% static 'bower_components/jquery/dist/jquery.js' %}"></script>
+<script src="{% static 'bower_components/angular/angular.js' %}"></script>
+<script src="{% static 'bower_components/angular-animate/angular-animate.js' %}"></script>
+<script src="{% static 'bower_components/angular-cookies/angular-cookies.js' %}"></script>
+<script src="{% static 'bower_components/angular-resource/angular-resource.js' %}"></script>
+<script src="{% static 'bower_components/angular-route/angular-route.js' %}"></script>
+<script src="{% static 'bower_components/angular-sanitize/angular-sanitize.js' %}"></script>
+<script src="{% static 'bower_components/angular-touch/angular-touch.js' %}"></script>
+<script src="{% static 'bower_components/angular-aria/angular-aria.js' %}"></script>
+<script src="{% static 'bower_components/angular-messages/angular-messages.js' %}"></script>
+<script src="{% static 'bower_components/angular-material/angular-material.js' %}"></script>
+<script src="{% static 'bower_components/moment/moment.js' %}"></script>
+<script src="{% static 'bower_components/fullcalendar/dist/fullcalendar.js' %}"></script>
+<script src="{% static 'bower_components/angular-material-data-table/dist/md-data-table.min.js' %}"></script>
+<script src="{% static 'bower_components/js-xlsx/dist/xlsx.core.min.js' %}"></script>
+<!-- endbower -->
+<!-- endbuild -->
+<script src="{% static 'bower_components/fullcalendar/dist/lang/es.js' %}"></script>
+<script src="{% static 'bower_components/angular-material-sidemenu/dest/angular-material-sidemenu.js' %}"></script>
+<script src="{% static 'scripts/angular-locale_es-py.js' %}"></script>
+<script src="{% static 'js/angular-file.js' %}"></script>
+<script src="{% static 'js/write.js' %}"></script>
 
 
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="{% static 'scripts/app.js' %}"></script>
-        <script src="{% static 'scripts/controllers/main.js' %}"></script>
-        <script src="{% static 'scripts/controllers/about.js' %}"></script>
-        <script src="{% static 'scripts/services/djangoauth.js' %}"></script>
-        <script src="{% static 'scripts/controllers/login.js' %}"></script>
-        <script src="{% static 'scripts/services/validate.js' %}"></script>
-        <script src="{% static 'scripts/controllers/logout.js' %}"></script>
-        <script src="{% static 'scripts/controllers/master.js' %}"></script>
-        <script src="{% static 'scripts/services/serverdata.js' %}"></script>
-        <script src="{% static 'scripts/services/establecimiento.js' %}"></script>
-        <script src="{% static 'scripts/controllers/inventario.js' %}"></script>
-        <script src="{% static 'scripts/services/animal.js' %}"></script>
-        <script src="{% static 'scripts/services/lote.js' %}"></script>
-        <script src="{% static 'scripts/services/potrero.js' %}"></script>
-        <script src="{% static 'scripts/services/categoria.js' %}"></script>
-        <script src="{% static 'scripts/services/raza.js' %}"></script>
-        <script src="{% static 'scripts/services/mortandad.js' %}"></script>
-        <script src="{% static 'scripts/controllers/establecimiento.js' %}"></script>
-        <script src="{% static 'scripts/controllers/potrero.js' %}"></script>
-        <script src="{% static 'scripts/controllers/nutricion.js' %}"></script>
-        <script src="{% static 'scripts/services/nutricion.js' %}"></script>
-        <script src="{% static 'scripts/controllers/sanitacion.js' %}"></script>
-        <script src="{% static 'scripts/services/evento.js' %}"></script>
-        <script src="{% static 'scripts/services/eventoestablecimiento.js' %}"></script>
-        <script src="{% static 'scripts/controllers/dashboard.js' %}"></script>
-        <!-- endbuild -->
+
+
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="{% static 'scripts/app.js' %}"></script>
+<script src="{% static 'scripts/controllers/main.js' %}"></script>
+<script src="{% static 'scripts/controllers/about.js' %}"></script>
+<script src="{% static 'scripts/services/djangoauth.js' %}"></script>
+<script src="{% static 'scripts/controllers/login.js' %}"></script>
+<script src="{% static 'scripts/services/validate.js' %}"></script>
+<script src="{% static 'scripts/controllers/logout.js' %}"></script>
+<script src="{% static 'scripts/controllers/master.js' %}"></script>
+<script src="{% static 'scripts/services/serverdata.js' %}"></script>
+<script src="{% static 'scripts/services/establecimiento.js' %}"></script>
+<script src="{% static 'scripts/controllers/inventario.js' %}"></script>
+<script src="{% static 'scripts/services/animal.js' %}"></script>
+<script src="{% static 'scripts/services/lote.js' %}"></script>
+<script src="{% static 'scripts/services/potrero.js' %}"></script>
+<script src="{% static 'scripts/services/categoria.js' %}"></script>
+<script src="{% static 'scripts/services/animalCaravana.js' %}"></script>
+<script src="{% static 'scripts/services/raza.js' %}"></script>
+<script src="{% static 'scripts/services/mortandad.js' %}"></script>
+<script src="{% static 'scripts/controllers/establecimiento.js' %}"></script>
+<script src="{% static 'scripts/controllers/potrero.js' %}"></script>
+<script src="{% static 'scripts/controllers/nutricion.js' %}"></script>
+<script src="{% static 'scripts/services/nutricion.js' %}"></script>
+<script src="{% static 'scripts/controllers/sanitacion.js' %}"></script>
+<script src="{% static 'scripts/services/evento.js' %}"></script>
+<script src="{% static 'scripts/services/eventoestablecimiento.js' %}"></script>
+<script src="{% static 'scripts/services/menu.js' %}"></script>
+<script src="{% static 'scripts/services/meteorologia.js' %}"></script>
+<script src="{% static 'scripts/controllers/dashboard.js' %}"></script>
+<script src="{% static 'scripts/controllers/mortandad.js' %}"></script>
+<script src="{% static 'scripts/controllers/raza.js' %}"></script>
+<script src="{% static 'scripts/controllers/categoria.js' %}"></script>
+<script src="{% static 'scripts/controllers/meteorologia.js' %}"></script>
+
+<!-- endbuild -->
 </body>
 </html>

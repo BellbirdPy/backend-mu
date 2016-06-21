@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_auth',
     'crispy_forms',
-    'corsheaders',
+
     'password_reset',
     'dj_static',
     #apps
@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'nutricion',
     'compra',
     'sanitacion',
+    'meteorologia',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -88,8 +89,9 @@ TEMPLATES = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 20
+    'DEFAULT_PAGINATION_CLASS': 'scripts.page_number_pagination.StandardResultsSetPagination',
+    'PAGE_SIZE': 20,
+    'PAGE_SIZE_QUERY_PARAM':'limit'
 }
 
 WSGI_APPLICATION = 'backendmu.wsgi.application'
@@ -108,8 +110,8 @@ DATABASES = {
      'PORT': '5432',
  }
 }
-'''
 
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

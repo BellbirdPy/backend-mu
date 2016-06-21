@@ -9,5 +9,8 @@
  */
 angular.module('frontendmuApp')
   .factory('Categoria', function ($resource) {
-    return $resource('/api/categoria/:id/',null);
+    return $resource('/api/categoria/:id/',null,{
+      'update': { method:'PUT' },
+      'delete': {method:'DELETE'}
+    });
   });

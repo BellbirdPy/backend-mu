@@ -1,0 +1,31 @@
+
+<md-dialog layout="column" aria-label="Raza" style="min-width: 800px; ">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2 class="white-text">Detalle Raza</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" aria-label="cancel" ng-click="cancel()"></md-button>
+    </div>
+  </md-toolbar>
+  <form>
+    <md-dialog-content layout-padding>
+      <div layout="column">
+        <md-input-container>
+          <label>Nombre</label>
+          <input ng-model="newRaza.nombre" required>
+        </md-input-container>
+        <md-input-container >
+          <label>Descripción</label>
+          <input ng-model="newRaza.descripcion" >
+        </md-input-container>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" >
+      <!--<div class="md-actions"><a href="#" flex>Informe</a></div>-->
+      <span flex></span>
+      <md-button flex-order="1" ng-click="answer('guardar')" class="md-primary">Guardar</md-button>
+      <md-button ng-click="cancel()" >Cancelar</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

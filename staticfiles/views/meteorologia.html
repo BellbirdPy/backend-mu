@@ -1,0 +1,111 @@
+<section>
+    <div >
+        <div class="md-display-1 green-text">Establecimiento <div class="md-headline grey-text">Meteorología</div> </div>
+    </div>
+</section>
+<section layout-md="row" layout-sm="column" layout-gt-md="row">
+
+    <md-card flex>
+        <md-toolbar class="md-table-toolbar md-default">
+            <div class="md-toolbar-tools">
+                <span>Pronóstico</span>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="getWeather()" aria-label="Actualizar">
+                    <md-icon><i class="material-icons">cached</i> </md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <div layout-padding>
+            <div class="grey-text text-darken-2"><form><md-input-container style="margin: 0;padding:0;"><label>Ciudad</label><input ng-model="query.q"></md-input-container><input ng-hide="true" type="submit" ng-click="getWeather()" value="Save" /></form></div>
+            <div class="grey-text text-darken-2" style="font-size: x-large;margin-bottom: 0;padding-bottom: 0;">[[current.name]], [[current.sys.country]]</div>
+            <div class="grey-text text-darken-2" style="margin-top: 0;padding-top: 0; margin-bottom: 0;padding-bottom: 0;"><span style="text-transform: capitalize;">[[current.dt |date:'EEEE']], </span>[[current.dt | date:'longDate']]</div>
+            <div class="grey-text text-darken-2" style="margin-top: 0;padding-top: 0; margin-bottom: 0;padding-bottom: 0;">[[current.weather[0].description]]</div>
+
+            <div layout-gt-sm="row" layout-sm="row" layout-xs="column">
+                <div style="width: 100px;height:100px;max-height: 100px; max-width: 100px;">
+                    <img  ng-src="/staticfiles/images/weather_icons/[[current.weather[0].icon]].png" height="50">
+                </div>
+                <div style="font-size: 60px;">
+                    [[current.main.temp]] ºC
+                </div>
+                <span flex></span>
+                <div class="grey-text text-darken-2">
+                    <p>Humedad: [[current.main.humidity]]%</p>
+                    <p>Viento: a [[current.wind.speed]] Km/h</p>
+                </div>
+            </div>
+        </div>
+        <div layout-padding>
+            <md-grid-list md-cols-xs="2" md-cols-sm="3" md-cols-md="5" md-cols-gt-md="6"
+                    md-row-height-gt-md="1:1" md-row-height="2:2"
+                    md-row-height="fit">
+                <md-grid-tile class="grey-text" ng-repeat="dia in forecast.list">
+                    <div layout="column" layout-align="start center">
+                        <div flex style="text-transform: capitalize;">[[dia.dt | date:'EEEE']] [[dia.dt | date:'dd']]</div>
+                        <div flex style="width: 75px;height:75px;max-height: 75px; max-width: 75px;"><img ng-src="/staticfiles/images/weather_icons/[[dia.weather[0].icon]].png" height="50"></div>
+                        <div flex style="text-align: center;">[[dia.weather[0].description]]</div>
+                        <div flex><p><strong>[[dia.temp.max]]</strong>/[[dia.temp.min]] ºC</p></div>
+                    </div>
+                </md-grid-tile>
+                </md-grid-list>
+        </div>
+    </md-card>
+
+</section>
+<section layout-md="row" layout-sm="column" layout-gt-md="row">
+    <md-card flex>
+        <md-toolbar class="md-table-toolbar md-default" ng-hide="selectedReg.length">
+            <div class="md-toolbar-tools">
+                <span>Registro de lluvia</span>
+                <md-menu md-position-mode="target-right target" >
+                    <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu($event)">
+                        <md-icon><i class="material-icons">more_vert</i> </md-icon>
+                    </md-button>
+                    <md-menu-content width="4" >
+                        <md-menu-item>
+                            <md-button ng-click="editReg()">
+                                <p>Agregar</p>
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+            </div>
+        </md-toolbar>
+        <md-toolbar class="md-table-toolbar green lighten-4 green-text text-darken-4" ng-show="selectedReg.length">
+            <div class="md-toolbar-tools">
+                <span>[[selectedReg.length]] [[selectedReg.length > 1 ? 'registros seleccionadas' : 'registro seleccionado']]</span>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-show="selectedReg.length == 1" ng-click="editCat(selectedReg[0])" aria-label="Editar registro">
+                    <md-icon><i class="material-icons green-text text-darken-4">edit</i> </md-icon>
+                </md-button>
+                <md-button class="md-icon-button green-text text-darken-4" ng-show="selectedReg.length >= 1" ng-click="deleteReg(selectedReg)"  aria-label="Delete Categoria">
+                    <md-icon><i class="material-icons green-text text-darken-4">delete</i> </md-icon>
+                </md-button>
+            </div>
+
+        </md-toolbar>
+
+        <md-table-container>
+            <table md-table md-row-select multiple ng-model="selectedReg" md-progress="promiseReg">
+                <thead md-head md-order="queryReg.ordering" md-on-reorder="getReg">
+                <tr md-row md-select-id="id">
+                    <th md-column md-order-by="fecha"><span>Fecha</span></th>
+                    <th md-column md-order-by="cantidad"><span>Cantidad (mm3)</span></th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row md-select="reg" md-select-id="id" md-auto-select ng-repeat="reg in registros.results">
+                    <td md-cell>[[reg.fecha]]</td>
+                    <td md-cell>[[reg.cantidad]]</td>
+                </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+        <md-table-pagination md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}" md-limit="20" md-page="queryReg.page" md-total="[[registros.count]]" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="getReg"></md-table-pagination>
+    </md-card>
+</section>
+
+
+
+
+

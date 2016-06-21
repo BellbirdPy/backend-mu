@@ -27,6 +27,7 @@ class Animal(models.Model):
 
     estado = models.CharField(max_length=1, choices=CHOICES_ESTADO, default="V")
     caravana = models.CharField(max_length=8)
+    caravana_madre = models.CharField(max_length=8,blank=True,default='')
     carimbo = models.PositiveIntegerField()
     prenada = models.BooleanField(default=False)
     categoria = models.ForeignKey(Categoria, related_name="animales", null=True, on_delete=models.SET_NULL)

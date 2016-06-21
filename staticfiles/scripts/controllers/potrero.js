@@ -8,9 +8,9 @@
  * Controller of the frontendmuApp
  */
 angular.module('frontendmuApp')
-  .controller('PotreroCtrl', function ($scope,Potrero,$mdDialog,$filter,ServerData) {
+  .controller('PotreroCtrl', function ($scope,Potrero,$mdDialog,$filter,ServerData,Establecimiento) {
 
-    $scope.queryPotreros = {establecimiento: ServerData.establecimiento.id,ordering: 'nombre',page: 1};
+    $scope.queryPotreros = {establecimiento: ServerData.establecimiento.id,ordering: 'id',page: 1};
     $scope.selectedPotreros = [];
 
   function successPotreros(potreros) {
@@ -41,6 +41,12 @@ angular.module('frontendmuApp')
         Potrero.delete({id:ev.id},ev,function(data){
           console.log(data);
           $scope.potreros.results.splice($scope.potreros.results.indexOf(ev),1);
+          console.log(ServerData.establecimiento);
+          Establecimiento.get({id:ServerData.establecimiento.id},function(data){
+            ServerData.establecimiento = data;
+            console.log(ServerData.establecimiento);
+          });
+
         });
       }, function() {
         $scope.status = 'Se eliminó correctamente.';
@@ -53,7 +59,7 @@ angular.module('frontendmuApp')
       $mdDialog.show({
         templateUrl: '/staticfiles/views/dialogs/dialogo_potrero.html',
         targetEvent: null,
-        controller: ['$scope','$mdDialog','Potrero','ServerData' ,function ($scope, $mdDialog, Potrero, ServerData) {
+        controller: ['$scope','$mdDialog','Potrero','ServerData','Establecimiento' ,function ($scope, $mdDialog, Potrero, ServerData, Establecimiento) {
           $scope.newPotrero = {};
           if (potreroModificar) {
             $scope.newPotrero = potreroModificar;
@@ -84,7 +90,9 @@ angular.module('frontendmuApp')
                 var nuevo = new Potrero($scope.newPotrero);
 
                 nuevo.$save(function () {
-
+                  console.log(ServerData);
+                  ServerData.establecimiento = Establecimiento.get({id:ServerData.establecimiento.id});
+                  console.log(ServerData);
                 }, function (error) {
                   console.log(error);
                 });

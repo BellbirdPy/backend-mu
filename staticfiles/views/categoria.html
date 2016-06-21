@@ -1,0 +1,65 @@
+<section>
+    <div >
+        <h1 class="md-display-1 green-text">Establecimiento</h1>
+    </div>
+</section>
+<section>
+    <div layout-padding>
+        <h2 class="md-headline green-text">Categorias</h2>
+    </div>
+    <md-card>
+        <md-toolbar class="md-table-toolbar md-default" ng-hide="selectedCat.length">
+            <div class="md-toolbar-tools">
+                <span>Categorías</span>
+                <md-menu md-position-mode="target-right target" >
+                    <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu($event)">
+                        <md-icon><i class="material-icons">more_vert</i> </md-icon>
+                    </md-button>
+                    <md-menu-content width="4" >
+                        <md-menu-item>
+                            <md-button ng-click="editCat()">
+                                <p>Agregar</p>
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+            </div>
+        </md-toolbar>
+        <md-toolbar class="md-table-toolbar green lighten-4 green-text text-darken-4" ng-show="selectedCat.length">
+            <div class="md-toolbar-tools">
+                <span>[[selectedCat.length]] [[selectedCat.length > 1 ? 'categorias seleccionadas' : 'categoria seleccionada']]</span>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-show="selectedCat.length == 1" ng-click="editCat(selectedCat[0])" aria-label="Editar Categoria">
+                    <md-icon><i class="material-icons green-text text-darken-4">edit</i> </md-icon>
+                </md-button>
+                <md-button class="md-icon-button green-text text-darken-4" ng-show="selectedCat.length >= 1" ng-click="deleteCat(selectedCat)"  aria-label="Delete Categoria">
+                    <md-icon><i class="material-icons green-text text-darken-4">delete</i> </md-icon>
+                </md-button>
+            </div>
+
+        </md-toolbar>
+
+        <!-- exact table from live demo -->
+        <md-table-container>
+            <table md-table md-row-select multiple ng-model="selectedCat" md-progress="promiseCat">
+                <thead md-head md-order="queryCat.ordering" md-on-reorder="getCat">
+                <tr md-row md-select-id="id">
+                    <th md-column md-order-by="id"><span>Código</span></th>
+                    <th md-column md-order-by="nombre"><span>Nombre</span></th>
+                    <th md-column md-order-by="is_hembra"><span>Sexo</span></th>
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row md-select="cat" md-select-id="id" ng-disabled="!cat.establecimiento" md-auto-select ng-repeat="cat in categorias.results">
+                    <td md-cell>[[cat.codigo]]</td>
+                    <td md-cell>[[cat.nombre]]</td>
+                    <td md-cell><span ng-show="cat.is_hembra">Hembra</span><span ng-hide="cat.is_hembra">Macho</span></td>
+                </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+        <md-table-pagination md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}" md-limit="20" md-page="queryCat.page" md-total="[[categorias.count]]" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="getCat" md-page-select></md-table-pagination>
+    </md-card>
+</section>
+
+

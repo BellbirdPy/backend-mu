@@ -1,0 +1,30 @@
+{
+  "projectName": "Angular Material Sidemenu",
+  "name": "angular-material-sidemenu",
+  "description": "A simple sidemenu for Angular Material",
+  "version": "1.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marcosmoura/angular-material-sidemenu.git"
+  },
+  "authors": [
+    "Marcos Moura <marcosvmmoura@gmail.com>"
+  ],
+  "keywords": [
+    "Angular",
+    "Material",
+    "Design",
+    "Navigation",
+    "Sidemenu"
+  ],
+  "main": "index.js",
+  "devDependencies": {
+
+  },
+  "dependencies": {
+    "angular": "^1.5.0",
+    "angular-animate": "^1.5.0",
+    "angular-aria": "^1.5.0",
+    "angular-material": "^1.0.6"
+  }
+}

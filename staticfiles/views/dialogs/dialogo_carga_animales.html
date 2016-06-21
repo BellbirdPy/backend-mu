@@ -1,0 +1,109 @@
+<md-dialog   style="min-width: 1200px; width: 1200px;">
+    <md-toolbar>
+        <div class="md-toolbar-tools white-text">
+            <h2>Carga de Animales</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                <md-icon><i class="material-icons white-text">close</i> </md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <md-tabs md-dynamic-height md-border-bottom >
+            <md-tab label="Paso 1">
+                <md-content class="md-padding" layout="column" layout-align="center center" >
+                    <br><br>
+                    <h3>1er paso. Descarga nuestra plantilla <small class="grey-text">(puede saltarse este paso si ya cuenta con la plantilla)</small> </h3>
+                    <div layout="row" layout-align="center center">
+                        <md-button ng-click="generarPlantilla()"><md-icon><i class="material-icons">file_download</i> </md-icon>Descargar</md-button>
+                    </div>
+                    <br><br>
+                    </md-content>
+                </md-tab>
+            <md-tab label="Paso 2">
+                <md-content class="md-padding" layout="column" layout-align="center center" >
+                    <br><br>
+                    <h3>2do paso. Descarge sus configuraciones <small class="grey-text">(puede saltarse este paso si ya cuenta con sus configuraciones mas actualizadas)</small> </h3>
+                    <div layout="row" layout-align="center center">
+                        <md-button ng-click="generarPlantilla()"><md-icon><i class="material-icons">file_download</i> </md-icon>Descargar</md-button>
+                    </div>
+                    <br><br>
+                </md-content>
+            </md-tab>
+            <md-tab label="Paso 3">
+                <md-content class="md-padding" layout="column" layout-align="center center" >
+                    <br><br>
+                    <h3>3er paso. Cargue la plantilla descargada anteriormente con los datos de sus animales y de sus configuraciones, luego suba el archivo</h3>
+                    <div layout="row" layout-align="center center">
+                        <md-button>
+                            <label for="file">
+                                <md-icon><i class="material-icons">file_upload</i> </md-icon>Subir archivo
+                            </label>
+                        </md-button>
+                        <md-button ng-show="!error.length && cargado" class="md-primary md-raised white-text" ng-click="guardarAnimales()">
+                                <md-icon><i class="material-icons white-text">save</i> </md-icon>Guardar animales
+                        </md-button>
+
+                        <input id="file" type="file" ng-model-instant onchange="angular.element(this).scope().setFiles(this)" hidden="true"/>
+                    </div>
+                    <div layout="column" layout-padding >
+                        <div ng-show="error.length">
+                            <p class="red-text">Su archivo no se pudo cargar porque contiene estos errores: </p>
+                            <p class="red-text" ng-repeat="error in error">
+                                [[error]]
+                            </p>
+                        </div>
+                        <md-card ng-show="cargado">
+                            <md-toolbar class="md-table-toolbar md-default">
+                                <div class="md-toolbar-tools">
+                                    <span>Animales</span>
+                                </div>
+                            </md-toolbar>
+                            <!-- exact table from live demo -->
+                            <md-table-container>
+                                <table md-table>
+                                    <thead md-head>
+                                    <tr md-row>
+                                        <th md-column>Lote</th>
+                                        <th md-column><span>Caravana</span></th>
+                                        <th md-column><span>Categoria</span></th>
+                                        <th md-column>Carimbo</th>
+                                        <th md-column>Raza</th>
+                                        <th md-column>Peso Específico (Kg.)</th>
+                                        <th md-column>Estado Sanitario</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody md-body>
+                                    <tr md-row ng-repeat="animal in archivo | limitTo: query.limit : (query.page -1) * query.limit" >
+                                        <td md-cell ng-class="{'red-text': animal.error}">[[animal.lote_nombre]]</td>
+                                        <td md-cell md-numeric ng-class="{'red-text': animal.error}">[[animal.caravana]]</td>
+                                        <td md-cell ng-class="{'red-text': animal.error}">[[animal.categoria_nombre]]</td>
+                                        <td md-cell md-numeric ng-class="{'red-text': animal.error}">[[animal.carimbo]]</td>
+                                        <td md-cell ng-class="{'red-text': animal.error}">[[animal.raza_nombre]]</td>
+                                        <td md-cell md-numeric ng-class="{'red-text': animal.error}">[[animal.peso_especifico]]</td>
+                                        <td md-cell ng-class="{'red-text': animal.error}">[[animal.estado_sanitario_display]]</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </md-table-container>
+                            <md-table-pagination md-limit="query.limit" md-page="query.page" md-total="[[archivo.length]]" md-page-select="options.pageSelect" md-on-paginate="logPagination"></md-table-pagination>
+                        </md-card>
+                    </div>
+
+
+                    <br><br>
+                </md-content>
+            </md-tab>
+            </md-tabs>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" ng-show="paso == -1">
+        <span flex></span>
+        <md-button ng-click="cancel()">
+            Cancelar
+        </md-button>
+        <md-button ng-click="answer('guardar')" style="margin-right:20px;">
+            Siguiente
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>
