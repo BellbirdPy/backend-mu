@@ -1,14 +1,14 @@
-<section>
-    <div >
-        <div class="md-display-1 green-text">Establecimiento <div class="md-headline grey-text">Meteorología</div> </div>
-    </div>
-</section>
+
+<div layout-padding>
+    <div class="md-display-1 green-text">Establecimiento <div class="md-headline grey-text">Meteorología</div> </div>
+</div>
+
 <section layout-md="row" layout-sm="column" layout-gt-md="row">
 
     <md-card flex>
         <md-toolbar class="md-table-toolbar md-default">
             <div class="md-toolbar-tools">
-                <span>Pronóstico</span>
+                <span>Pronóstico del tiempo</span>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="getWeather()" aria-label="Actualizar">
                     <md-icon><i class="material-icons">cached</i> </md-icon>
@@ -37,8 +37,8 @@
         </div>
         <div layout-padding>
             <md-grid-list md-cols-xs="2" md-cols-sm="3" md-cols-md="5" md-cols-gt-md="6"
-                    md-row-height-gt-md="1:1" md-row-height="2:2"
-                    md-row-height="fit">
+                          md-row-height-gt-md="1:1" md-row-height="2:2"
+                          md-row-height="fit">
                 <md-grid-tile class="grey-text" ng-repeat="dia in forecast.list">
                     <div layout="column" layout-align="start center">
                         <div flex style="text-transform: capitalize;">[[dia.dt | date:'EEEE']] [[dia.dt | date:'dd']]</div>
@@ -47,7 +47,7 @@
                         <div flex><p><strong>[[dia.temp.max]]</strong>/[[dia.temp.min]] ºC</p></div>
                     </div>
                 </md-grid-tile>
-                </md-grid-list>
+            </md-grid-list>
         </div>
     </md-card>
 

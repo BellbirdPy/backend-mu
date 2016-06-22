@@ -1,0 +1,83 @@
+
+<md-dialog layout="column" aria-label="Categoria" style="min-width: 1000px; ">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2 class="white-text">Detalle Empleado</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" aria-label="cancel" ng-click="cancel()"></md-button>
+    </div>
+  </md-toolbar>
+  <form enctype="multipart/form-data">
+    <md-dialog-content layout-padding>
+      <div layout="column">
+          <div layout-gt-sm="row">
+              <md-input-container class="md-block" flex-gt-sm>
+                  <label>Nombre</label>
+                  <input ng-model="newEmpleado.nombre" required>
+              </md-input-container>
+              <md-input-container class="md-block" flex-gt-sm>
+                  <label>Apellido</label>
+                  <input ng-model="newEmpleado.apellido" required>
+              </md-input-container>
+              <md-input-container class="md-block" flex-gt-sm>
+                  <label>Cedula de Identidad Nº.</label>
+                  <input ng-model="newEmpleado.numero_cedula" required>
+              </md-input-container>
+          </div>
+          <div layout-gt-sm="row">
+              <md-input-container class="md-block" flex-gt-sm>
+                  <label>Fecha de Nacimiento</label>
+                  <input type="date" ng-model="newEmpleado.fecha_nacimiento" required>
+              </md-input-container>
+              <md-input-container class="md-block" flex-gt-sm>
+                  <label>Ciudad de Nacimiento</label>
+                  <input ng-model="newEmpleado.ciudad_nacimiento">
+              </md-input-container>
+          </div>
+          <div layout-gt-sm="row">
+              <md-input-container class="md-block" flex-gt-sm>
+                  <label>Teléfono</label>
+                  <input ng-model="newEmpleado.telefono" required>
+              </md-input-container>
+              <md-input-container class="md-block" flex-gt-sm>
+                  <label>Mail</label>
+                  <input ng-model="newEmpleado.mail" type="email">
+              </md-input-container>
+              <md-input-container class="md-block" flex-gt-sm>
+                  <label>Contacto de emergencia</label>
+                  <input ng-model="newEmpleado.contacto_emergencia">
+              </md-input-container>
+          </div>
+          <div layout-gt-sm="row">
+              <md-input-container class="md-block" flex-gt-sm>
+                  <label>Dirección</label>
+                  <input ng-model="newEmpleado.direccion" required>
+              </md-input-container>
+          </div>
+          <div layout-gt-sm="row">
+              <md-input-container class="md-block" flex-gt-sm>
+                  <label>Ingreso a la empresa</label>
+                  <input type="date" ng-model="newEmpleado.ingreso_empresa" required>
+              </md-input-container>
+              <md-input-container class="md-block" flex-gt-sm>
+                  <label>Cargo</label>
+                  <input ng-model="newEmpleado.cargo" required>
+              </md-input-container>
+              <md-input-container class="md-block" flex-gt-sm>
+                  <label>Salario</label>
+                  <input ng-model="newEmpleado.salario" required>
+              </md-input-container>
+          </div>
+
+
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" >
+      <!--<div class="md-actions"><a href="#" flex>Informe</a></div>-->
+      <span flex></span>
+      <md-button flex-order="1" ng-click="answer('guardar')" class="md-primary">Guardar</md-button>
+      <md-button ng-click="cancel()" >Cancelar</md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

@@ -26,8 +26,11 @@ from mortandad.views import MortandadViewSet
 from nutricion.views import NutricionViewSet
 from sanitacion.views import *
 from meteorologia.views import *
+from empleado.views import *
 
 router = DefaultRouter()
+router.register(r'contratista' ,ContratistaViewSet,base_name='contratista')
+router.register(r'empleado' ,EmpleadoViewSet,base_name='empleado')
 router.register(r'meteorologia' ,RegistroViewSet,base_name='meteorologia')
 router.register(r'potrero' ,PotreroViewSet,base_name='potrero')
 router.register(r'establecimiento' ,EstablecimientoViewSet,base_name='establecimiento')
