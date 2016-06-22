@@ -95,7 +95,7 @@
                 </thead>
                 <tbody md-body>
                 <tr md-row md-select="reg" md-select-id="id" md-auto-select ng-repeat="reg in registros.results">
-                    <td md-cell>[[reg.fecha]]</td>
+                    <td md-cell>[[reg.fecha | date:'fullDate' ]]</td>
                     <td md-cell>[[reg.cantidad]]</td>
                 </tr>
                 </tbody>

@@ -8,7 +8,7 @@
  * Controller of the frontendmuApp
  */
 angular.module('frontendmuApp')
-  .controller('MeteorologiaCtrl', function ($scope,$mdDialog,ServerData,Meteorologia) {
+  .controller('MeteorologiaCtrl', function ($scope,$mdDialog,ServerData,Meteorologia,$filter) {
 
     $scope.query = {q:'Asunción',units:'metric',lang:'es',APPID:'38212c68fe70ee4c21988681e3982a25'};
 

@@ -9,12 +9,10 @@
   </md-toolbar>
   <form>
     <md-dialog-content layout-padding>
-      <div>
-          <h4>Standard date-picker</h4>
-          <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+      <div layout="row">
         <md-input-container>
           <label>Fecha</label>
-          <input ng-model="newRegistro.fecha" required>
+          <input type="date" ng-model="newRegistro.fecha" required>
         </md-input-container>
           <md-input-container>
               <label>Cantidad (mm3)</label>
