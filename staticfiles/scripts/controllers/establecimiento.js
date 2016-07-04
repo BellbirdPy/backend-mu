@@ -8,16 +8,11 @@
  * Controller of the frontendmuApp
  */
 angular.module('frontendmuApp')
-  .controller('EstablecimientoCtrl', function ($scope,$location,$rootScope,Potrero,Categoria,Raza,Lote, ServerData,$mdDialog, AnimalCaravana) {
+  .controller('EstablecimientoCtrl', function ($scope,$location,Potrero,Categoria,Raza,Lote, ServerData,$mdDialog, AnimalCaravana) {
 
     $scope.go = function ( path ) {
       $location.path( path );
     };
-    $scope.categorias = [];
-    $scope.lotes = [];
-    $scope.razas = [];
-    $scope.potreros = [];
-
 
     $scope.configuraciones = [
       {nombre:'Potreros',url:'/potrero'},
@@ -28,243 +23,33 @@ angular.module('frontendmuApp')
     ];
 
 
-
-
-
-    //lotes
-    $scope.query = {establecimiento: ServerData.establecimiento.id,ordering: 'id',page: 1,limit:1000};
-
-    function successPotreros(potreros) {
-      $scope.potreros = potreros;
-      console.log(potreros);
-    }
-
-    $scope.getPotreros = function () {
-      $scope.promisePotreros = Potrero.get($scope.query,successPotreros).$promise;
-    };
-
-    $scope.getPotreros();
-
-
-    function successCat(categorias) {
-      $scope.categorias = categorias;
-      console.log(categorias);
-
-    }
-
-    $scope.getCat = function () {
-      $scope.promiseCat = Categoria.get($scope.query,successCat).$promise;
-    };
-
-    $scope.getCat();
-
-    function successLote(lotes) {
-      $scope.lotes = lotes;
-      console.log(lotes);
-    }
-
-    $scope.getLotes = function () {
-      $scope.promiseLote = Lote.get($scope.query,successLote).$promise;
-    };
-
-    $scope.getLotes();
-
-    function successRaza(razas) {
-      $scope.razas = razas;
-      console.log(razas);
-    }
-
-    $scope.getRaza = function () {
-      $scope.promiseRaza = Raza.get($scope.query,successRaza).$promise;
-    };
-
-    $scope.getRaza();
-
-
-
-    function datenum(v, date1904) {
-      if(date1904) v+=1462;
-      var epoch = Date.parse(v);
-      return (epoch - new Date(Date.UTC(1899, 11, 30))) / (24 * 60 * 60 * 1000);
-    }
-
-    function capitalizeFirstLetter(string) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-
-    function array_from_json(data){
-      var aux = 0;
-      var lista = [];
-      var borrarId = false;
-      angular.forEach(data, function(item){
-        delete item.establecimiento;
-        delete item.animales;
-        delete item.is_hembra;
-        delete item.potrero;
-        if (borrarId){
-          delete item.id;
-        }
-        if (aux==0){
-          var header = $rootScope.Utils.keys(item);
-          angular.forEach(header, function(titulo){
-            if (titulo == 'potrero_nombre'){
-              header[$.inArray(titulo, header)] = 'Potrero';
-            }else if (titulo == 'peso_promedio') {
-              header[$.inArray(titulo, header)] = 'Peso promedio';
-            }else{
-              header[$.inArray(titulo, header)] = capitalizeFirstLetter(titulo);
-            }
-          });
-          var estaDentro = $.inArray('Codigo', header);
-          if (estaDentro < 0){
-            header[0] = 'Código';
-            borrarId =false;
-          }else{
-            delete item.id;
-            header = $rootScope.Utils.keys(item);
-            angular.forEach(header, function(titulo){
-              header[$.inArray(titulo, header)] = capitalizeFirstLetter(titulo);
-            });
-            borrarId = true;
-            estaDentro = $.inArray('Codigo', header);
-            header[estaDentro] = 'Código';
-          }
-
-          console.log(header);
-          lista.push(header);
-          var arr = $.map(item, function(el) { return el });
-          lista.push(arr);
-        }else{
-          var arr = $.map(item, function(el) { return el });
-          lista.push(arr);
-        }
-        aux += 1;
-      });
-      return lista;
-    };
-    ;
-    function sheet_from_array_of_arrays(data, opts) {
-      var ws = {};
-      var range = {s: {c:10000000, r:10000000}, e: {c:0, r:0 }};
-      for(var R = 0; R != data.length; ++R) {
-        for(var C = 0; C != data[R].length; ++C) {
-          if(range.s.r > R) range.s.r = R;
-          if(range.s.c > C) range.s.c = C;
-          if(range.e.r < R) range.e.r = R;
-          if(range.e.c < C) range.e.c = C;
-          var cell = {v: data[R][C] };
-          if(cell.v == null) continue;
-          var cell_ref = XLSX.utils.encode_cell({c:C,r:R});
-
-          if(typeof cell.v === 'number') cell.t = 'n';
-          else if(typeof cell.v === 'boolean') cell.t = 'b';
-          else if(cell.v instanceof Date) {
-            cell.t = 'n'; cell.z = XLSX.SSF._table[14];
-            cell.v = datenum(cell.v);
-          }
-          else cell.t = 's';
-
-          ws[cell_ref] = cell;
-        }
-      }
-      if(range.s.c < 10000000) ws['!ref'] = XLSX.utils.encode_range(range);
-      return ws;
-    }
-
-    /* original data */
-    var data = [[1,2,3],[true, false, null, "sheetjs"],["foo","bar",new Date("2014-02-19T14:30Z"), "0.3"], ["baz", null, "qux"]]
-    var ws_name = "SheetJS";
-
-    function Workbook(sheetNames) {
-      if(!(this instanceof Workbook)) return new Workbook();
-      this.SheetNames = sheetNames;
-      this.Sheets = {};
-    }
-
-    $scope.generarPlantilla = function (){
-      var wb = new Workbook(['Animales']);
-      var wsani = sheet_from_array_of_arrays([['N° de Caravana','Código de Raza',	'Código de Categoría','Carimbo',	'N° de Caravana de la Madre',	'Código de Lote']])
-      var wscols = [
-        {wch:15},
-        {wch:15},
-        {wch:18},
-        {wch:10},
-        {wch:25},
-        {wch:15}
-      ];
-      wsani['!cols'] = wscols;
-
-      wb.Sheets['Animales'] = wsani;
-      var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'binary'});
-
-      function s2ab(s) {
-        var buf = new ArrayBuffer(s.length);
-        var view = new Uint8Array(buf);
-        for (var i=0; i!=s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
-        return buf;
-      }
-      saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), "animales.xlsx")
-
-    };
-
-    $scope.crearExcel = function (){
-      console.log('crearExcel')
-      var wb = new Workbook(['Potreros','Lotes','Categorias','Razas']);
-      var wscat = sheet_from_array_of_arrays(array_from_json($scope.categorias.results));
-      var wslot = sheet_from_array_of_arrays(array_from_json($scope.lotes.results));
-      var wsraz = sheet_from_array_of_arrays(array_from_json($scope.razas.results));
-      var wspot = sheet_from_array_of_arrays(array_from_json($scope.potreros.results));
-
-
-
-      var wscols = [
-        {wch:20},
-        {wch:20},
-        {wch:20},
-        {wch:20}
-      ];
-      wspot['!cols'] = wscols;
-      wscat['!cols'] = wscols;
-      wsraz['!cols'] = wscols;
-      wslot['!cols'] = wscols;
-      /* add worksheet to workbook */
-      wb.Sheets['Potreros'] = wspot;
-      wb.Sheets['Lotes'] = wslot;
-      wb.Sheets['Categorias'] = wscat;
-      wb.Sheets['Razas'] = wsraz;
-      wb.Sheets['Potreros']
-      var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'binary'});
-
-      function s2ab(s) {
-        var buf = new ArrayBuffer(s.length);
-        var view = new Uint8Array(buf);
-        for (var i=0; i!=s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
-        return buf;
-      }
-      saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), "configuracion.xlsx")
-    }
-
-
     $scope.cargaAnimales = function() {
 
       $mdDialog.show({
         templateUrl: '/staticfiles/views/dialogs/dialogo_carga_animales.html',
         targetEvent: null,
-        controller: ['$scope','$mdDialog','Raza','Categoria','ServerData','$filter','Animal','AnimalCaravana' ,function ($scope, $mdDialog, Raza,Categoria, ServerData,$filter,Animal,AnimalCaravana) {
+        controller: ['$scope','$mdDialog','Raza','Categoria','ServerData','$filter','Animal','AnimalCaravana','Potrero','$rootScope' ,function ($scope, $mdDialog, Raza,Categoria, ServerData,$filter,Animal,AnimalCaravana,Potrero,$rootScope) {
 
           var query = {establecimiento: ServerData.establecimiento.id,ordering: 'id',page: 1,limit:100};
-          $scope.categorias = Categoria.get(query,function(response){
+          Categoria.get(query,function(response){
             $scope.categorias = response;
           });
-          $scope.razas = Raza.get(query,function(response){
+          Raza.get(query,function(response){
             $scope.razas = response;
           });
-          $scope.lotes = Lote.get(query,function(response){
+          Lote.get(query,function(response){
             $scope.lotes = response;
           });
-          $scope.caravanas = AnimalCaravana.get({id:ServerData.establecimiento.id},function(response){
+          Potrero.get(query,function(response){
+            $scope.potreros = response;
+          });
+          AnimalCaravana.get({id:ServerData.establecimiento.id},function(response){
             $scope.caravanas = response.animales;
           });
+
+          $scope.crearExcel = function (){
+            $scope.$parent.crearExcel();
+          };
 
           $scope.options = {
             pageSelect: true
@@ -377,6 +162,101 @@ angular.module('frontendmuApp')
             saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), "animales.xlsx")
 
           };
+
+          function datenum(v, date1904) {
+            if(date1904) v+=1462;
+            var epoch = Date.parse(v);
+            return (epoch - new Date(Date.UTC(1899, 11, 30))) / (24 * 60 * 60 * 1000);
+          }
+
+          function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+          }
+
+          function array_from_json(data){
+            var aux = 0;
+            var lista = [];
+            var borrarId = false;
+            angular.forEach(data, function(item){
+              delete item.establecimiento;
+              delete item.animales;
+              delete item.is_hembra;
+              delete item.potrero;
+              if (borrarId){
+                delete item.id;
+              }
+              if (aux==0){
+                var header = $rootScope.Utils.keys(item);
+                angular.forEach(header, function(titulo){
+                  if (titulo == 'potrero_nombre'){
+                    header[$.inArray(titulo, header)] = 'Potrero';
+                  }else if (titulo == 'peso_promedio') {
+                    header[$.inArray(titulo, header)] = 'Peso promedio';
+                  }else{
+                    header[$.inArray(titulo, header)] = capitalizeFirstLetter(titulo);
+                  }
+                });
+                var estaDentro = $.inArray('Codigo', header);
+                if (estaDentro < 0){
+                  header[0] = 'Código';
+                  borrarId =false;
+                }else{
+                  delete item.id;
+                  header = $rootScope.Utils.keys(item);
+                  angular.forEach(header, function(titulo){
+                    header[$.inArray(titulo, header)] = capitalizeFirstLetter(titulo);
+                  });
+                  borrarId = true;
+                  estaDentro = $.inArray('Codigo', header);
+                  header[estaDentro] = 'Código';
+                }
+
+                console.log(header);
+                lista.push(header);
+                var arr = $.map(item, function(el) { return el });
+                lista.push(arr);
+              }else{
+                var arr = $.map(item, function(el) { return el });
+                lista.push(arr);
+              }
+              aux += 1;
+            });
+            return lista;
+          }
+
+          function sheet_from_array_of_arrays(data, opts) {
+            var ws = {};
+            var range = {s: {c:10000000, r:10000000}, e: {c:0, r:0 }};
+            for(var R = 0; R != data.length; ++R) {
+              for(var C = 0; C != data[R].length; ++C) {
+                if(range.s.r > R) range.s.r = R;
+                if(range.s.c > C) range.s.c = C;
+                if(range.e.r < R) range.e.r = R;
+                if(range.e.c < C) range.e.c = C;
+                var cell = {v: data[R][C] };
+                if(cell.v == null) continue;
+                var cell_ref = XLSX.utils.encode_cell({c:C,r:R});
+
+                if(typeof cell.v === 'number') cell.t = 'n';
+                else if(typeof cell.v === 'boolean') cell.t = 'b';
+                else if(cell.v instanceof Date) {
+                  cell.t = 'n'; cell.z = XLSX.SSF._table[14];
+                  cell.v = datenum(cell.v);
+                }
+                else cell.t = 's';
+
+                ws[cell_ref] = cell;
+              }
+            }
+            if(range.s.c < 10000000) ws['!ref'] = XLSX.utils.encode_range(range);
+            return ws;
+          }
+
+          function Workbook(sheetNames) {
+            if(!(this instanceof Workbook)) return new Workbook();
+            this.SheetNames = sheetNames;
+            this.Sheets = {};
+          }
 
           $scope.setFiles = function(element) {
             $scope.$apply(function($scope) {
@@ -517,6 +397,42 @@ angular.module('frontendmuApp')
             console.log($scope.error);
           };
 
+          $scope.crearExcel = function (){
+            console.log('crearExcel')
+            var wb = new Workbook(['Potreros','Lotes','Categorias','Razas']);
+            var wscat = sheet_from_array_of_arrays(array_from_json($scope.categorias.results));
+            var wslot = sheet_from_array_of_arrays(array_from_json($scope.lotes.results));
+            var wsraz = sheet_from_array_of_arrays(array_from_json($scope.razas.results));
+            var wspot = sheet_from_array_of_arrays(array_from_json($scope.potreros.results));
+
+
+
+            var wscols = [
+              {wch:20},
+              {wch:20},
+              {wch:20},
+              {wch:20}
+            ];
+            wspot['!cols'] = wscols;
+            wscat['!cols'] = wscols;
+            wsraz['!cols'] = wscols;
+            wslot['!cols'] = wscols;
+            /* add worksheet to workbook */
+            wb.Sheets['Potreros'] = wspot;
+            wb.Sheets['Lotes'] = wslot;
+            wb.Sheets['Categorias'] = wscat;
+            wb.Sheets['Razas'] = wsraz;
+            wb.Sheets['Potreros']
+            var wbout = XLSX.write(wb, {bookType:'xlsx', bookSST:true, type: 'binary'});
+
+            function s2ab(s) {
+              var buf = new ArrayBuffer(s.length);
+              var view = new Uint8Array(buf);
+              for (var i=0; i!=s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+              return buf;
+            }
+            saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), "configuracion.xlsx")
+          };
 
           $scope.hide = function () {
             $mdDialog.hide();

@@ -22,6 +22,79 @@
     <!-- endbuild -->
 </head>
 <body layout="row" ng-app="frontendmuApp" ng-controller="MasterCtrl" style="background-color: lightgray;">
+<div class="m-app-loading" ng-animate-children ng-if="false">
+    <!--
+        HACKY CODE WARNING: I'm putting Style block inside directive so that it
+        will be removed from the DOM when we remove the directive container.
+    -->
+    <style type="text/css">
+            div.m-app-loading {
+                position: absolute;
+            }
+            div.m-app-loading div.animated-container {
+                background-color: #FFFFFF ;
+                bottom: 0px ;
+                left: 0px ;
+                opacity: 1.0 ;
+                position: fixed ;
+                right: 0px ;
+                top: 0px ;
+                z-index: 999999 ;
+            }
+            /* Used to initialize the ng-leave animation state. */
+            div.m-app-loading div.animated-container.ng-leave {
+                opacity: 1.0 ;
+                transition: all linear 200ms ;
+                    -webkit-transition: all linear 200ms ;
+            }
+            /* Used to set the end properties of the ng-leave animation state. */
+            div.m-app-loading div.animated-container.ng-leave-active {
+                opacity: 0 ;
+            }
+            div.m-app-loading div.messaging {
+                color: #4CAF50 ;
+                font-family: monospace ;
+                left: 0px ;
+                margin-top: -37px ;
+                position: absolute ;
+                right: 0px ;
+                text-align: center ;
+                top: 50% ;
+            }
+            div.m-app-loading h1 {
+                font-size: 26px ;
+                line-height: 35px ;
+                margin: 0px 0px 20px 0px ;
+            }
+            div.m-app-loading p {
+                font-size: 18px ;
+                line-height: 14px ;
+                margin: 0px 0px 0px 0px ;
+            }
+        </style>
+
+
+    <!-- BEGIN: Actual animated container. -->
+    <div class="animated-container">
+
+        <div class="messaging">
+
+            <h1>
+                La aplicación se esta cargando
+            </h1>
+
+            <p>
+                Por favor espere!
+            </p>
+
+        </div>
+
+    </div>
+    <!-- END: Actual animated container. -->
+
+</div>
+<!-- END: App-Loading Screen. -->
+
 
 <md-sidenav ng-if="obj.establecimiento.id" class="site-sidenav md-sidenav-left md-whiteframe-z2" style="width: 250px;" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
 
@@ -60,9 +133,9 @@
                 <md-divider style="margin:0;"></md-divider>
 
                 <md-sidemenu-content md-icon="home" md-heading="Establecimiento" md-arrow="true">
-                    <md-sidemenu-button href="#establecimiento">Configuraciones</md-sidemenu-button>
+                    <md-sidemenu-button href="#establecimiento">Configuración</md-sidemenu-button>
                     <md-sidemenu-button href="#meteorologia">Meteorología</md-sidemenu-button>
-                    <md-sidemenu-button href="#compra">Empleados y contratistas</md-sidemenu-button>
+                    <md-sidemenu-button href="#empleados">Empleados y contratistas</md-sidemenu-button>
                     <md-sidemenu-button href="#venta">Contabilidad</md-sidemenu-button>
                     <md-sidemenu-button href="#mortandad">Resultados físicos</md-sidemenu-button>
                 </md-sidemenu-content>
@@ -76,7 +149,7 @@
 
 </md-sidenav>
 
-<div layout="column" tabIndex="-1" role="main" flex>
+<div layout="column" tabIndex="-1" role="main" flex ng-cloak>
     <md-toolbar ng-hide="loginView" class="md-whiteframe-z1 green">
         <div class="md-toolbar-tools" tabIndex="-1">
             <md-button class="md-icon-button" aria-label="Menu"hide-gt-md ng-click="toggleLeft()">
@@ -135,9 +208,6 @@
         </div>
     </md-content>
 </div>
-
-
-
 
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -207,11 +277,14 @@
 <script src="{% static 'scripts/services/eventoestablecimiento.js' %}"></script>
 <script src="{% static 'scripts/services/menu.js' %}"></script>
 <script src="{% static 'scripts/services/meteorologia.js' %}"></script>
+<script src="{% static 'scripts/services/empleado.js' %}"></script>
+<script src="{% static 'scripts/services/contratista.js' %}"></script>
 <script src="{% static 'scripts/controllers/dashboard.js' %}"></script>
 <script src="{% static 'scripts/controllers/mortandad.js' %}"></script>
 <script src="{% static 'scripts/controllers/raza.js' %}"></script>
 <script src="{% static 'scripts/controllers/categoria.js' %}"></script>
 <script src="{% static 'scripts/controllers/meteorologia.js' %}"></script>
+<script src="{% static 'scripts/controllers/empleado.js' %}"></script>
 
 <!-- endbuild -->
 </body>

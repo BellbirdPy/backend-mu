@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'compra',
     'sanitacion',
     'meteorologia',
+    'empleado'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -168,6 +169,7 @@ SERVER_EMAIL = 'gmacchi@bellbird.com.py'
 ALLOWED_HOSTS = ['*']
 
 STATIC_URL = '/staticfiles/'
+MEDIA_ROOT = '/media/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'staticfiles'),

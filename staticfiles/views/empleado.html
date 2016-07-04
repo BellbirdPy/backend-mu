@@ -1,0 +1,165 @@
+<section>
+    <div >
+        <div class="md-display-1 green-text">Establecimiento <div class="md-headline grey-text">Empleados y Contratistas</div> </div>
+    </div>
+</section>
+<section>
+    <md-card>
+        <md-toolbar class="md-table-toolbar md-default" ng-hide="selectedEmp.length">
+            <div class="md-toolbar-tools">
+                <span>Empleados</span>
+                <md-menu md-position-mode="target-right target" >
+                    <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu($event)">
+                        <md-icon><i class="material-icons">more_vert</i> </md-icon>
+                    </md-button>
+                    <md-menu-content width="4" >
+                        <md-menu-item>
+                            <md-button ng-click="editEmp()">
+                                <p>Agregar</p>
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+            </div>
+        </md-toolbar>
+        <md-toolbar class="md-table-toolbar green lighten-4 green-text text-darken-4" ng-show="selectedEmp.length">
+            <div class="md-toolbar-tools">
+                <span>[[selectedEmp.length]] [[selectedEmp.length > 1 ? 'empleados seleccionados' : 'empleado seleccionado']]</span>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-show="selectedEmp.length == 1" ng-click="verEmp(selectedEmp[0])" aria-label="Ver Empleado">
+                    <md-icon><i class="material-icons green-text text-darken-4">visibility</i> </md-icon>
+                </md-button>
+                <md-button class="md-icon-button" ng-show="selectedEmp.length == 1" ng-click="editEmp(selectedEmp[0])" aria-label="Editar Empleado">
+                    <md-icon><i class="material-icons green-text text-darken-4">edit</i> </md-icon>
+                </md-button>
+                <md-button class="md-icon-button green-text text-darken-4" ng-show="selectedEmp.length >= 1" ng-click="deleteEmp(selectedEmp)"  aria-label="Delete Empleado">
+                    <md-icon><i class="material-icons green-text text-darken-4">delete</i> </md-icon>
+                </md-button>
+            </div>
+
+        </md-toolbar>
+
+        <!-- exact table from live demo -->
+        <md-table-container>
+            <table md-table md-row-select multiple ng-model="selectedEmp" md-progress="promiseEmp">
+                <thead md-head md-order="queryEmp.ordering" md-on-reorder="getEmp">
+                <tr md-row md-select-id="id">
+                    <th md-column md-order-by="apellido"><span>Apellido</span></th>
+                    <th md-column md-order-by="nombre"><span>Nombre</span></th>
+                    <th md-column md-numeric md-order-by="numero_cedula"><span>CI Nº.</span></th>
+                    <th md-column><span>Teléfono</span></th>
+                    <!--
+                    <th md-column md-order-by="fecha_nacimiento"><span>Fecha Nac.</span></th>
+                    <th md-column md-order-by="direccion"><span>Dirección</span></th>
+
+                    <th md-column md-order-by="ingreso_empresa"><span>Ingreso</span></th>
+                    <th md-column md-order-by="ciudad_nacimiento"><span>Ciudad Nac.</span></th>
+                    -->
+                    <th md-column md-order-by="cargo"><span>Cargo</span></th>
+                    <th md-column md-numeric md-order-by="salario"><span>Salario</span></th>
+
+
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row md-select="emp" md-select-id="id"md-auto-select ng-repeat="emp in empleados.results">
+                    <td md-cell>[[emp.apellido]]</td>
+                    <td md-cell>[[emp.nombre]]</td>
+                    <td md-cell>[[emp.numero_cedula | number]]</td>
+                    <td md-cell>[[emp.telefono]]</td>
+                    <!--
+                    <td md-cell>[[emp.fecha_nacimiento | date:'dd/MM/yyyy']]</td>
+                    <td md-cell>[[emp.direccion]]</td>
+
+                    <td md-cell>[[emp.ingreso_empresa | date:'dd/MM/yyyy']]</td>
+                    <td md-cell>[[emp.ciudad_nacimiento]]</td>
+                    --><td md-cell>[[emp.cargo]]</td>
+                    <td md-cell>[[emp.salario | number]]</td>
+
+                </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+        <md-table-pagination md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}" md-limit="20" md-page="queryEmp.page" md-total="[[empleados.count]]" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="getEmp" md-page-select></md-table-pagination>
+    </md-card>
+</section>
+<!-- CONTRATISTA -->
+<section>
+    <md-card>
+        <md-toolbar class="md-table-toolbar md-default" ng-hide="selectedCon.length">
+            <div class="md-toolbar-tools">
+                <span>Contratistas</span>
+                <md-menu md-position-mode="target-right target" >
+                    <md-button class="md-icon-button" aria-label="More" ng-click="$mdOpenMenu($event)">
+                        <md-icon><i class="material-icons">more_vert</i> </md-icon>
+                    </md-button>
+                    <md-menu-content width="4" >
+                        <md-menu-item>
+                            <md-button ng-click="editCon()">
+                                <p>Agregar</p>
+                            </md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+            </div>
+        </md-toolbar>
+        <md-toolbar class="md-table-toolbar green lighten-4 green-text text-darken-4" ng-show="selectedCon.length">
+            <div class="md-toolbar-tools">
+                <span>[[selectedCon.length]] [[selectedCon.length > 1 ? 'contratistas seleccionados' : 'contratista seleccionado']]</span>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-show="selectedCon.length == 1" ng-click="editCon(selectedCon[0])" aria-label="Editar Contratista">
+                    <md-icon><i class="material-icons green-text text-darken-4">edit</i> </md-icon>
+                </md-button>
+                <md-button class="md-icon-button green-text text-darken-4" ng-show="selectedCon.length >= 1" ng-click="deleteCon(selectedCon)"  aria-label="Delete Empleado">
+                    <md-icon><i class="material-icons green-text text-darken-4">delete</i> </md-icon>
+                </md-button>
+            </div>
+
+        </md-toolbar>
+
+        <!-- exact table from live demo -->
+        <md-table-container>
+            <table md-table md-row-select multiple ng-model="selectedCon" md-progress="promiseCon">
+                <thead md-head md-order="queryCon.ordering" md-on-reorder="getCon">
+                <tr md-row md-select-id="id">
+                    <th md-column md-order-by="apellido"><span>Apellido</span></th>
+                    <th md-column md-order-by="nombre"><span>Nombre</span></th>
+                    <th md-column md-numeric md-order-by="numero_cedula"><span>CI Nº.</span></th>
+                    <th md-column md-order-by="fecha_nacimiento"><span>Fecha Nac.</span></th>
+                    <th md-column><span>Teléfono</span></th>
+                    <!--
+                    <th md-column md-order-by="fecha_nacimiento"><span>Fecha Nac.</span></th>
+                    <th md-column md-order-by="direccion"><span>Dirección</span></th>
+
+                    <th md-column md-order-by="ingreso_empresa"><span>Ingreso</span></th>
+                    <th md-column md-order-by="ciudad_nacimiento"><span>Ciudad Nac.</span></th>
+                    -->
+                    <th md-column md-order-by="actividad"><span>Actividad</span></th>
+                    <th md-column md-numeric md-order-by="jornal"><span>Jornal</span></th>
+
+
+                </tr>
+                </thead>
+                <tbody md-body>
+                <tr md-row md-select="con" md-select-id="id" md-auto-select ng-repeat="con in contratistas.results">
+                    <td md-cell>[[con.apellido]]</td>
+                    <td md-cell>[[con.nombre]]</td>
+                    <td md-cell>[[con.numero_cedula | number]]</td>
+                    <td md-cell>[[con.fecha_nacimiento | date:'dd/MM/yyyy']]</td>
+                    <td md-cell>[[con.telefono]]</td>
+                    <!--
+                    <td md-cell>[[emp.fecha_nacimiento | date:'dd/MM/yyyy']]</td>
+                    <td md-cell>[[emp.direccion]]</td>
+
+                    <td md-cell>[[emp.ingreso_empresa | date:'dd/MM/yyyy']]</td>
+                    <td md-cell>[[emp.ciudad_nacimiento]]</td>
+                    --><td md-cell>[[con.actividad]]</td>
+                    <td md-cell>[[con.jornal | number]]</td>
+
+                </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+        <md-table-pagination md-label="{page: 'Página:', rowsPerPage: 'Filas por página:', of: 'de'}" md-limit="20" md-page="queryCon.page" md-total="[[contratistas.count]]" md-page-select="options.pageSelect" md-boundary-links="options.boundaryLinks" md-on-paginate="getCon" md-page-select></md-table-pagination>
+    </md-card>
+</section>

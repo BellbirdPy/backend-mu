@@ -104,18 +104,25 @@ angular
         controller: 'MeteorologiaCtrl',
         controllerAs: 'meteorologia'
       })
+
+      .when('/empleados', {
+        templateUrl: '/staticfiles/views/empleado.html',
+        controller: 'EmpleadoCtrl',
+        controllerAs: 'empleado'
+      })
       .otherwise({
         redirectTo: '/'
       });
 
-  })/*.run( function($rootScope, $location) {
+  }).run( function($rootScope, $location) {
     $rootScope.$on( "$routeChangeStart", function(event, next, current,$templateCache) {
       if ( $rootScope.establecimiento == null ) {
           $location.path( "" );
       }
     });
+
     $rootScope.Utils = {
       keys : Object.keys
     }
-  })*/;
+  });
 
