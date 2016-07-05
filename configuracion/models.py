@@ -18,7 +18,7 @@ class Categoria(models.Model):
 class Raza(models.Model):
     nombre = models.CharField(max_length=80)
     descripcion = models.TextField(blank=True,default="")
-    establecimiento = models.ForeignKey(Establecimiento,related_name='razas',null=True,default=None)
+    establecimiento = models.ForeignKey(Establecimiento,related_name='razas',null=True,default=None,blank=True)
 
     def __unicode__(self):
         return unicode(self.nombre)

@@ -10,7 +10,9 @@ class Compra(models.Model):
     establecimiento = models.ForeignKey(Establecimiento, related_name="compras")
     cod_establecimiento_vendedor = models.CharField(max_length=32)
     nombre_vendedor = models.CharField(max_length=100)
-    fecha = models.DateField(auto_now=True)
+    numero_guia = models.IntegerField()
+    fecha_compra = models.DateField()
+    fecha_creacion = models.DateField(auto_now=True)
 
     def __unicode__(self):
         return unicode(self.cod_establecimiento_vendedor + ' ' + self.nombre_vendedor + ' '
