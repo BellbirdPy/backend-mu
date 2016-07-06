@@ -167,12 +167,7 @@
                 </md-button>
 
                 <md-menu-content width="4" >
-                    <md-menu-item ng-hide="true">
-                        <md-button>
-                            <p>Nada</p>
-                        </md-button>
-                    </md-menu-item>
-                    <md-menu-item>
+                    <md-menu-item ng-if="obj.establecimiento.id">
                         <md-button ng-href="#/main">
                             <p>Cambiar establecimiento</p>
                         </md-button>
@@ -188,7 +183,7 @@
         </div>
     </md-toolbar>
     <md-content md-scroll-y layout="column" flex>
-        <div ng-view layout-padding flex="noshrink" ng-if="obj.establecimiento"></div>
+        <div ng-view layout-padding flex="noshrink" ng-if="obj.establecimiento" class="grey lighten-4"></div>
         <div layout-padding flex="noshrink" ng-if="obj.establecimiento == ''">
             <div layout="row">
                 <md-card flex="20" ng-repeat="e in establecimientos" class="green">
@@ -279,6 +274,8 @@
 <script src="{% static 'scripts/services/meteorologia.js' %}"></script>
 <script src="{% static 'scripts/services/empleado.js' %}"></script>
 <script src="{% static 'scripts/services/contratista.js' %}"></script>
+<script src="{% static 'scripts/services/noticia.js' %}"></script>
+<script src="{% static 'scripts/filters/limittohtml.js' %}"></script>
 <script src="{% static 'scripts/controllers/dashboard.js' %}"></script>
 <script src="{% static 'scripts/controllers/mortandad.js' %}"></script>
 <script src="{% static 'scripts/controllers/raza.js' %}"></script>

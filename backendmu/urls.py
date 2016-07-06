@@ -27,8 +27,12 @@ from nutricion.views import NutricionViewSet
 from sanitacion.views import *
 from meteorologia.views import *
 from empleado.views import *
+from noticia.views import *
+from django.conf import settings
+from django.views.static import serve
 
 router = DefaultRouter()
+router.register(r'noticia' ,NoticiaViewSet,base_name='noticia')
 router.register(r'contratista' ,ContratistaViewSet,base_name='contratista')
 router.register(r'empleado' ,EmpleadoViewSet,base_name='empleado')
 router.register(r'meteorologia' ,RegistroViewSet,base_name='meteorologia')
@@ -57,3 +61,7 @@ urlpatterns = [
     url(r'^animal/', include('animal.urls')),
     url(r'^rest-auth/', include('rest_auth.urls')),
 ]
+
+if settings.DEBUG:
+    urlpatterns.append(url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}))
+

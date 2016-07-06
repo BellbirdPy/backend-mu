@@ -139,14 +139,16 @@ angular.module('frontendmuApp')
 
           $scope.generarPlantilla = function (){
             var wb = new Workbook(['Animales']);
-            var wsani = sheet_from_array_of_arrays([['N° de Caravana','Código de Raza',	'Código de Categoría','Carimbo',	'N° de Caravana de la Madre',	'Código de Lote','Estado sanitario']])
+            var wsani = sheet_from_array_of_arrays([['N° de Caravana','Código de Raza',	'Código de Categoría','Carimbo',	'N° de Caravana de la Madre',	'Código de Lote','Estado sanitario','Peso especifico']])
             var wscols = [
               {wch:15},
               {wch:15},
               {wch:18},
               {wch:10},
               {wch:25},
-              {wch:15}
+              {wch:15},
+              {wch:25},
+              {wch:25}
             ];
             wsani['!cols'] = wscols;
 
