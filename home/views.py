@@ -11,7 +11,7 @@ from establecimiento.models import Establecimiento
 
 # Create your views here.
 def home(request):
-    return render(request,'index.html',{})
+    return render(request,'index2.html',{})
 
 def login_view(request):
     state = ""
@@ -63,4 +63,4 @@ def cuenta_view(request):
 @ensure_csrf_cookie
 @login_required(None, 'login', '/login/')
 def index(request):
-    return render(request, 'angular.html')
+    return render(request, 'index.html')

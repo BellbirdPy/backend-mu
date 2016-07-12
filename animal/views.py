@@ -32,7 +32,6 @@ class AnimalViewSet(viewsets.ModelViewSet):
         else:
             return super(AnimalViewSet, self).create(request,*args, **kwargs)
 
-@login_required(None,'login','/login/')
 def list_caravana_animal(request,pk):
     try:
         user = request.user

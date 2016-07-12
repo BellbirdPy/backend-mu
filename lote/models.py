@@ -10,6 +10,7 @@ class Lote(models.Model):
     potrero = models.OneToOneField(Potrero,related_name='lote')
     peso_promedio = models.FloatField(blank=True, null=True)
     establecimiento = models.ForeignKey(Establecimiento,related_name='lotes')
+    is_venta = models.BooleanField(default=False)
 
     def __unicode__(self):
         return unicode(self.nombre)
