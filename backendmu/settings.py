@@ -56,7 +56,8 @@ INSTALLED_APPS = [
     'meteorologia',
     'empleado',
     'noticia',
-    'venta'
+    'venta',
+    'servicio'
 ]
 
 MIDDLEWARE_CLASSES = [

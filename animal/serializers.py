@@ -19,4 +19,4 @@ class AnimalSerializer(serializers.ModelSerializer):
         list_serializer_class = AnimalListSerializer
         fields = ['id', 'caravana', 'lote', 'lote_nombre', 'establecimiento', 'raza', 'categoria', 'raza_nombre',
                   'categoria_nombre', 'carimbo', 'estado_sanitario_display', 'estado_sanitario', 'peso_especifico',
-                  'origen','detalle_compra','estado']
+                  'origen','detalle_compra','estado','venta']

@@ -14,7 +14,7 @@ class AnimalViewSet(viewsets.ModelViewSet):
     serializer_class = AnimalSerializer
     queryset = Animal.objects.all()
     filter_backends = (filters.DjangoFilterBackend,filters.OrderingFilter,RelatedOrderingFilter)
-    filter_fields = ('establecimiento','estado','lote','categoria','raza','carimbo','estado_sanitario')
+    filter_fields = ('establecimiento','estado','lote','categoria','raza','carimbo','estado_sanitario','venta')
     ordering_fields = '__all__'
     ordering = ('caravana',)
 

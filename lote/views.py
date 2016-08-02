@@ -8,6 +8,6 @@ class LoteViewSet(viewsets.ModelViewSet):
     serializer_class = LoteSerializer
     queryset = Lote.objects.all()
     filter_backends = (filters.DjangoFilterBackend, filters.OrderingFilter, RelatedOrderingFilter)
-    filter_fields = ('establecimiento',)
+    filter_fields = ('establecimiento','estado')
     ordering_fields = '__all__'
     ordering = ('nombre',)
