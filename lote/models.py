@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from potrero.models import *
 from establecimiento.models import *
+from sanitacion.models import Vacunacion
 from venta.models import Venta
 from servicio.models import Servicio
 
@@ -20,6 +21,8 @@ class Lote(models.Model):
     is_venta = models.BooleanField(default=False)
     venta = models.ForeignKey(Venta,related_name='lotes',on_delete=models.SET_NULL,null=True,default=None)
     servicio = models.ForeignKey(Servicio, related_name='lotes', on_delete=models.SET_NULL, null=True, default=None)
+    vacunacion = models.ManyToManyField(Vacunacion, related_name='lotes', default=None, blank=True)
+
 
     def __unicode__(self):
         return unicode(self.nombre)

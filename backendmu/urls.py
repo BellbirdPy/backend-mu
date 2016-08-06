@@ -52,6 +52,7 @@ router.register(r'sanitacion/eventos',EventoViewSet,base_name='sanitacion_evento
 router.register(r'sanitacion/eventos_establecimiento',EventoEstablecimientoViewSet,base_name='sanitacion_eventos_establecimiento')
 router.register(r'venta',VentaViewSet,base_name='venta')
 router.register(r'servicio',ServicioViewSet,base_name='servicio')
+router.register(r'sanitacion/vacunacion',VacunacionViewSet,base_name='vacunacion')
 
 
 

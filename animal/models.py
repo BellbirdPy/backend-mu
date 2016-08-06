@@ -44,7 +44,7 @@ class Animal(models.Model):
     origen = models.CharField(max_length=1, choices=CHOICES_ORIGEN, default="S")
     detalle_compra = models.ForeignKey(DetalleCompra,related_name="animales",null=True, on_delete=models.CASCADE)
     venta = models.ForeignKey(Venta,related_name="animales",null=True,on_delete=models.SET_NULL,default=None)
-
+    vacunacion = models.ManyToManyField(Vacunacion, related_name='animales',blank=True, default=None)
 
     def __unicode__(self):
         return unicode(self.caravana) +" - " +unicode(self.categoria)+" - " +unicode(self.raza)
