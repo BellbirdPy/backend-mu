@@ -19,7 +19,7 @@ class Lote(models.Model):
     establecimiento = models.ForeignKey(Establecimiento,related_name='lotes')
     is_venta = models.BooleanField(default=False)
     venta = models.ForeignKey(Venta,related_name='lotes',on_delete=models.SET_NULL,null=True,default=None)
-    servicio = models.ForeignKey(Servicio, related_name='lotes', on_delete=models.SET_NULL, null=True, default=None)
+    servicio = models.ManyToManyField(Servicio, related_name='lotes', default=None)
 
     def __unicode__(self):
         return unicode(self.nombre)

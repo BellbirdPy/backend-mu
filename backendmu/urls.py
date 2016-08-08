@@ -32,6 +32,7 @@ from django.conf import settings
 from django.views.static import serve
 from venta.views import VentaViewSet
 from servicio.views import ServicioViewSet
+from palpacion.views import PalpacionViewSet
 
 router = DefaultRouter()
 router.register(r'noticia' ,NoticiaViewSet,base_name='noticia')
@@ -52,6 +53,8 @@ router.register(r'sanitacion/eventos',EventoViewSet,base_name='sanitacion_evento
 router.register(r'sanitacion/eventos_establecimiento',EventoEstablecimientoViewSet,base_name='sanitacion_eventos_establecimiento')
 router.register(r'venta',VentaViewSet,base_name='venta')
 router.register(r'servicio',ServicioViewSet,base_name='servicio')
+router.register(r'palpacion',PalpacionViewSet,base_name='palpacion')
+
 
 
 
