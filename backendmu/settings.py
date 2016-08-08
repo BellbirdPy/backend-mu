@@ -54,7 +54,8 @@ INSTALLED_APPS = [
     'compra',
     'sanitacion',
     'meteorologia',
-    'empleado'
+    'empleado',
+    'genetica'
 ]
 
 MIDDLEWARE_CLASSES = [
