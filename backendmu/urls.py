@@ -17,6 +17,8 @@ from compra.views import CompraViewSet, DetalleCompraViewSet
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework.routers import DefaultRouter
+
+from contabilidad.views import EgresoViewSet, ReporteEgresoViewSet, IngresoVarioViewSet
 from establecimiento.views import EstablecimientoViewSet
 from potrero.views import PotreroViewSet
 from configuracion.views import CategoriaViewSet, RazaViewSet
@@ -53,6 +55,10 @@ router.register(r'sanitacion/eventos_establecimiento',EventoEstablecimientoViewS
 router.register(r'venta',VentaViewSet,base_name='venta')
 router.register(r'servicio',ServicioViewSet,base_name='servicio')
 router.register(r'sanitacion/vacunacion',VacunacionViewSet,base_name='vacunacion')
+router.register(r'contabilidad/reporte_egreso',ReporteEgresoViewSet,base_name='reporte_egreso')
+router.register(r'contabilidad/egreso',EgresoViewSet,base_name='egreso')
+router.register(r'contabilidad/ingreso_vario',IngresoVarioViewSet,base_name='ingreso_vario')
+
 
 
 
