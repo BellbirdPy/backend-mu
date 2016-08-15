@@ -11,3 +11,11 @@ class LoteViewSet(viewsets.ModelViewSet):
     filter_fields = ('establecimiento','estado')
     ordering_fields = '__all__'
     ordering = ('nombre',)
+
+class LoteAnimalCompletoViewSet(viewsets.ModelViewSet):
+    serializer_class = LoteAnimalCompletoSerializer
+    queryset = Lote.objects.all()
+    filter_backends = (filters.DjangoFilterBackend, filters.OrderingFilter, RelatedOrderingFilter)
+    filter_fields = ('establecimiento','estado')
+    ordering_fields = '__all__'
+    ordering = ('nombre',)

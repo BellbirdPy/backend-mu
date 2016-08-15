@@ -17,6 +17,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='animal',
             name='vacunacion',
-            field=models.ForeignKey(default=None, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='animales', to='sanitacion.Vacunacion'),
+            field=models.ManyToManyField(blank=True, default=None, related_name='animales', to='sanitacion.Vacunacion'),
         ),
     ]

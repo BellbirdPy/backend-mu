@@ -40,3 +40,13 @@ class RazaViewSet(viewsets.ModelViewSet):
             return self.get_paginated_response(serializer.data)
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+
+class PajuelaViewSet(viewsets.ModelViewSet):
+    serializer_class = PajuelaSerializer
+    queryset = Pajuela.objects.all()
+    filter_backends = (filters.DjangoFilterBackend,filters.OrderingFilter)
+    filter_fields = ('establecimiento',)
+    ordering_fields = '__all__'
+    ordering = ('nombre',)
+
+

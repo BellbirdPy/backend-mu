@@ -22,9 +22,9 @@ from contabilidad.views import EgresoViewSet, ReporteEgresoViewSet, IngresoVario
     TotalesViewSet
 from establecimiento.views import EstablecimientoViewSet
 from potrero.views import PotreroViewSet
-from configuracion.views import CategoriaViewSet, RazaViewSet
+from configuracion.views import CategoriaViewSet, RazaViewSet, PajuelaViewSet
 from animal.views import AnimalViewSet
-from lote.views import LoteViewSet
+from lote.views import LoteViewSet,LoteAnimalCompletoViewSet
 from mortandad.views import MortandadViewSet
 from nutricion.views import NutricionViewSet
 from sanitacion.views import *
@@ -35,6 +35,8 @@ from django.conf import settings
 from django.views.static import serve
 from venta.views import VentaViewSet
 from servicio.views import ServicioViewSet
+from palpacion.views import PalpacionViewSet,PalpacionDetalleViewSet
+from inseminacion.views import InseminacionViewSet,InseminacionDetalleViewSet
 
 router = DefaultRouter()
 router.register(r'noticia' ,NoticiaViewSet,base_name='noticia')
@@ -45,7 +47,9 @@ router.register(r'potrero' ,PotreroViewSet,base_name='potrero')
 router.register(r'establecimiento' ,EstablecimientoViewSet,base_name='establecimiento')
 router.register(r'categoria' ,CategoriaViewSet,base_name='categoria')
 router.register(r'raza' ,RazaViewSet,base_name='raza')
+router.register(r'pajuela' ,PajuelaViewSet,base_name='pajuela')
 router.register(r'animal' ,AnimalViewSet,base_name='animal')
+router.register(r'lote_completo' ,LoteAnimalCompletoViewSet,base_name='lote_completo')
 router.register(r'lote' ,LoteViewSet,base_name='lote')
 router.register(r'mortandad' ,MortandadViewSet,base_name='mortandad')
 router.register(r'nutricion' ,NutricionViewSet,base_name='nutricion')
@@ -61,6 +65,12 @@ router.register(r'contabilidad/egreso',EgresoViewSet,base_name='egreso')
 router.register(r'contabilidad/ingreso_vario',IngresoVarioViewSet,base_name='ingreso_vario')
 router.register(r'contabilidad/ingreso_venta',IngresoVentaViewSet,base_name='ingreso_venta')
 router.register(r'contabilidad/totales',TotalesViewSet,base_name='contabilidad_totales')
+
+router.register(r'palpacion',PalpacionViewSet,base_name='palpacion')
+router.register(r'palpacionDetalle',PalpacionDetalleViewSet,base_name='palpacion_detalle')
+router.register(r'inseminacion',InseminacionViewSet,base_name='inseminacion')
+router.register(r'inseminacionDetalle',InseminacionDetalleViewSet,base_name='inseminacion_detalle')
+
 
 
 

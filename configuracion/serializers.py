@@ -11,3 +11,8 @@ class RazaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Raza
+
+class PajuelaSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Pajuela
