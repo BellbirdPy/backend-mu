@@ -22,3 +22,12 @@ class Raza(models.Model):
 
     def __unicode__(self):
         return unicode(self.nombre)
+
+class Pajuela(models.Model):
+    nombre = models.CharField(max_length=80)
+    descripcion = models.TextField(blank=True,default="")
+    establecimiento = models.ForeignKey(Establecimiento,related_name='pajuelas')
+
+
+    def __unicode__(self):
+        return unicode(self.nombre)

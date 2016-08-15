@@ -6,10 +6,17 @@ from django.db import models
 
 # Create your models here.
 class Palpacion(models.Model):
+    CHOICES_METODO = (
+        ("M", "Manual"),
+        ("E", "Ecografo")
+    )
     establecimiento = models.ForeignKey(Establecimiento, related_name="palpaciones")
     servicio = models.ForeignKey(Servicio, related_name="palpaciones")
-    metodo_manual = models.BooleanField(default=True)
+    metodo = models.CharField(max_length=1, choices=CHOICES_METODO, default="M")
     fecha = models.DateField()
+    cantidad_prenados = models.IntegerField()
+    cantidad_total = models.IntegerField()
+
 
 
     def __unicode__(self):
@@ -19,7 +26,7 @@ class DetallePalpacion(models.Model):
     palpacion = models.ForeignKey(Palpacion, related_name="detalles")
     animal = models.ForeignKey(Animal,related_name="palpaciones")
     resultado = models.BooleanField()
-    gestacion = models.IntegerField(null=True,blank=True)
+    gestacion = models.CharField(max_length=8,null=True,blank=True)
 
     def __unicode__(self):
         return unicode(self.animal) + unicode(self.resultado)

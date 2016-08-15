@@ -26,3 +26,15 @@ class EventoEstablecimiento(models.Model):
 
     def __unicode__(self):
         return unicode(self.nombre)
+
+class Vacunacion(models.Model):
+    establecimiento = models.ForeignKey(Establecimiento, related_name="vacunaciones")
+    fecha_vacunacion = models.DateField()
+    nombre = models.CharField(max_length=50, default='')
+    nombre_cientifico = models.CharField(max_length=50, default='',blank=True, null=True)
+    veterinario = models.CharField(max_length=40, default='')
+    enfermedad = models.CharField(max_length=30,default='')
+    codigo = models.CharField(max_length=20,default='',blank=True, null=True)
+
+    def __unicode__(self):
+        return unicode(self.nombre)

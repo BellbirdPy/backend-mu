@@ -58,7 +58,8 @@ INSTALLED_APPS = [
     'noticia',
     'venta',
     'servicio',
-    'palpacion'
+    'palpacion',
+    'inseminacion'
 ]
 
 MIDDLEWARE_CLASSES = [

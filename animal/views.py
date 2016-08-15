@@ -14,7 +14,7 @@ class AnimalViewSet(viewsets.ModelViewSet):
     serializer_class = AnimalSerializer
     queryset = Animal.objects.all()
     filter_backends = (filters.DjangoFilterBackend,filters.OrderingFilter,RelatedOrderingFilter)
-    filter_fields = ('establecimiento','estado','lote','categoria','raza','carimbo','estado_sanitario','venta')
+    filter_fields = ('establecimiento','estado','lote','categoria','categoria__codigo','categoria__is_hembra','prenada','raza','carimbo','estado_sanitario','venta')
     ordering_fields = '__all__'
     ordering = ('caravana',)
 
@@ -46,4 +46,6 @@ def list_caravana_animal(request,pk):
 
 
     return HttpResponse(data, content_type='application/json')
+
+
 
