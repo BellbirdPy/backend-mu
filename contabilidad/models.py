@@ -7,6 +7,7 @@ from django.db import models
 from django.utils import timezone
 from django.db import models
 
+from configuracion.models import Categoria
 from establecimiento.models import Establecimiento
 
 
@@ -21,7 +22,7 @@ class Egreso(models.Model):
     fecha = models.DateField()
     descripcion = models.CharField(max_length=80, default='')
     rubro = models.CharField(max_length=2, choices=CHOICES_RUBRO, default='GD')
-    monto = models.IntegerField()
+    monto = models.PositiveIntegerField()
     establecimiento = models.ForeignKey(Establecimiento, related_name='egreso')
 
     def __unicode__(self):
@@ -33,10 +34,25 @@ class IngresoVario(models.Model):
     fecha = models.DateField()
     motivo = models.CharField(max_length=80, default='')
     comprador = models.CharField(max_length=80, default='')
-    cantidad = models.IntegerField()
-    precio_unitario = models.IntegerField()
+    cantidad = models.PositiveIntegerField()
+    precio_unitario = models.PositiveIntegerField()
     establecimiento = models.ForeignKey(Establecimiento, related_name='ingreso_vario')
 
 
     def __unicode__(self):
         return unicode(self.motivo)
+
+
+class IngresoVenta(models.Model):
+
+    fecha = models.DateField()
+    comprador = models.CharField(max_length=80, default='')
+    cantidad = models.PositiveIntegerField()
+    categoria = models.CharField(max_length=80)
+    carimbo = models.PositiveIntegerField ()
+    peso_promedio = models.FloatField(blank=True, null=True)
+    total = models.PositiveIntegerField()
+    establecimiento = models.ForeignKey(Establecimiento, related_name='ingreso_venta')
+
+    def __unicode__(self):
+        return unicode(self.comprador+''+self.fecha.strftime('%d-%m-%Y'))

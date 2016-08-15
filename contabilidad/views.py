@@ -12,8 +12,6 @@ class ReporteEgresoViewSet (viewsets.ViewSet):
             anho = request.query_params.get('anho')
             establecimiento = request.query_params.get('establecimiento')
             reportes = []
-            request.mes=8
-            request.anho=2016
             rubros = [{'c':'GD','n':'Gastos Directos'}, {'c':'GA','n':'Gastos Administrativos'}, {'c':'IT','n':'Impuestos y Tazas'},
                       {'c':'GC', 'n':'Gastos de Comercializacion'}, {'c':'GF','n':'Gastos Financieros'}]
             total_reporte = 0
@@ -39,69 +37,48 @@ class ReporteEgresoViewSet (viewsets.ViewSet):
             response = {'count': 0, 'next': None, 'previous': None, 'results': None, 'total_reporte': None}
         return Response(response)
 
+
+class TotalesViewSet (viewsets.ViewSet):
+    def list(self, request, format=None):
+        if (request.query_params):
+            total_ingresos_venta = 0
+            total_ingresos_varios = 0
+            total_cantidad_venta = 0
+            establecimiento = request.query_params.get('establecimiento')
+            for ingreso_venta in IngresoVenta.objects.filter(establecimiento=establecimiento):
+                total_cantidad_venta = total_cantidad_venta+ingreso_venta.cantidad
+                total_ingresos_venta = total_ingresos_venta+ingreso_venta.total
+            for ingreso_vario in IngresoVario.objects.filter(establecimiento=establecimiento):
+                total_ingresos_varios = total_ingresos_varios+(ingreso_vario.precio_unitario*ingreso_vario.cantidad)
+            response = {'total_ingresos_venta': total_ingresos_venta,'total_ingresos_varios': total_ingresos_varios,'total_cantidad_venta': total_cantidad_venta}
+        else:
+            response = {'total_ingresos_venta': 0,'total_ingresos_varios': 0,'total_cantidad_venta': 0}
+        return Response(response)
+
+
+
 class EgresoViewSet(viewsets.ModelViewSet):
     serializer_class = EgresoSerializer
     queryset = Egreso.objects.all()
     filter_backends = (filters.DjangoFilterBackend,filters.OrderingFilter)
-    filter_fields = ('establecimiento','monto',)
+    filter_fields = ('establecimiento','rubro',)
     ordering_fields = '__all__'
     ordering = ('fecha',)
-    """
-    def create(self, request, *args, **kwargs):
-        return super(EgresoViewSet, self).create(request,*args, **kwargs)
 
-    def destroy(self, request, *args, **kwargs):
-        try:
-            egreso = self.get_object()
-            try:
-                rubro, created = ReporteEgreso.objects.get(establecimiento=egreso.establecimiento,
-                                                            mes=egreso.fecha.month, anho=egreso.fecha.year)
-                if egreso.rubro == 'GD':
-                    rubro.gastos_directos -= egreso.monto
-                    rubro.save()
-                    descripcion, created = ReporteDescripcion.objects.get(rubro=rubro, nombre=egreso.descripcion)
-                    descripcion.monto_des -= egreso.monto
-                    descripcion.porcentaje = (descripcion.monto_des / rubro.gastos_directos)*100
-                    descripcion.save()
-                if egreso.rubro == 'GA':
-                    rubro.gastos_administrativos += egreso.monto
-                    rubro.save()
-                    descripcion, created = ReporteDescripcion.objects.get(rubro=rubro, nombre=egreso.descripcion)
-                    descripcion.monto_des -= egreso.monto
-                    descripcion.porcentaje = (descripcion.monto_des / rubro.gastos_administrativos)*100
-                    descripcion.save()
-                if egreso.rubro == 'IT':
-                    rubro.impuestos -= egreso.monto
-                    rubro.save()
-                    descripcion, created = ReporteDescripcion.objects.get(rubro=rubro, nombre=egreso.descripcion)
-                    descripcion.monto_des -= egreso.monto
-                    descripcion.porcentaje = (descripcion.monto_des / rubro.impuestos)*100
-                    descripcion.save()
-                if egreso.rubro == 'GC':
-                    rubro.gastos_comercializacion -= egreso.monto
-                    rubro.save()
-                    descripcion, created = ReporteDescripcion.objects.get(rubro=rubro, nombre=egreso.descripcion)
-                    descripcion.monto_des -= egreso.monto
-                    descripcion.porcentaje = (descripcion.monto_des / rubro.gastos_comercializacion)*100
-                    descripcion.save()
-                if egreso.rubro == 'GF':
-                    rubro.gastos_financieros -= egreso.monto
-                    rubro.save()
-                    descripcion, created = ReporteDescripcion.objects.get(rubro=rubro, nombre=egreso.descripcion)
-                    descripcion.monto_des -= egreso.monto
-                    descripcion.porcentaje = (descripcion.monto_des / rubro.gastos_financieros)*100
-                    descripcion.save()
-                self.perform_destroy(egreso)
-            except ReporteDescripcion.DoesNotExist or ReporteEgreso.DoesNotExist:
-                pass
-        except:
-            pass
-        return super(EgresoViewSet, self).destroy(request,*args,**kwargs) """""
 
 class IngresoVarioViewSet(viewsets.ModelViewSet):
     serializer_class = IngresoVarioSerializer
     queryset = IngresoVario.objects.all()
     filter_backends = (filters.DjangoFilterBackend,filters.OrderingFilter)
-    filter_fields = ('establecimiento','fecha',)
+    filter_fields = ('establecimiento',)
+    ordering_fields = '__all__'
+    ordering = ('fecha',)
+
+
+class IngresoVentaViewSet(viewsets.ModelViewSet):
+    serializer_class = IngresoVentaSerializer
+    queryset = IngresoVenta.objects.all()
+    filter_backends = (filters.DjangoFilterBackend,filters.OrderingFilter)
+    filter_fields = ('establecimiento',)
     ordering_fields = '__all__'
     ordering = ('fecha',)
