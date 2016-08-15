@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 # Create your views here.
 from rest_framework import filters
 from rest_framework import viewsets
@@ -14,8 +12,9 @@ class LoteGeneticaViewSet(viewsets.ModelViewSet):
     #filter_backends = (filters.DjangoFilterBackend,)
     #filter_fields = ('establecimiento',)
 
+
 class AnimalGeneticaViewSet(viewsets.ModelViewSet):
     serializer_class = AnimalGeneticaSerializer
     queryset = AnimalGenetica.objects.all()
-    #filter_backends = (filters.DjangoFilterBackend,)
-    #filter_fields = ('establecimiento',)
+    # filter_backends = (filters.DjangoFilterBackend,)
+    # filter_fields = ('establecimiento',)

@@ -10,8 +10,8 @@ class LoteGeneticaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = LoteGenetica
-        fields = ['id', 'lote', 'raza', 'categoria', 'porcentaje_pureza', 'tipo_servicio', 'carimbo', 'descripcion',
-                  'pedigree_padre']
+        fields = ['id', 'establecimiento', 'lote', 'raza', 'categoria', 'porcentaje_pureza', 'tipo_servicio',
+                  'carimbo', 'descripcion', 'pedigree_padre']
 
 
 class AnimalGeneticaSerializer(serializers.ModelSerializer):
@@ -19,5 +19,6 @@ class AnimalGeneticaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AnimalGenetica
-        fields = ['id', 'animal', 'raza', 'categoria', 'porcentaje_pureza', 'tipo_servicio', 'carimbo', 'rp',
+        fields = ['id', 'establecimiento', 'animal', 'nombre', 'nombre_corto', 'porcentaje_pureza', 'tipo_servicio',
+                  'rp',
                   'descripcion', 'cantidad_pajuelas', 'pedigree_padre', 'pedigree_madre', 'pedigree_abuelo']
