@@ -22,7 +22,8 @@ class LoteGeneticaSerializer(serializers.ModelSerializer):
         # Esto crea una genetica por cada animal dentro del lotr
         i = 0
         for animal in animales:
-            a = AnimalGenetica(establecimiento=loteGenetica.establecimiento,
+            a = AnimalGenetica(lote_genetica=loteGenetica,
+                               establecimiento=loteGenetica.establecimiento,
                                animal=animal,
                                porcentaje_pureza=loteGenetica.porcentaje_pureza,
                                tipo_servicio=loteGenetica.tipo_servicio,
