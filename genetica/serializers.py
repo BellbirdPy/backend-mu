@@ -19,6 +19,7 @@ class LoteGeneticaSerializer(serializers.ModelSerializer):
         loteGenetica = LoteGenetica.objects.create(**validated_data)
         lote = Lote.objects.get(id=loteGenetica.lote_id)
         animales = Animal.objects.all().filter(lote=lote)
+        # Esto crea una genetica por cada animal dentro del lotr
         i = 0
         for animal in animales:
             a = AnimalGenetica(establecimiento=loteGenetica.establecimiento,
@@ -31,6 +32,22 @@ class LoteGeneticaSerializer(serializers.ModelSerializer):
             i = i + 1
             print i, 'Listo: animal ', animal.id
         return loteGenetica
+
+    def update(self, instance, validated_data):
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+        lote = Lote.objects.get(id=instance.lote_id)
+        animales = Animal.objects.all().filter(lote=lote)
+        for animal in animales:
+            a = AnimalGenetica.objects.get(animal=animal)
+            a.porcentaje_pureza = instance.porcentaje_pureza
+            a.tipo_servicio = instance.tipo_servicio
+            a.descripcion = instance.descripcion
+            a.pedigree_padre = instance.pedigree_padre
+            a.save()
+
+        return instance
 
 
 class AnimalGeneticaSerializer(serializers.ModelSerializer):
