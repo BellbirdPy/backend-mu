@@ -20,7 +20,7 @@ from rest_framework.routers import DefaultRouter
 
 from contabilidad.views import EgresoViewSet, ReporteEgresoViewSet, IngresoVarioViewSet, IngresoVentaViewSet, \
     TotalesViewSet
-from establecimiento.views import EstablecimientoViewSet
+from establecimiento.views import EstablecimientoViewSet, TareaViewSet, UsuariosEstablecimientoViewSet
 from potrero.views import PotreroViewSet
 from configuracion.views import CategoriaViewSet, RazaViewSet
 from animal.views import AnimalViewSet
@@ -61,6 +61,8 @@ router.register(r'contabilidad/egreso',EgresoViewSet,base_name='egreso')
 router.register(r'contabilidad/ingreso_vario',IngresoVarioViewSet,base_name='ingreso_vario')
 router.register(r'contabilidad/ingreso_venta',IngresoVentaViewSet,base_name='ingreso_venta')
 router.register(r'contabilidad/totales',TotalesViewSet,base_name='contabilidad_totales')
+router.register(r'tarea', TareaViewSet, base_name='tarea')
+router.register(r'establecimiento_usuarios', UsuariosEstablecimientoViewSet, base_name='establecimiento_usuarios')
 
 
 
