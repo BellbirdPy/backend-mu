@@ -12,5 +12,5 @@ class TareaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tarea
         fields = ('id', 'fecha', 'descripcion', 'usuario_asignado','usuario_asignado_display',
-                  'establecimiento', 'usuario_creador')
+                  'leido','establecimiento', 'usuario_creador')
 
