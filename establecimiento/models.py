@@ -40,3 +40,17 @@ class Establecimiento(models.Model):
         return user == self.owner
 
 
+class Tarea(models.Model):
+    fecha = models.DateField()
+    descripcion = models.CharField(max_length=50, default= '')
+    leido = models.BooleanField(default=False)
+    usuario_asignado = models.ForeignKey(User, related_name='tarea_asignada')
+    usuario_creador = models.ForeignKey(User, related_name='tarea_creada', null=True)
+    establecimiento = models.ForeignKey(Establecimiento, related_name='tarea')
+
+
+    def __unicode__(self):
+        return unicode(self.fecha)+', ' + unicode (self.descripcion)
+
+    def get_usuario_asignado_display(self):
+        return self.usuario_asignado.username
