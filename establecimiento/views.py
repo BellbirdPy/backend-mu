@@ -9,6 +9,7 @@ from django.core.mail import EmailMessage
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from rest_framework import viewsets, filters
+from rest_framework.views import Response
 from serializers import *
 from models import *
 from django.db.models import Q
@@ -133,3 +134,31 @@ def add_miembro_view(request,pk):
                 return render(request, 'add_miembro.html', {'form': form})
 
         return render(request,'add_miembro.html',{'form':form})
+
+
+class TareaViewSet(viewsets.ModelViewSet):
+    serializer_class = TareaSerializer
+    queryset = Tarea.objects.all()
+    filter_backends = (filters.DjangoFilterBackend,filters.OrderingFilter)
+    filter_fields = ('establecimiento','leido',)
+    ordering_fields = '__all__'
+    ordering = ('fecha',)
+
+class UsuariosEstablecimientoViewSet(viewsets.ViewSet):
+
+    def list(self, request, format=None):
+        if (request.query_params):
+            results = []
+            owner_in = False
+            establecimiento = Establecimiento.objects.get(pk=request.query_params.get('establecimiento'))
+            miembros = establecimiento.miembros.all().values()
+            for usuario in miembros:
+                results.append({'username': usuario['username'], 'id': usuario['id']})
+                if usuario['id'] == establecimiento.owner_id:
+                    owner_in = True
+            if not owner_in:
+                results.append({'username': establecimiento.owner.username, 'id': establecimiento.owner_id})
+            response = {'lista': results}
+        else:
+            response = {'lista': None}
+        return Response(response)
