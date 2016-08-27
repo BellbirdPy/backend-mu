@@ -15,13 +15,23 @@ class PalpacionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Palpacion
-        fields = ['id', 'establecimiento', 'fecha','metodo','metodo_display','servicio','servicio_completo','detalles','cantidad_prenados','cantidad_total']
+        fields = ['id', 'establecimiento', 'fecha','metodo','metodo_display','servicio','servicio_completo','detalles','cantidad_prenados','cantidad_total','lote']
 
     def create(self, validated_data):
         detalles = validated_data.pop('detalles')
         palpacion = Palpacion.objects.create(**validated_data)
+        print palpacion.lote
         for detalle in detalles:
-            DetallePalpacion.objects.create(palpacion=palpacion,**detalle)
+            detalle_creado = DetallePalpacion.objects.create(palpacion=palpacion,**detalle)
+            if detalle_creado.resultado == True:
+                detalle_creado.animal.prenada = True
+                detalle_creado.animal.palpaciones.add(palpacion)
+                detalle_creado.animal.lote = palpacion.lote
+                detalle_creado.animal.save()
+            else:
+                detalle_creado.animal.prenada = False
+                detalle_creado.animal.save()
+
         return palpacion
 
 

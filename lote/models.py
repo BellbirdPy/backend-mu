@@ -14,12 +14,21 @@ class Lote(models.Model):
     )
     estado = models.CharField(max_length=1, choices=CHOICES_ESTADO, default="N")
     nombre = models.CharField(max_length=80)
-    potrero = models.OneToOneField(Potrero,related_name='lote',null=True,blank=True)
+    potrero = models.ForeignKey(Potrero,related_name='lote',null=True,blank=True)
     peso_promedio = models.FloatField(blank=True, null=True)
     establecimiento = models.ForeignKey(Establecimiento,related_name='lotes')
     is_venta = models.BooleanField(default=False)
     venta = models.ForeignKey(Venta,related_name='lotes',on_delete=models.SET_NULL,null=True,default=None)
     vacunacion = models.ManyToManyField(Vacunacion, related_name='lotes', default=None, blank=True)
+    cantidad = models.IntegerField(default=0,editable=False)
+
+    def count_animales(self):
+        """
+        Counts the total number of live changes of this type and saves the result to the `change_count` field.
+        """
+        count = self.animales.filter(estado='V').count()
+        self.cantidad = count
+        self.save()
 
 
     def __unicode__(self):

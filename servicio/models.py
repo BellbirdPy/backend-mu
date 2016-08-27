@@ -15,8 +15,8 @@ class Servicio(models.Model):
     fecha_fin = models.DateField()
     tipo = models.CharField(max_length=1,choices=CHOICES_TIPO,default="N")
     lote = models.ForeignKey(Lote,related_name='servicios')
-    cantidad_prenados = models.IntegerField(default=0)
-    cantidad_total = models.IntegerField(default=0)
+    cantidad_toros = models.IntegerField(default=0)
+
 
     def __unicode__(self):
-        return unicode(self.tipo)
+        return unicode(self.tipo) + unicode(self.fecha)

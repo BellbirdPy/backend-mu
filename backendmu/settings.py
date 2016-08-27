@@ -58,9 +58,10 @@ INSTALLED_APPS = [
     'noticia',
     'venta',
     'servicio',
-    'contabilidad'
+    'contabilidad',
     'palpacion',
-    'inseminacion'
+    'inseminacion',
+    'paricion'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -106,24 +107,16 @@ WSGI_APPLICATION = 'backendmu.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-'''
+
 DATABASES = {
  'default': {
      'ENGINE': 'django.db.backends.postgresql',
-     'NAME': 'd9r50b1np87ngi',
-     'USER': 'kwbotkykupjpqc',
-     'PASSWORD': 'hrnQ1k3VVynjnd79dR5CBh8wmW',
-     'HOST': 'ec2-54-243-199-161.compute-1.amazonaws.com',
+     'NAME': 'mu',
+     'USER': 'muadmin',
+     'PASSWORD': 'sistemamu',
+     'HOST': 'localhost',
      'PORT': '5432',
  }
-}
-
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
 }
 
 # Password validation

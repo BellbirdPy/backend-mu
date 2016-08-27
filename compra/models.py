@@ -16,6 +16,7 @@ class Compra(models.Model):
     fecha_compra = models.DateField()
     precio_total = models.BigIntegerField(blank=True, null=True, default=0)
     fecha_creacion = models.DateField(auto_now=True)
+    carga_masiva = models.BooleanField(default=False)
 
     def __unicode__(self):
         return unicode(self.cod_establecimiento_vendedor + ' ' + self.nombre_vendedor + ' '
@@ -30,7 +31,7 @@ class DetalleCompra(models.Model):
     compra = models.ForeignKey(Compra, related_name="detalle_compra", on_delete=models.CASCADE)
     categoria = models.ForeignKey(Categoria, null=True, on_delete=models.SET_NULL, related_name="detalle_compra")
     raza = models.ForeignKey(Raza, null=True, on_delete=models.SET_NULL, related_name="detalle_compra")
-    lote = models.ForeignKey(Lote, null=True, on_delete=models.SET_NULL, related_name="detalle_compra")
+    lote = models.ForeignKey(Lote, null=True,blank=True, on_delete=models.SET_NULL, related_name="detalle_compra")
 
     def __unicode__(self):
         return unicode(self.categoria.nombre + ' ' + self.cantidad.__str__())

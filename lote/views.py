@@ -12,6 +12,8 @@ class LoteViewSet(viewsets.ModelViewSet):
     ordering_fields = '__all__'
     ordering = ('nombre',)
 
+
+
 class LoteAnimalCompletoViewSet(viewsets.ModelViewSet):
     serializer_class = LoteAnimalCompletoSerializer
     queryset = Lote.objects.all()
