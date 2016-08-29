@@ -26,17 +26,17 @@ class LoteGeneticaSerializer(serializers.ModelSerializer):
             i = i + 1
             try:
                 a = AnimalGenetica(lote_genetica=loteGenetica,
-                               establecimiento=loteGenetica.establecimiento,
-                               animal=animal,
-                               porcentaje_pureza=loteGenetica.porcentaje_pureza,
-                               tipo_servicio=loteGenetica.tipo_servicio,
-                               descripcion=loteGenetica.descripcion,
-                               pedigree_padre=loteGenetica.pedigree_padre)
+                                   establecimiento=loteGenetica.establecimiento,
+                                   animal=animal,
+                                   porcentaje_pureza=loteGenetica.porcentaje_pureza,
+                                   tipo_servicio=loteGenetica.tipo_servicio,
+                                   descripcion=loteGenetica.descripcion,
+                                   pedigree_padre=loteGenetica.pedigree_padre)
                 a.save()
                 print i, 'Listo: animal ', animal.id
             except IntegrityError as e:
                 if 'UNIQUE constraint' in e.message:
-                    print i, 'Animal ya posee genetica ',animal.id
+                    print i, 'Animal ya posee genetica ', animal.id
 
         return loteGenetica
 
@@ -58,10 +58,10 @@ class LoteGeneticaSerializer(serializers.ModelSerializer):
 
 
 class AnimalGeneticaSerializer(serializers.ModelSerializer):
-    animal_detalle = AnimalSerializer(many=False, read_only=True)
+    animal_detalle = AnimalSerializer(source='animal', many=False, read_only=True)
 
     class Meta:
         model = AnimalGenetica
-        fields = ['lote_genetica', 'id', 'establecimiento', 'animal', 'animal_detalle','nombre', 'nombre_corto',
+        fields = ['lote_genetica', 'id', 'establecimiento', 'animal', 'animal_detalle', 'nombre', 'nombre_corto',
                   'porcentaje_pureza', 'tipo_servicio', 'rp', 'descripcion', 'cantidad_pajuelas', 'pedigree_padre',
                   'pedigree_madre', 'pedigree_abuelo']
