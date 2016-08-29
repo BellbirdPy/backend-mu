@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_auth',
     'crispy_forms',
-
     'password_reset',
     'dj_static',
+    'ckeditor',
     #apps
     'home',
     'establecimiento',
@@ -55,6 +55,9 @@ INSTALLED_APPS = [
     'sanitacion',
     'meteorologia',
     'empleado',
+    'noticia',
+    'venta',
+    'servicio',
     'genetica'
 ]
 
@@ -170,8 +173,10 @@ SERVER_EMAIL = 'gmacchi@bellbird.com.py'
 ALLOWED_HOSTS = ['*']
 
 STATIC_URL = '/staticfiles/'
-MEDIA_ROOT = '/media/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'staticfiles'),
 )
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

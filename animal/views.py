@@ -14,7 +14,7 @@ class AnimalViewSet(viewsets.ModelViewSet):
     serializer_class = AnimalSerializer
     queryset = Animal.objects.all()
     filter_backends = (filters.DjangoFilterBackend,filters.OrderingFilter,RelatedOrderingFilter)
-    filter_fields = ('establecimiento','estado','lote','categoria','raza','carimbo','estado_sanitario','caravana')
+    filter_fields = ('establecimiento','estado','lote','categoria','raza','carimbo','estado_sanitario','venta','caravana')
     ordering_fields = '__all__'
     ordering = ('caravana',)
 
@@ -32,7 +32,6 @@ class AnimalViewSet(viewsets.ModelViewSet):
         else:
             return super(AnimalViewSet, self).create(request,*args, **kwargs)
 
-@login_required(None,'login','/login/')
 def list_caravana_animal(request,pk):
     try:
         user = request.user
