@@ -9,12 +9,12 @@ from genetica.serializers import LoteGeneticaSerializer, AnimalGeneticaSerialize
 class LoteGeneticaViewSet(viewsets.ModelViewSet):
     serializer_class = LoteGeneticaSerializer
     queryset = LoteGenetica.objects.all()
-    #filter_backends = (filters.DjangoFilterBackend,)
-    #filter_fields = ('establecimiento',)
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ('establecimiento',)
 
 
 class AnimalGeneticaViewSet(viewsets.ModelViewSet):
     serializer_class = AnimalGeneticaSerializer
     queryset = AnimalGenetica.objects.all()
-    # filter_backends = (filters.DjangoFilterBackend,)
-    # filter_fields = ('establecimiento',)
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_fields = ('establecimiento','animal',)
