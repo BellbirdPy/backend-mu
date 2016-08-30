@@ -13,7 +13,6 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from compra.views import CompraViewSet, DetalleCompraViewSet
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework.routers import DefaultRouter
@@ -23,10 +22,18 @@ from contabilidad.views import EgresoViewSet, ReporteEgresoViewSet, IngresoVario
 from establecimiento.views import EstablecimientoViewSet, TareaViewSet, UsuariosEstablecimientoViewSet
 from potrero.views import PotreroViewSet
 from configuracion.views import CategoriaViewSet, RazaViewSet, PajuelaViewSet
+
 from animal.views import AnimalViewSet
 from lote.views import LoteViewSet,LoteAnimalCompletoViewSet
+from compra.views import CompraViewSet, DetalleCompraViewSet
+from empleado.views import *
+from establecimiento.views import EstablecimientoViewSet
+from genetica.views import LoteGeneticaViewSet, AnimalGeneticaViewSet
+from lote.views import LoteViewSet
+from meteorologia.views import *
 from mortandad.views import MortandadViewSet
 from nutricion.views import NutricionViewSet
+from potrero.views import PotreroViewSet
 from sanitacion.views import *
 from meteorologia.views import *
 from empleado.views import *
@@ -79,6 +86,8 @@ router.register(r'inseminacionDetalle',InseminacionDetalleViewSet,base_name='ins
 
 
 
+router.register(r'genetica/genetica_lote', LoteGeneticaViewSet, base_name='lote_genetica')
+router.register(r'genetica/genetica_animal', AnimalGeneticaViewSet, base_name='animal_genetica')
 
 urlpatterns = [
     url(r'^animal/', AnimalViewSet.as_view({'put': 'update', 'delete': 'destroy'})),

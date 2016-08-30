@@ -61,7 +61,8 @@ INSTALLED_APPS = [
     'contabilidad',
     'palpacion',
     'inseminacion',
-    'paricion'
+    'paricion',
+    'genetica'
 ]
 
 MIDDLEWARE_CLASSES = [
