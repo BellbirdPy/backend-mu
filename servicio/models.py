@@ -19,4 +19,4 @@ class Servicio(models.Model):
 
 
     def __unicode__(self):
-        return unicode(self.tipo) + unicode(self.fecha)
+        return unicode(self.tipo) + unicode(self.fecha_fin)

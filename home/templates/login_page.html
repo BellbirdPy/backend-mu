@@ -1,38 +1,57 @@
-{% extends "base.html"%}
-{% block content %}
+<!DOCTYPE html>
 {% load staticfiles %}
-<div class="row intro">
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>Sistema MU</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body >
+<div class="row" style="background-color: #bdbdbd !important;"  >
     <div class="container" >
         <div class="section">
             <!--   Icon Section   -->
             <div class="row" style="padding-top:5%;padding-bottom:5%;">
-                <div class="col s12 m10 l6 offset-l3 offset-m1">
+                <div class="col s12 m10 l5 offset-l4 offset-m1">
                     <div class="card">
                         <div class="card-content">
                             <div class="icon-block">
-                                <h2 class="center light-green-text"><i class="material-icons">person</i></h2>
-                                <h5 class="center">Login</h5>
+                                <center>
+                                <img class="center" src="{% static 'images/logo.png' %}" width="80%">
+                                    </center>
+                                <h5>Login</h5>
                                 <br>
-                                <form role="form" method="post" autocomplete="off">{% csrf_token %}
-                                    <div class="input-field" >
-                                        <label for="username">Nombre de usuario</label>
-                                        <input type="text" class="validate" id="username" name="username" required>
-                                    </div>
-                                    <div class="input-field">
-                                        <label for="Password1">Contraseña</label>
-                                        <input type="password" class="validate" id="Password1" name="password" required>
-                                    </div>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col s12">
-                                            <center><button class="btn waves-effect waves-light light-green" type="submit" name="action">Entrar</button></center>
+                                <div class="row">
+                                    <form role="form" method="post" autocomplete="off">{% csrf_token %}
+                                        <div class="row">
+                                            <div class="input-field col s12" >
+                                                <label for="username">Nombre de usuario</label>
+                                                <input type="text" id="username" name="username" required>
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <label for="Password1">Contraseña</label>
+                                                <input type="password" class="validate" id="Password1" name="password" required>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row">
+                                            <div class="col s12">
+                                                <button class="btn-flat green-text waves-effect waves-light-grey waves-light right" type="submit">Ingresar</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
                                 {% if state %}<p class="red-text">{{state}}</p>{% endif %}
-                                <br>
                                 <div class="card-action">
-                                    <p><a href="/password/recover">olvidaste tu contraseña?</a></p>
+                                    <p ><a href="/password/recover" class="green-text">olvidaste tu contraseña?</a></p>
                                 </div>
                             </div>
                         </div>
@@ -44,4 +63,9 @@
     </div>
 </div>
 
-{% endblock %}
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="{% static 'js/materialize.js' %}"></script>
+<script src="{% static 'js/init.js' %}"></script>
+</body>
+</html>
