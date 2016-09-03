@@ -44,6 +44,7 @@ from venta.views import VentaViewSet
 from servicio.views import ServicioViewSet
 from palpacion.views import PalpacionViewSet,PalpacionDetalleViewSet
 from paricion.views import ParicionViewSet
+from establecimiento.views import MiembroViewSet
 from inseminacion.views import InseminacionViewSet,InseminacionDetalleViewSet
 
 router = DefaultRouter()
@@ -76,7 +77,7 @@ router.register(r'contabilidad/totales',TotalesViewSet,base_name='contabilidad_t
 router.register(r'paricion',ParicionViewSet,base_name='paricion')
 router.register(r'tarea', TareaViewSet, base_name='tarea')
 router.register(r'establecimiento_usuarios', UsuariosEstablecimientoViewSet, base_name='establecimiento_usuarios')
-
+router.register(r'miembro',MiembroViewSet,base_name='miembro')
 router.register(r'palpacion',PalpacionViewSet,base_name='palpacion')
 router.register(r'palpacionDetalle',PalpacionDetalleViewSet,base_name='palpacion_detalle')
 router.register(r'inseminacion',InseminacionViewSet,base_name='inseminacion')

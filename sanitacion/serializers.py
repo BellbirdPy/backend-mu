@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from models import *
+from lote.serializers import LoteSerializer
 
 class EventoSerializer(serializers.ModelSerializer):
 
@@ -20,16 +21,16 @@ class EventoEstablecimientoSerializer(serializers.ModelSerializer):
         return obj.nombre + ' - Veterinario: ' + obj.veterinario
     
 class VacunacionSerializer(serializers.ModelSerializer):
+    lotes_completo = LoteSerializer(source='lotes', many=True, read_only=True)
 
     class Meta:
         model = Vacunacion
         fields = ['id', 'establecimiento','fecha_vacunacion', 'nombre', 'nombre_cientifico',
-                  'veterinario','enfermedad','codigo', 'lotes']
+                  'veterinario','enfermedad','codigo', 'lotes','lotes_completo']
 
     def create(self, validated_data):
         try:
             lotes = validated_data.pop('lotes')
-            print lotes
         except:
             lotes = []
             print "error"

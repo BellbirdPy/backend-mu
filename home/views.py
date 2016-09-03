@@ -13,6 +13,9 @@ from establecimiento.models import Establecimiento
 def home(request):
     return render(request,'index2.html',{})
 
+def bienvenida(request):
+    return render(request,'bienvenida.html',{})
+
 def login_view(request):
     state = ""
     if request.method == "POST":
@@ -23,7 +26,7 @@ def login_view(request):
             if user.is_active:
                 login(request, user)
                 state = "Te has logueado correctamente!"
-                return redirect('/')
+                return redirect('/cuenta/')
             else:
                 state = "Tu cuenta no esta activa, por favor ponte en contacto con el administrador."
         else:

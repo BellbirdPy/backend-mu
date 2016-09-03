@@ -135,6 +135,14 @@ def add_miembro_view(request,pk):
 
         return render(request,'add_miembro.html',{'form':form})
 
+class MiembroViewSet(viewsets.ModelViewSet):
+    serializer_class = MiembroSerializer
+    queryset = User.objects.all()
+    filter_backends = (filters.DjangoFilterBackend,filters.OrderingFilter)
+    filter_fields = ('establecimientos','establecimientos_owner',)
+    ordering_fields = '__all__'
+    ordering = ('first_name',)
+
 
 class TareaViewSet(viewsets.ModelViewSet):
     serializer_class = TareaSerializer
