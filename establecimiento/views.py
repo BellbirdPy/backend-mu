@@ -22,6 +22,10 @@ except ImportError:
 
 
 # Create your views here.
+class DepartamentoViewSet(viewsets.ModelViewSet):
+    serializer_class = DepartamentoSerializer
+    queryset = Departamento.objects.all()
+
 
 class EstablecimientoViewSet(viewsets.ModelViewSet):
     serializer_class = EstablecimientoSerializer
