@@ -22,6 +22,10 @@ except ImportError:
 
 
 # Create your views here.
+class DepartamentoViewSet(viewsets.ModelViewSet):
+    serializer_class = DepartamentoSerializer
+    queryset = Departamento.objects.all()
+
 
 class EstablecimientoViewSet(viewsets.ModelViewSet):
     serializer_class = EstablecimientoSerializer
@@ -37,6 +41,19 @@ class EstablecimientoViewSet(viewsets.ModelViewSet):
             return Establecimiento.objects.filter(Q(owner=self.request.user) | Q(miembros=self.request.user.miembros.all()),estado='A')
         else:
             return Establecimiento.objects.all()
+
+    def create(self, request, *args, **kwargs):
+        print request.user
+        est = Establecimiento(departamento_id=request.data['departamento'],
+                              ciudad=request.data['ciudad'],
+                              plan=request.data['plan'],
+                              owner=request.user,
+                              nombre=request.data['nombre'],
+                              codigo=request.data['codigo'],
+                              estado=request.data['estado'])
+        est.save()
+
+
 
 @login_required(None,'login','/login/')
 def add_view(request):
