@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-{% load staticfiles %}
-<html lang="es">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-    <title>Sistema MU</title>
-
-    <!-- CSS  -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
-    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
-</head>
-<body style="background-color: #bdbdbd !important;">
-<div class="row">
-    <div class="container">
-        <div class="section">
+{% extends "base2.html" %}
+{% block content %}
+    {% load staticfiles %}
+    <div class="row intro">
+        <div class="container">
             <!--   Icon Section   -->
             <div class="row" style="padding-top:5%;padding-bottom:5%;">
                 <div class="col s12 m10 l8 offset-l2 offset-m1">
@@ -25,89 +13,61 @@
                                 <h5 class="center black-text">Registro</h5>
                                 <br>
                                 <form role="form" method="post">{% csrf_token %}
-                                    <div class="row">
-                                        <div class="input-field col s6" >
-                                            <label for="id_username">Nombre de Usuario</label>
-                                            <input type="text" name="username" id="id_username" value="{{form.username.value | default:''}}" required>
-                                            <div class="red-text">{{form.username.errors}}</div>
-                                        </div>
-                                        <div class="input-field col s6">
-                                            <label for="id_email">Email</label>
-                                            <input type="email" class="form-control" name="email" id="id_email" value="{{form.email.value | default:''}}" required>
-                                            <div class="red-text">{{form.email.errors}}</div>
-                                        </div>
-
+                                    <div class="input-field">
+                                        <label for="id_username">Nombre de Usuario</label>
+                                        <input type="text" name="username" id="id_username"
+                                               value="{{ form.username.value | default:'' }}" required>
+                                        <div class="red-text">{{ form.username.errors }}</div>
                                     </div>
-                                    <div class="row">
-                                        <div class="input-field col s6">
-                                            <label for="id_nombre">Nombre</label>
-                                            <input type="text" class="form-control" id="id_nombre" name="nombre" value="{{form.nombre.value | default:''}}" required>
-                                            <div class="red-text">{{form.nombre.errors}}</div>
-                                        </div>
-                                        <div class="input-field col s6">
-                                            <label for="id_apellido">Apellido</label>
-                                            <input type="text" class="form-control" id="id_apellido" name="apellido" value="{{form.apellido.value | default:''}}" required>
-                                            <div class="red-text">{{form.apellido.errors}}</div>
-                                        </div>
+                                    <div class="input-field">
+                                        <label for="id_email">Email</label>
+                                        <input type="email" class="form-control" name="email" id="id_email"
+                                               value="{{ form.email.value | default:'' }}" required>
+                                        <div class="red-text">{{ form.email.errors }}</div>
                                     </div>
-
-                                    <div class="row">
-
-                                        <div class="input-field col s6 green-text">
-                                            <select class="green-text">
-                                                <option value="" disabled selected class="grey-text"></option>
-                                                <option value="Hombre">Hombre</option>
-                                                <option value="Mujer">Mujer</option>
-                                            </select>
-                                            <label>Sexo</label>
-                                            <!--<div class="red-text">{{form.sexo.errors}}</div>-->
-                                        </div>
-                                        <div class="input-field col s6">
-                                            <label for="id_telefono">Teléfono</label>
-                                            <input type="text" class="form-control" id="id_telefono" name="telefono" required>
-                                            <div class="red-text">{{form.telefono.errors}}</div>
-                                        </div>
+                                    <div class="input-field">
+                                        <label for="id_nombre">Nombre</label>
+                                        <input type="text" class="form-control" id="id_nombre" name="nombre"
+                                               value="{{ form.nombre.value | default:'' }}" required>
+                                        <div class="red-text">{{ form.nombre.errors }}</div>
                                     </div>
-                                    <div class="row">
-                                        <div class="input-field col s6">
-                                            <label for="id_password1">Contraseña</label>
-                                            <input type="password" class="form-control" id="id_password1" name="password1" required>
-                                            <div class="red-text">{{form.password1.errors}}</div>
-                                        </div>
-                                        <div class="input-field col s6">
-                                            <label for="id_password2">Confirmar contraseña</label>
-                                            <input type="password" class="form-control" id="id_password2" name="password2" required>
-                                            <div class="red-text">{{form.password2.errors}}</div>
-                                        </div>
+                                    <div class="input-field">
+                                        <label for="id_apellido">Apellido</label>
+                                        <input type="text" class="form-control" id="id_apellido" name="apellido"
+                                               value="{{ form.apellido.value | default:'' }}" required>
+                                        <div class="red-text">{{ form.apellido.errors }}</div>
+                                    </div>
+                                    <div class="input-field">
+                                        <label for="id_password1">Contraseña</label>
+                                        <input type="password" class="form-control" id="id_password1" name="password1"
+                                               required>
+                                        <div class="red-text">{{ form.password1.errors }}</div>
+                                    </div>
+                                    <div class="input-field">
+                                        <label for="id_password2">Confirmar contraseña</label>
+                                        <input type="password" class="form-control" id="id_password2" name="password2"
+                                               required>
+                                        <div class="red-text">{{ form.password2.errors }}</div>
                                     </div>
                                     <br>
-                                    <div class="row">
-                                        <button class="btn-flat waves-effect waves-light-grey waves-light light-green-text right" type="submit">Registrar</button>
-                                    </div>
+                                    <center><input type="submit" class="btn btn-default submit-btn light-green"
+                                                   value="Enviar"/></center>
                                 </form>
+
                                 <br>
                                 <div class="card-action">
-                                    <p >Ya tienes una cuenta?<a href="/password/recover/"><span><a class="light-green-text" href="/login">Loguéate aquí</a></span></a></p>
+                                    </p>
+                                    <p>Ya tienes una cuenta?<a href="/password/recover/"><span><a href="/login">Loguéate aquí</a></span></a>
+                                    </p>
                                 </div>
                             </div>
                         </div>
 
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
-</div>
 
-<!--  Scripts-->
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="{% static 'js/materialize.js' %}"></script>
-<script src="{% static 'js/init.js' %}"></script>
-<script>
-    $(document).ready(function() {
-    $('select').material_select();
-  });
-</script>
-</body>
-</html>
+{% endblock %}

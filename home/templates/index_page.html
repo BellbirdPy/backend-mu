@@ -1,0 +1,252 @@
+{% extends "base.html" %}
+{% block content %}
+    {% load staticfiles %}
+
+    <header id="header" class="section transparent white-header header active-section sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="logo">
+                        <a href="/" title="">
+                            <img src="{% static 'demo/logo.png' %}" class="black-logo standard-logo middle-content"
+                                 alt="">
+                            <img src="{% static 'demo/logo.png' %}" class="white-logo standard-logo middle-content"
+                                 alt="">
+                            <img src="{% static 'demo/logo.png' %}" class="black-logo retina-logo middle-content"
+                                 alt="">
+                            <img src="{% static 'demo/logo.png' %}" class="white-logo retina-logo middle-content"
+                                 alt="">
+                        </a>
+                    </div>
+                </div><!-- /.col-->
+                <div class="col-md-9 menu-col text-right">
+                    <div class="menu">
+                        <ul class="list-inline">
+                            <li class=""><a href="#inicio">Inicio</a>
+                            </li>
+                            <li class=""><a href="#que_es">Que es?</a>
+                            </li>
+                            <li class=""><a href="#pilares" class="">Pilares</a>
+                            </li>
+                            <li class=""><a href="#funciones">Funciones</a>
+                            </li>
+                            <li class=""><a href="/pricing">Precios</a>
+                            </li>
+                            <li class=""><a href="/contact">Contactos</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div><!-- /.col-->
+                <div class="header-line">
+                    <div class="line"></div><!--/.line-->
+                </div><!-- /.header-line -->
+                <div class="menu-toggle">
+                    <i class="ti-menu"></i>
+                </div>
+            </div>
+        </div><!-- /.container -->
+    </header><!-- /header -->
+    <!-- PARALLAX SECTION -->
+    <section id="inicio"
+             class="big-hero section background-wrapper fullscreen with-overlay black-overlay active-section"
+             style="height: 633px;">
+        <div class="background-image parallax-background" data-stellar-background-ratio="0.5"
+             style="background: url('/staticfiles/demo/img1.jpg') 0% 0px;">
+
+        </div>
+        <div class="container middle-content">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="element">
+                        <h1 class="lighter"><strong>SISTEMA MU</strong> un proyecto <br>de ganadería inteligente en <br>Paraguay.
+                        </h1>
+                        <div class="space"></div>
+                        <p><a class="btn btn-punch btn-white hover-primary hover-colors btn-md" role="button"
+                              href="/pricing">Ver
+                            Planes</a>
+                            <a class="btn btn-punch btn-primary btn-md btn-darker" role="button" href="/sistema">Ingresar</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="#" title="" class="scroll-down"><i class="fa animated infinite bounce ti-arrow-down"></i></a>
+    </section>
+    <!-- /.section -->
+    <!-- CONTENT 1 -->
+    <!-- Que es MU  -->
+    <section id="que_es" class="section big-padding grey-background active-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5" style="margin-top: 6%;">
+                    <h2 class="lighter">Bienvenido a <strong>MU</strong></h2>
+                    <p class="">El Sistema MU es un Proyecto de Ganadería Inteligente en Paraguay. Se divide en 2
+                        Versiones
+                        Principales, la Primera es un Software Administrativo basado en los 4 Pilares Principales de la
+                        Ganadería. La Segunda, es una Plataforma Educativa ideal para Estudiantes y Pequeños
+                        Productores.</p>
+                </div><!-- /.col -->
+                <div class="col-md-6 col-md-offset-1">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/Fm9Q0nlDTfE" frameborder="0"
+                                allowfullscreen></iframe>
+                    </div>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </section>
+    <!-- /.section -->
+
+    <section class="section background-wrapper with-overlay black-overlay big-padding active-section">
+        <div class="background-image parallax-background" data-stellar-background-ratio="0.5"
+             style="background: url('/staticfiles/demo/img3.jpg') 0% 1920px;"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="larger-lead"><span>Aumente su <strong style="text-transform: uppercase">producción ganadera</strong></span>
+                        <br> Registros ordenados
+                        permiten tomar decisiones óptimas</strong> </p>
+
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </section>
+    <!--.<section-->
+    <section id="pilares" class="section active-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1 class="lighter">Software Administrativo</h1>
+                    <div class="space large">Se basa en los 4 Pilares Principales de la Ganadería</div>
+                </div>
+                <div class="col-md-3">
+                    <div class="team-block">
+                        <a href="#" title="" class="team-image text-center">
+                            <img src="{% static 'demo/pilar1manejo.jpg' %}" alt="">
+                        </a>
+                        <p class="position"></p>
+                        <h3 style="text-align: center">Manejo</h3>
+                        </ul>
+                    </div>
+                </div><!-- /.col -->
+                <div class="col-md-3">
+                    <div class="team-block">
+                        <a href="#" title="" class="team-image text-center">
+                            <img src="{% static 'demo/pilar2sanidad.jpg' %}" alt="">
+                        </a>
+                        <p class="position"></p>
+                        <h3 style="text-align: center">Sanidad</h3>
+                    </div>
+                </div><!-- /.col -->
+                <div class="col-md-3">
+                    <div class="team-block">
+                        <a href="#" title="" class="team-image text-center">
+                            <img src="{% static 'demo/pilar3nutricion.jpg' %}" alt="">
+                        </a>
+                        <p class="position"></p>
+                        <h3 style="text-align: center">Nutrición</h3>
+                    </div>
+                </div><!-- /.col -->
+                <div class="col-md-3">
+                    <div class="team-block">
+                        <a href="#" title="" class="team-image text-center">
+                            <img src="{% static 'demo/pilar4genetica.jpg' %}" alt="">
+                        </a>
+                        <p class="position"></p>
+                        <h3 style="text-align: center">Genética</h3>
+                    </div>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </section>
+    <!--.section-->
+    <section class="section background-wrapper with-overlay black-overlay big-padding active-section">
+        <div class="background-image parallax-background" data-stellar-background-ratio="0.5"
+             style="background: url('/staticfiles/demo/img2.jpg') 0% 800px;"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="larger-lead" style="text-align: center">Software administrativo <strong
+                            style="text-transform: uppercase">Online</strong>, <span style="text-transform: lowercase">los Propietarios y Administradores,
+                        podrán Controlar todas las Gestiones del Establecimiento desde sus Computadoras, Tablets o Smartphones; y tener toda su
+                        Información de manera Ordenada y Protegida.</span></p>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </section>
+    <section id="funciones" class="section active-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1 class="lighter">Funciones</h1>
+                    <div class="space large"></div>
+                </div><!--/.col-->
+
+                <div class="col-md-offset-1 col-md-2 text-center">
+                    <img class="icon large" style="width: 60px;" src="{% static 'demo/manejo.svg' %}">
+                    <h3 class="lighter no-padding-top">Manejo</h3>
+                    <p>
+                        Inventario
+                        <br>Manejo de Lotes
+                        <br>Compra de Animales
+                        <br>Venta de Animales
+                        <br>Servicio
+                        <br>Palpación
+                        <br>Parición
+                        <br>Desmamantar
+                    </p>
+                </div>
+                <div class="col-md-2 text-center">
+                    <img class="icon large" style="width: 60px;" src="{% static 'demo/sanidad.svg' %}">
+                    <h3 class="lighter no-padding-top">Sanidad</h3>
+                    <p>
+                        Calendario de Vacunación (SENACSA)
+                        <br>Sanitación de Animales
+                        <br>Vacunación de Animales</p>
+                </div>
+                <!--/.col-->
+                <div class="col-md-2 text-center">
+                    <img class="icon large" style="width: 60px;" src="{% static 'demo/nutricion.svg' %}">
+                    <h3 class="lighter no-padding-top">Nutrición</h3>
+                    <p>Plan Nutricional
+                        <br>Dietas y Raciones</p>
+                </div><!--/.col-->
+                <div class="col-md-2 text-center">
+                    <img class="icon large" style="width: 60px;" src="{% static 'demo/genetica.svg' %}">
+                    <h3 class="lighter no-padding-top">Genética</h3>
+                    <p>
+                        Genética por Lotes
+                        <br>Genética por Animal</p>
+                </div><!--/.col-->
+                <div class="col-md-2 text-center">
+                    <img class="icon large" style="width: 60px;" src="{% static 'demo/establecimiento.svg' %}">
+                    <h3 class="lighter no-padding-top">Establecimiento</h3>
+                    <p> Potreros
+                        <br>Meteorología
+                        <br>Resultados Físicos
+                        <br>Portal de Noticias
+                        <br>Calendario General
+                        <br>Empleados y Contratistas
+                        <br>Contabilidad General
+                    </p>
+                </div><!--/.col-->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </section>
+    <section class="section background-wrapper with-overlay black-overlay big-padding active-section">
+        <div class="background-image parallax-background" data-stellar-background-ratio="0.5"
+             style="background: url('/staticfiles/demo/img4.jpg') 0% -200px;"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="larger-lead" style="text-align: right">Versión <strong style="text-transform: uppercase">Gratuita</strong>,
+                        <span style="text-transform: lowercase">Esta Versión del Sistema MU permite a los Estudiantes y Pequeños Productores
+                            familiarizarse con el Software Administrativo, enseña buenas prácticas de manejo y
+                            técnicas de organización en los registros.</span>
+                    </p>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </section>
+    <!-- /.section -->
+{% endblock %}

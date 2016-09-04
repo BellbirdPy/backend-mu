@@ -11,52 +11,59 @@
     <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
     <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
-<body >
-<div class="row" style="background-color: #bdbdbd !important;"  >
-    <div class="container" >
-        <div class="section">
-            <!--   Icon Section   -->
-            <div class="row" style="padding-top:5%;padding-bottom:5%;">
-                <div class="col s12 m10 l5 offset-l4 offset-m1">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="icon-block">
-                                <center>
+<body style="background-color: #bdbdbd !important;">
+<div class="row" >
+    <div class="container">
+        <!--   Icon Section   -->
+        <div class="row" style="padding-top:5%;padding-bottom:5%;">
+            <div class="col s12 m10 l5 offset-l4 offset-m1">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="icon-block">
+                            <center>
                                 <img class="center" src="{% static 'images/logo.png' %}" width="80%">
-                                    </center>
-                                <h5>Login</h5>
-                                <br>
-                                <div class="row">
-                                    <form role="form" method="post" autocomplete="off">{% csrf_token %}
-                                        <div class="row">
-                                            <div class="input-field col s12" >
-                                                <label for="username">Nombre de usuario</label>
-                                                <input type="text" id="username" name="username" required>
-                                            </div>
+                            </center>
+                            <h5>Login</h5>
+                            <br>
+                            <div class="row">
+                                <form role="form" method="post" autocomplete="off">{% csrf_token %}
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <label for="username">Nombre de usuario</label>
+                                            <input type="text" id="username" name="username" required>
                                         </div>
-                                        <div class="row">
-                                            <div class="input-field col s12">
-                                                <label for="Password1">Contraseña</label>
-                                                <input type="password" class="validate" id="Password1" name="password" required>
-                                            </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <label for="Password1">Contraseña</label>
+                                            <input type="password" class="validate" id="Password1" name="password"
+                                                   required>
                                         </div>
-                                        <br>
-                                        <div class="row">
-                                            <div class="col s12">
-                                                <button class="btn-flat light-green-text waves-effect waves-light-grey waves-light right" type="submit">Ingresar</button>
-                                            </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col s6">
+                                            <a class="btn light-white-text green waves-effect waves-light-grey waves-light left"
+                                                    href="/register">Registrar Usuario
+                                            </a>
                                         </div>
-                                    </form>
-                                </div>
+                                        <div class="col s6">
+                                            <button class="btn-flat light-green-text waves-effect waves-light-grey waves-light right"
+                                                    type="submit">Ingresar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
 
-                                {% if state %}<p class="red-text">{{state}}</p>{% endif %}
-                                <div class="card-action">
-                                    <center><p ><a href="/password/recover" class="light-green-text">olvidaste tu contraseña?</a></p></center>
-                                </div>
+                            {% if state %}<p class="red-text">{{ state }}</p>{% endif %}
+                            <div class="card-action">
+                                <p style="text-align: center;"><a href="/password/recover" class="light-green-text">Olvidaste tu
+                                    contraseña?</a></p>
                             </div>
                         </div>
-
                     </div>
+
                 </div>
             </div>
         </div>

@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block content %}
+    {% load staticfiles %}
+    <header id="header" class="section white-header header active-section sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="logo">
+                        <a href="/" title="">
+                            <img src="{% static 'demo/logo.png' %}" class="black-logo standard-logo middle-content"
+                                 alt="">
+                            <img src="{% static 'demo/logo.png' %}" class="white-logo standard-logo middle-content"
+                                 alt="">
+                            <img src="{% static 'demo/logo.png' %}" class="black-logo retina-logo middle-content"
+                                 alt="">
+                            <img src="{% static 'demo/logo.png' %}" class="white-logo retina-logo middle-content"
+                                 alt="">
+                        </a>
+                    </div>
+                </div><!-- /.col-->
+                <div class="col-md-9 menu-col text-right">
+                    <div class="menu">
+                        <ul class="list-inline">
+                            <li class=""><a href="/">Inicio</a>
+                            </li>
+                            <li class=""><a href="/#que_es">Que es?</a>
+                            </li>
+                            <li class=""><a href="/#pilares" class="">Pilares</a>
+                            </li>
+                            <li class=""><a href="/#funciones">Funciones</a>
+                            </li>
+                            <li class=""><a href="/pricing">Precios</a>
+                            </li>
+                            <li class=""><a href="/contact">Contactos</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div><!-- /.col-->
+                <div class="header-line">
+                    <div class="line"></div><!--/.line-->
+                </div><!-- /.header-line -->
+                <div class="menu-toggle">
+                    <i class="ti-menu"></i>
+                </div>
+            </div>
+        </div><!-- /.container -->
+    </header><!-- /header -->
+    <!-- Three reasons to call us  -->
+    <section class="section big-padding active-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-offset-2 col-md-8">
+                    <form data-toggle="validator" id="template-contactform" name="template-contactform"
+                          action="include/sendemail.php" method="post" role="form">
+
+                        <div class="form-process"></div>
+
+                        <div class="col-md-4 form-group">
+                            <input type="text" id="template-contactform-name" name="template-contactform-name" value=""
+                                   class="form-control" placeholder="Nombre" required="">
+                            <div class="help-block with-errors"></div>
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            <input type="email" id="template-contactform-email" name="template-contactform-email"
+                                   value="" class="email form-control" placeholder="e-Mail" required="">
+                            <div class="help-block with-errors"></div>
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            <input type="text" id="template-contactform-phone" name="template-contactform-phone"
+                                   value="" placeholder="Telefono" class="form-control">
+                            <div class="help-block with-errors"></div>
+                        </div>
+
+                        <div class="col-md-8 form-group">
+                            <input type="text" id="template-contactform-subject" name="template-contactform-subject"
+                                   value="" class="form-control" placeholder="Asunto" required="">
+                            <div class="help-block with-errors"></div>
+                        </div>
+
+                        <div class="col-md-4 form-group">
+                            <select id="template-contactform-service" name="template-contactform-service"
+                                    class="form-control">
+                                <option value="">Planes</option>
+                                <option value="Premium">Premium</option>
+                                <option value="Estandar">Estandar</option>
+                                <option value="Consulta">Consulta</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-12 form-group">
+                            <textarea class="form-control" id="template-contactform-message"
+                                      name="template-contactform-message" placeholder="Mensaje" rows="6" cols="30"
+                                      required=""></textarea>
+                            <div class="help-block with-errors"></div>
+                        </div>
+
+                        <div class="col-md-12 hidden form-group">
+                            <input type="text" id="template-contactform-botcheck" name="template-contactform-botcheck"
+                                   value="" class="form-control">
+                        </div>
+
+                        <div class="col-md-12">
+                            <p id="contact-form-result"></p>
+                            <br>
+                        </div><!--/.col-->
+
+                        <div class="col-md-12">
+                            <button class="btn btn-punch btn-xs btn-black disabled" type="submit"
+                                    id="template-contactform-submit" name="template-contactform-submit" value="submit"
+                                    style="pointer-events: all; cursor: pointer;">Enviar mensaje
+                            </button>
+                        </div>
+
+                    </form><!--/.form-->
+                    <script type="text/javascript">
+                        jQuery(document).ready(function () {
+                            $("#template-contactform").validator().on('submit', function (e) {
+                                $(this).ajaxSubmit({
+                                    target: '#contact-form-result',
+                                    success: function (response) {
+                                        $('.form-process').fadeOut();
+                                        $('#template-contactform').find('.form-control').val('');
+                                        $('#contact-form-result').html(response);
+                                        $('#contact-form-result').fadeIn();
+                                        console.log(response);
+                                    }
+                                });
+                                return false;
+                            })
+
+                        });
+
+                    </script>
+
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </section><!-- /.section --><!-- Footer 2 -->
+{% endblock %}

@@ -8,6 +8,8 @@ urlpatterns = [
     url(r'^logout/',logout_view),
     url(r'^register/', register_view),
     url(r'^cuenta/',cuenta_view),
+    url(r'^pricing/',pricing_view),
+    url(r'^contact/', contact_view)
     url(r'^bienvenida/', bienvenida),
 
 ]
