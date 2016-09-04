@@ -16,7 +16,7 @@ class PalpacionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Palpacion
-        fields = ['id', 'establecimiento', 'fecha','metodo','metodo_display','servicio','servicio_completo','detalles','cantidad_prenados','cantidad_actual_prenados','cantidad_total','lote']
+        fields = ['id', 'establecimiento', 'fecha','metodo','metodo_display','terminado','servicio','servicio_completo','detalles','cantidad_prenados','cantidad_actual_prenados','cantidad_total','lote']
 
     def create(self, validated_data):
         detalles = validated_data.pop('detalles')

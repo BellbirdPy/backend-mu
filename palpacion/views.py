@@ -6,11 +6,10 @@ from scripts.related_ordering import RelatedOrderingFilter
 # Create your views here.
 
 class PalpacionFilter(filters.FilterSet):
-    cantidad_actual = django_filters.NumberFilter(name="animalesprenados",lookup_expr='lt')
 
     class Meta:
         model = Palpacion
-        fields = ['establecimiento', 'cantidad_actual']
+        fields = ['establecimiento','terminado']
 
 class PalpacionViewSet(viewsets.ModelViewSet):
     serializer_class = PalpacionSerializer

@@ -19,9 +19,14 @@ class Palpacion(models.Model):
     cantidad_total = models.IntegerField()
     animales_prenados = models.ManyToManyField(Animal,related_name='palpaciones')
     lote = models.ForeignKey(Lote,related_name='palpaciones',null=True,default=None)
+    terminado = models.BooleanField(default=False)
 
     def get_animales_prenados(self):
-        return self.animales_prenados.filter(prenada=True).count()
+        cant = self.animales_prenados.filter(prenada=True).count()
+        if cant == 0:
+            self.terminado = True
+            self.save()
+        return cant
 
 
 
