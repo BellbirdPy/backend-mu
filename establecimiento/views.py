@@ -34,7 +34,7 @@ class EstablecimientoViewSet(viewsets.ModelViewSet):
         #borrar esto en produccion
 
         if self.request.user.is_authenticated():
-            return Establecimiento.objects.filter(Q(owner=self.request.user) | Q(miembros=self.request.user),estado='A')
+            return Establecimiento.objects.filter(Q(owner=self.request.user) | Q(miembros=self.request.user.miembros.all()),estado='A')
         else:
             return Establecimiento.objects.all()
 
@@ -137,11 +137,20 @@ def add_miembro_view(request,pk):
 
 class MiembroViewSet(viewsets.ModelViewSet):
     serializer_class = MiembroSerializer
-    queryset = User.objects.all()
+    queryset = Miembro.objects.all()
     filter_backends = (filters.DjangoFilterBackend,filters.OrderingFilter)
-    filter_fields = ('establecimientos','establecimientos_owner',)
+    filter_fields = ('establecimiento',)
     ordering_fields = '__all__'
-    ordering = ('first_name',)
+    ordering = ('establecimiento',)
+
+    def destroy(self, request, *args, **kwargs):
+        try:
+            instance = self.get_object()
+            instance.user.delete()
+            self.perform_destroy(instance)
+        except:
+            pass
+        return Response()
 
 
 class TareaViewSet(viewsets.ModelViewSet):

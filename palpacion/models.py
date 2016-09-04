@@ -20,6 +20,9 @@ class Palpacion(models.Model):
     animales_prenados = models.ManyToManyField(Animal,related_name='palpaciones')
     lote = models.ForeignKey(Lote,related_name='palpaciones',null=True,default=None)
 
+    def get_animales_prenados(self):
+        return self.animales_prenados.filter(prenada=True).count()
+
 
 
     def __unicode__(self):

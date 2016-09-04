@@ -17,8 +17,7 @@ class Establecimiento(models.Model):
         ("B","Borrado")
     )
     nombre = models.CharField(max_length=100)
-    owner = models.ForeignKey(User,related_name='establecimientos_owner')
-    miembros = models.ManyToManyField(User,related_name='establecimientos',blank=True)
+    owner = models.ForeignKey(User,related_name='establecimientos')
     estado = models.CharField(max_length=1, choices=CHOICES_ESTADO, default="A")
     fecha_expiracion = models.DateField()
 
@@ -54,3 +53,17 @@ class Tarea(models.Model):
 
     def get_usuario_asignado_display(self):
         return self.usuario_asignado.username
+
+class Miembro(models.Model):
+    CHOICES_ESTADO = (
+        ("A", "Administrador"),
+        ("C", "Contador"),
+        ("P", "Propietario")
+    )
+    establecimiento = models.ForeignKey(Establecimiento, related_name='miembros')
+    user = models.ForeignKey(User, related_name='miembros')
+    cargo = models.CharField(max_length=1,choices=CHOICES_ESTADO,default='A')
+
+    def __unicode__(self):
+        return unicode(self.user.username)
+

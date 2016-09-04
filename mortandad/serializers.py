@@ -17,7 +17,6 @@ class MortandadSerializer(serializers.ModelSerializer):
         mortandad = Mortandad.objects.create(**validated_data)
         for animal in animales:
             animal.estado = 'M'
-            animal.lote = None
             animal.mortandad = mortandad
             animal.save()
         return mortandad
