@@ -11,7 +11,7 @@ from establecimiento.models import Establecimiento
 
 # Create your views here.
 def home(request):
-    return render(request,'index2.html',{})
+    return render(request,'index_page.html',{})
 
 def login_view(request):
     state = ""
@@ -23,7 +23,7 @@ def login_view(request):
             if user.is_active:
                 login(request, user)
                 state = "Te has logueado correctamente!"
-                return redirect('/')
+                return redirect('/sistema')
             else:
                 state = "Tu cuenta no esta activa, por favor ponte en contacto con el administrador."
         else:
@@ -64,3 +64,9 @@ def cuenta_view(request):
 @login_required(None, 'login', '/login/')
 def index(request):
     return render(request, 'index.html')
+
+def pricing_view(request):
+    return render(request,'pricing.html')
+
+def contact_view(request):
+    return render(request,'contact.html')
