@@ -42,6 +42,19 @@ class EstablecimientoViewSet(viewsets.ModelViewSet):
         else:
             return Establecimiento.objects.all()
 
+    def create(self, request, *args, **kwargs):
+        print request.user
+        est = Establecimiento(departamento_id=request.data['departamento'],
+                              ciudad=request.data['ciudad'],
+                              plan=request.data['plan'],
+                              owner=request.user,
+                              nombre=request.data['nombre'],
+                              codigo=request.data['codigo'],
+                              estado=request.data['estado'])
+        est.save()
+
+
+
 @login_required(None,'login','/login/')
 def add_view(request):
     form = EstablecimientoForm(request.POST or None)

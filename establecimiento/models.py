@@ -41,7 +41,7 @@ class Establecimiento(models.Model):
     owner = models.ForeignKey(User, related_name='establecimientos_owner')
     miembros = models.ManyToManyField(User, related_name='establecimientos', blank=True)
     estado = models.CharField(max_length=1, choices=CHOICES_ESTADO, default="A")
-    plan = models.CharField(max_length=1, choices=CHOICES_ESTADO, default="G")
+    plan = models.CharField(max_length=1, choices=CHOICES_PLAN, default="G")
     fecha_expiracion = models.DateField(blank=True, null=True)
 
     def __unicode__(self):

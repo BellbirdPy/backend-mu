@@ -10,16 +10,18 @@ class DepartamentoSerializer(serializers.ModelSerializer):
 
 
 class CiudadesSerializer(serializers.ModelSerializer):
-
     class Meta:
         models = Ciudad
         fields = ('id', 'nombre')
 
 
 class EstablecimientoSerializer(serializers.ModelSerializer):
+    departamento_nombre = serializers.CharField(source='departamento.nombre', read_only=True)
+
     class Meta:
         model = Establecimiento
-        fields = ('id', 'nombre', 'owner', 'miembros', 'lotes', 'potreros')
+        fields = ('id', 'nombre', 'codigo', 'departamento', 'departamento_nombre', 'ciudad', 'owner',
+                  'miembros', 'lotes', 'potreros', 'estado', 'plan')
 
 
 class TareaSerializer(serializers.ModelSerializer):
