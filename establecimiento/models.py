@@ -21,6 +21,7 @@ class Ciudad(models.Model):
         return unicode(self.nombre)
 
 
+
 # Create your models here.
 class Establecimiento(models.Model):
     CHOICES_ESTADO = (
