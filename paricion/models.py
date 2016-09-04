@@ -17,5 +17,5 @@ class Paricion(models.Model):
     lote = models.ForeignKey(Lote,related_name='pariciones',null=True,blank=True)
 
     def __unicode__(self):
-        return unicode(self.fecha) + unicode(self.animal)
+        return unicode(self.fecha) + unicode(self.madre)
 

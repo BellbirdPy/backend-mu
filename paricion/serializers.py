@@ -12,13 +12,14 @@ class ParicionSerializer(serializers.ModelSerializer):
         fields = ['id', 'hijo','madre','fecha','establecimiento','palpacion','aborto','lote']
 
     def create(self, validated_data):
-        hijo = validated_data.pop('hijo')
+        hijo = validated_data.pop('hijo') or None
         paricion = Paricion.objects.create(**validated_data)
-        animal_hijo = Animal.objects.create(lote=paricion.lote,**hijo)
-        animal_hijo.caravana_madre = paricion.madre.caravana
-        paricion.madre.lote = paricion.lote
+        if hijo:
+            animal_hijo = Animal.objects.create(lote=paricion.lote,**hijo)
+            animal_hijo.caravana_madre = paricion.madre.caravana
+            paricion.madre.lote = paricion.lote
+            paricion.hijo = animal_hijo
         paricion.madre.prenada = False
-        paricion.hijo = animal_hijo
         paricion.save()
         paricion.madre.save()
 

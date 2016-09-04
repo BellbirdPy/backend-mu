@@ -43,6 +43,10 @@ from paricion.views import ParicionViewSet
 from potrero.views import PotreroViewSet
 from sanitacion.views import *
 from servicio.views import ServicioViewSet
+from palpacion.views import PalpacionViewSet,PalpacionDetalleViewSet
+from paricion.views import ParicionViewSet
+from establecimiento.views import MiembroViewSet
+from inseminacion.views import InseminacionViewSet,InseminacionDetalleViewSet
 from venta.views import VentaViewSet
 
 router = DefaultRouter()
@@ -81,6 +85,7 @@ router.register(r'palpacion', PalpacionViewSet, base_name='palpacion')
 router.register(r'palpacionDetalle', PalpacionDetalleViewSet, base_name='palpacion_detalle')
 router.register(r'inseminacion', InseminacionViewSet, base_name='inseminacion')
 router.register(r'inseminacionDetalle', InseminacionDetalleViewSet, base_name='inseminacion_detalle')
+router.register(r'miembro',MiembroViewSet,base_name='miembro')
 
 router.register(r'genetica/genetica_lote', LoteGeneticaViewSet, base_name='lote_genetica')
 router.register(r'genetica/genetica_animal', AnimalGeneticaViewSet, base_name='animal_genetica')

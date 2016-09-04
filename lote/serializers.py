@@ -5,10 +5,12 @@ from animal.serializers import AnimalSerializer
 
 class LoteSerializer(serializers.ModelSerializer):
     potrero_nombre = serializers.CharField(source='potrero.nombre',read_only=True)
+    servicio = serializers.CharField(source='get_servicio_actual',read_only=True)
+    nutricion = serializers.CharField(source='get_nutricion_actual', read_only=True)
 
     class Meta:
         model = Lote
-        fields = ['id','nombre','potrero','potrero_nombre','peso_promedio','establecimiento','venta','cantidad']
+        fields = ['id','nombre','potrero','potrero_nombre','peso_promedio','establecimiento','venta','cantidad','servicio','nutricion']
 
         def create(self, validated_data):
             if validated_data.has_key('animales'):

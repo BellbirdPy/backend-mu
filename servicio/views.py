@@ -9,7 +9,7 @@ class ServicioFilter(filters.FilterSet):
     fecha_hoy = django_filters.DateFilter(name="fecha_fin", lookup_expr='gte')
     class Meta:
         model = Servicio
-        fields = ['establecimiento', 'fecha_hoy', 'fecha_15']
+        fields = ['establecimiento', 'fecha_hoy', 'fecha_15','palpado']
 
 class ServicioViewSet(viewsets.ModelViewSet):
     serializer_class = ServicioSerializer

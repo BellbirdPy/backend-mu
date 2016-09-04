@@ -1,0 +1,178 @@
+<!doctype html>
+{% load staticfiles %}
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Sistema de gestion de paquetes</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <meta http-equiv="Cache-Control" content="no-store"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
+   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css
+  <link rel="stylesheet" href="{% static 'bower_components/angular-material/angular-material.css' %}"/>
+  <link rel="stylesheet" href="{% static 'bower_components/ng-dialog/css/ngDialog.css' %}"/>
+  <link rel="stylesheet" href="{% static 'bower_components/ng-dialog/css/ngDialog-theme-default.css' %}"/>
+  <!-- endbower -->
+  <!-- endbuild -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css' %}">
+  <!--link rel="stylesheet" href="{% static 'bower_components/angular-material-sidemenu/dest/angular-material-sidemenu.css' %}"-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- build:css(.tmp) styles/main.css
+  <link rel="stylesheet" href="styles/main.css' %}">
+  <!-- endbuild -->
+</head>
+<body ng-app="muuApp" layout="column" style="background-color: #BDBDBD">
+<!--[if lte IE 8]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+  your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!-- Add your site or application content here -->
+<div ui-view style="height: 100%;min-height: 100%">
+  <div style="min-height: 100%" layout="row" layout-sm="row" layout-xs="column"
+     layout-align="center center" flex>
+  <div flex-gt-lg="30" flex-gt-md="30" flex-gt-sm="40" id="login_view" layout-padding >
+    <md-card>
+      <img src="{% static 'images/logo.png' %}" class="md-card-image" alt="Gical">
+      <md-content ng-hide="i">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Login</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <form role="form" method="post" layout="column" autocomplete="off" name="loginForm">{% csrf_token %}
+
+            <md-input-container>
+              <label>Nombre de usuario</label>
+              <input type="text" class="validate" id="username" name="username" required>
+              <div ng-messages="loginForm.user.$error">
+                <div ng-message="required">Debe ingresar un usuario.</div>
+              </div>
+            </md-input-container>
+            <md-input-container>
+              <label>Contraseña</label>
+              <input type="password" class="validate" id="Password1" name="password" required>
+              <div ng-messages="loginForm.pass.$error">
+                <div ng-message="required">Debe ingresar una contraseña.</div>
+              </div>
+            </md-input-container>
+            <div style="color: rgb(221, 44, 0); font-size: 12px;" ng-show="invalid">
+              <p>El usuario y/o la contraseña son incorrectos.</p>
+            </div>
+            <div class="md-actions" layout="row">
+              <span flex></span>
+              <md-button flex-order="1" type="submit" class="md-primary">Ingresar</md-button>
+            </div>
+          </form>
+        </md-card-content>
+      </md-content>
+      <div layout="row" layout-sm="column" layout-align="space-around" ng-show="i">
+        <md-progress-circular md-mode="indeterminate" md-diameter="96"></md-progress-circular>
+      </div>
+    </md-card>
+  </div>
+</div>
+</md-content>
+
+</div>
+
+
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+<script>
+  !function (A, n, g, u, l, a, r) {
+    A.GoogleAnalyticsObject = l, A[l] = A[l] || function () {
+        (A[l].q = A[l].q || []).push(arguments)
+      }, A[l].l = +new Date, a = n.createElement(g),
+      r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
+  }(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+  ga('create', 'UA-XXXXX-X');
+  ga('send', 'pageview');
+
+</script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+<script type="text/javascript">
+    /**
+     * You must include the dependency on 'ngMaterial'
+     */
+    angular.module('muuApp', ['ngMaterial']).config(function ($mdThemingProvider) {
+
+    //Definimos una nueva paleta de colores
+    var customPrimary = {
+      '50': '#a3d7a5',
+      '100': '#92cf94',
+      '200': '#80c883',
+      '300': '#6ec071',
+      '400': '#5cb860',
+      '500': '#4caf50',
+      '600': '#449d48',
+      '700': '#3d8b40',
+      '800': '#357a38',
+      '900': '#2d682f',
+      'A100': '#b5dfb7',
+      'A200': '#c7e7c8',
+      'A400': '#d9eeda',
+      'A700': '#255627'
+    };
+    $mdThemingProvider
+      .definePalette('customPrimary',
+        customPrimary);
+
+    //Definimos un custom accent
+    var customAccent = {
+      '50': '#171717',
+      '100': '#242424',
+      '200': '#313030',
+      '300': '#3e3d3d',
+      '400': '#4a4a4a',
+      '500': '#575656',
+      '600': '#717070',
+      '700': '#7e7c7c',
+      '800': '#8a8989',
+      '900': '#979696',
+      'A100': '#717070',
+      'A200': '646363',
+      'A400': '#575656',
+      'A700': '#a4a3a3'
+    };
+    $mdThemingProvider
+      .definePalette('customAccent',
+        customAccent);
+
+
+    //Colocamos el theme que creamos
+    $mdThemingProvider.theme('default')
+      .primaryPalette('customPrimary')
+      .accentPalette('customAccent');
+      });
+
+  </script>
+
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js
+<script src="{% static 'bower_components/angular/angular.js' %}"></script>
+<script src="{% static 'bower_components/angular-animate/angular-animate.js' %}"></script>
+<script src="{% static 'bower_components/angular-cookies/angular-cookies.js' %}"></script>
+<script src="{% static 'bower_components/angular-resource/angular-resource.js' %}"></script>
+<script src="{% static 'bower_components/angular-route/angular-route.js' %}"></script>
+<script src="{% static 'bower_components/angular-sanitize/angular-sanitize.js' %}"></script>
+<script src="{% static 'bower_components/angular-aria/angular-aria.js' %}"></script>
+<script src="{% static 'bower_components/angular-messages/angular-messages.js' %}"></script>
+<script src="{% static 'bower_components/angular-material/angular-material.js' %}"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+
+</body>
+</html>

@@ -9,7 +9,7 @@ class Mortandad(models.Model):
         ("A","Abigeo")
     )
     tipo = models.CharField(max_length=1,choices=CHOICES_TIPO,default='M')
-    fecha = models.DateTimeField()
+    fecha = models.DateField()
     razon = models.TextField()
     establecimiento = models.ForeignKey(Establecimiento,related_name='mortandades')
 

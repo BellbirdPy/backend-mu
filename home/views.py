@@ -13,6 +13,9 @@ from establecimiento.models import Establecimiento
 def home(request):
     return render(request,'index_page.html',{})
 
+def bienvenida(request):
+    return render(request,'bienvenida.html',{})
+
 def login_view(request):
     state = ""
     if request.method == "POST":
@@ -55,7 +58,7 @@ def register_view(request):
 @login_required(None,'login','/login/')
 def cuenta_view(request):
     user = request.user
-    establecimientos = Establecimiento.objects.filter(Q(owner=user) | Q(miembros=user)).exclude(estado='B')
+    establecimientos = Establecimiento.objects.filter(Q(owner=user) | Q(miembros=user.miembros.all())).exclude(estado='B')
 
     return render(request,'cuenta.html',{'user':user,'establecimientos':establecimientos})
 

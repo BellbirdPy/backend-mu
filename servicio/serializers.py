@@ -10,7 +10,7 @@ class ServicioListSerializer(serializers.ListSerializer):
     class Meta:
         model = Servicio
         fields = ['id', 'establecimiento', 'fecha_inicio', 'fecha_fin', 'tipo', 'tipo_display',
-                  'lote_completo','cantidad_toros']
+                  'lote_completo','cantidad_toros','palpado']
 
 
 class ServicioSerializer(serializers.ModelSerializer):
@@ -22,7 +22,7 @@ class ServicioSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Servicio
-        fields = ['id', 'establecimiento', 'fecha_inicio', 'fecha_fin','toros', 'tipo','lote','tipo_display','lote_completo','inseminaciones','cantidad_toros']
+        fields = ['id', 'establecimiento','palpado', 'fecha_inicio', 'fecha_fin','toros', 'tipo','lote','tipo_display','lote_completo','inseminaciones','cantidad_toros']
 
     def create(self, validated_data):
         if validated_data.has_key('toros'):

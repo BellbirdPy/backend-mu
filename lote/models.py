@@ -5,6 +5,7 @@ from potrero.models import *
 from establecimiento.models import *
 from sanitacion.models import Vacunacion
 from venta.models import Venta
+import datetime
 
 # Create your models here.
 class Lote(models.Model):
@@ -29,6 +30,18 @@ class Lote(models.Model):
         count = self.animales.filter(estado='V').count()
         self.cantidad = count
         self.save()
+
+    def get_servicio_actual(self):
+        fecha_hoy = datetime.date.today()
+        servicios = self.servicios.filter(fecha_fin__gte=fecha_hoy,fecha_inicio__lte=fecha_hoy)
+        if servicios:
+            return servicios[0].get_tipo_display()
+
+    def get_nutricion_actual(self):
+        fecha_hoy = datetime.date.today()
+        nutriciones = self.nutriciones.filter(fecha_fin__gte=fecha_hoy, fecha_inicio__lte=fecha_hoy)
+        if nutriciones:
+            return nutriciones[0].tipo_nutricion
 
 
     def __unicode__(self):

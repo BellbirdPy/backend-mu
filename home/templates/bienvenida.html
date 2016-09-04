@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <title>Sistema MU</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body style="background-color: #bdbdbd !important;">
+<div class="row">
+    <div class="container">
+        <div class="section">
+            <!--   Icon Section   -->
+            <div class="row" style="padding-top:5%;padding-bottom:5%;">
+                <div class="col s12 m10 l8 offset-l2 offset-m1">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="icon-block">
+
+                                <h2  class="black-text">Juan Pérez, bienvenido al Sistema MU</h2>
+
+    <p align="justify">MU es un Proyecto de Ganadería Inteligente en Paraguay. Con su Software Administrativo podrás Controlar todas las Gestiones de tu Establecimiento Ganadero desde tu Computadora, Tablet o Smartphone; y tener toda tu Información de manera Ordenada y Protegida. Este, es el Inicio de la Revolución Ganadera en Paraguay.
+    </p>
+    <button class="green-text" ng-click="empezar()">Empezar</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="{% static 'js/materialize.js' %}"></script>
+<script src="{% static 'js/init.js' %}"></script>
+<script>
+    $(document).ready(function() {
+    $('select').material_select();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<div style="min-height: 100%" layout="row" layout-sm="row" layout-xs="column"
+     layout-align="center center" flex>
+  <div flex-gt-lg="30" flex-gt-md="30" flex-gt-sm="40" id="login_view" layout-padding ng-controller="LoginCtrl">
+    <md-card>
+      <img src="{% static 'images/logo.png' %}" class="md-card-image" alt="Gical">
+      <md-content ng-hide="i">
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Login</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <form role="form" layout="column" ng-submit="passwordLogin(usuario)" name="loginForm">
+            <md-input-container>
+              <label>Nombre de usuario</label>
+              <input ng-model="usuario.user" name="user" type="text" required>
+              <div ng-messages="loginForm.user.$error">
+                <div ng-message="required">Debe ingresar un usuario.</div>
+              </div>
+            </md-input-container>
+            <md-input-container>
+              <label>Contraseña</label>
+              <input ng-model="usuario.pass" name="pass" type="password" required>
+              <div ng-messages="loginForm.pass.$error">
+                <div ng-message="required">Debe ingresar una contraseña.</div>
+              </div>
+            </md-input-container>
+            <div style="color: rgb(221, 44, 0); font-size: 12px;" ng-show="invalid">
+              <p>El usuario y/o la contraseña son incorrectos.</p>
+            </div>
+            <div class="md-actions" layout="row">
+              <span flex></span>
+              <md-button flex-order="1" type="submit" class="md-primary">Ingresar</md-button>
+            </div>
+          </form>
+        </md-card-content>
+      </md-content>
+      <div layout="row" layout-sm="column" layout-align="space-around" ng-show="i">
+        <md-progress-circular md-mode="indeterminate" md-diameter="96"></md-progress-circular>
+      </div>
+    </md-card>
+  </div>
+</div>
+</md-content>
