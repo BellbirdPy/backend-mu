@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'c5_gjms@k%gnk)z)rd*y@r#ee3-fnd6z_e!bt)0dk+##cz8@!3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Application definition
 
@@ -77,7 +77,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = False
 
 ROOT_URLCONF = 'backendmu.urls'
 
@@ -166,13 +166,13 @@ SERVER_EMAIL = 'gmacchi@bellbird.com.py'
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 # Allow all host headers
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['www.mu.com.py','mu.com.py']
 
 STATIC_URL = '/staticfiles/'
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'staticfiles'),
-)
+STATIC_ROOT = BASE_DIR, 'staticfiles'
+#STATICFILES_DIRS = (
+#    os.path.join(BASE_DIR, 'staticfiles'),
+#)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
