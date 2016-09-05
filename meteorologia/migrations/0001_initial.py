@@ -16,13 +16,12 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Mortandad',
+            name='Registro',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('tipo', models.CharField(choices=[('M', 'Mortandad'), ('A', 'Abigeo')], default='M', max_length=1)),
-                ('fecha', models.DateField()),
-                ('razon', models.TextField()),
-                ('establecimiento', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='mortandades', to='establecimiento.Establecimiento')),
+                ('fecha', models.DateTimeField()),
+                ('cantidad', models.FloatField()),
+                ('establecimiento', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='registros', to='establecimiento.Establecimiento')),
             ],
         ),
     ]
