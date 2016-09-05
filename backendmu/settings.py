@@ -166,7 +166,7 @@ SERVER_EMAIL = 'gmacchi@bellbird.com.py'
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 # Allow all host headers
-ALLOWED_HOSTS = ['www.mu.com.py','mu.com.py']
+ALLOWED_HOSTS = ['www.mu.com.py','mu.com.py','67.205.156.130']
 
 STATIC_URL = '/staticfiles/'
 STATIC_ROOT = BASE_DIR, 'staticfiles'

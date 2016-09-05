@@ -11,10 +11,10 @@ from establecimiento.models import Establecimiento
 
 # Create your views here.
 def home(request):
-    return render(request,'index_page.html',{})
+    return render(request,'index_page.html')
 
 def bienvenida(request):
-    return render(request,'bienvenida.html',{})
+    return render(request,'bienvenida.html')
 
 def login_view(request):
     state = ""
