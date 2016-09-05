@@ -169,7 +169,7 @@ SERVER_EMAIL = 'gmacchi@bellbird.com.py'
 ALLOWED_HOSTS = ['www.mu.com.py','mu.com.py','67.205.156.130']
 
 STATIC_URL = '/staticfiles/'
-STATIC_ROOT = BASE_DIR, 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 #STATICFILES_DIRS = (
 #    os.path.join(BASE_DIR, 'staticfiles'),
 #)
