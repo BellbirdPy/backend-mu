@@ -10,6 +10,5 @@ urlpatterns = [
     url(r'^cuenta/',cuenta_view),
     url(r'^pricing/',pricing_view),
     url(r'^contact/', contact_view)
-    url(r'^bienvenida/', bienvenida),
 
 ]
