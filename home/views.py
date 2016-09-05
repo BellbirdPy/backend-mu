@@ -2,19 +2,23 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth import authenticate, logout, login
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
 from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
-from forms import *
+
 from establecimiento.models import Establecimiento
+from forms import *
 
 
 # Create your views here.
 def home(request):
     return render(request,'index_page.html')
 
+
 def bienvenida(request):
     return render(request,'bienvenida.html')
+
 
 def login_view(request):
     state = ""
@@ -32,35 +36,41 @@ def login_view(request):
         else:
             state = "Tu nombre de usuario y/o contraseña no coinciden."
 
-    return render(request,'login_page.html',{'state':state})
+    return render(request, 'login_page.html', {'state': state})
 
-@login_required(None,'login','/login/')
+
+@login_required(None, 'login', '/login/')
 def logout_view(request):
     logout(request)
     return redirect("/")
+
 
 def register_view(request):
     if request.method == "POST":
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            new_user = User.objects.create_user(form.cleaned_data['username'], form.cleaned_data['email'], form.cleaned_data['password1'])
+            new_user = User.objects.create_user(form.cleaned_data['username'], form.cleaned_data['email'],
+                                                form.cleaned_data['password1'])
             new_user.first_name = form.cleaned_data['nombre']
             new_user.last_name = form.cleaned_data['apellido']
             new_user.save()
             return redirect('/login/')
         else:
-            return render(request,'register_page.html',{'form':form})
+            return render(request, 'register_page.html', {'form': form})
     else:
         form = RegistrationForm()
 
-    return render(request,'register_page.html',{'form':form})
+    return render(request, 'register_page.html', {'form': form})
 
-@login_required(None,'login','/login/')
+
+@login_required(None, 'login', '/login/')
 def cuenta_view(request):
     user = request.user
-    establecimientos = Establecimiento.objects.filter(Q(owner=user) | Q(miembros=user.miembros.all())).exclude(estado='B')
+    establecimientos = Establecimiento.objects.filter(Q(owner=user) | Q(miembros=user.miembros.all())).exclude(
+        estado='B')
 
-    return render(request,'cuenta.html',{'user':user,'establecimientos':establecimientos})
+    return render(request, 'cuenta.html', {'user': user, 'establecimientos': establecimientos})
+
 
 @csrf_protect
 @ensure_csrf_cookie
@@ -68,8 +78,22 @@ def cuenta_view(request):
 def index(request):
     return render(request, 'index.html')
 
-def pricing_view(request):
-    return render(request,'pricing.html')
 
+def pricing_view(request):
+    return render(request, 'pricing.html')
+
+
+@csrf_protect
+@ensure_csrf_cookie
 def contact_view(request):
-    return render(request,'contact.html')
+    if request.method == "POST":
+        print request.POST
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            mensaje = 'Telefono: ', form.cleaned_data['phone'], ' Plan: ', form.cleaned_data['plan'], ' Mensaje: ', \
+                      form.cleaned_data['message']
+            mensaje = unicode(mensaje)
+            send_mail(form.cleaned_data['subject'], mensaje, form.cleaned_data['email'], ['info@mu.com.py'],
+                      fail_silently=False)
+
+    return render(request, 'contact.html')

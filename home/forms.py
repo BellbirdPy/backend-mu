@@ -54,3 +54,12 @@ class RegistrationForm(forms.Form):
                 msg = "Las contraseñas no coinciden."
                 self.add_error('password1', msg)
                 self.add_error('password2', msg)
+
+
+class ContactForm(forms.Form):
+    name = forms.CharField(max_length=100,required=True)
+    email = forms.CharField(max_length=100,required=True)
+    phone = forms.CharField(max_length=100,required=True)
+    subject = forms.CharField(max_length=100,required=False)
+    plan = forms.CharField(max_length=30,required=False)
+    message = forms.CharField(max_length=1024,required=True)

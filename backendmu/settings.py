@@ -155,11 +155,11 @@ USE_TZ = True
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.zoho.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'gmacchi@bellbird.com.py'
-EMAIL_HOST_PASSWORD = 'cerrop1912'
-DEFAULT_FROM_EMAIL = 'gmacchi@bellbird.com.py'
+EMAIL_HOST_USER = 'rauleburro@bellbird.com.py'
+EMAIL_HOST_PASSWORD = '867722467Vorrachos'
+DEFAULT_FROM_EMAIL = 'rauleburro@bellbird.com.py'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-SERVER_EMAIL = 'gmacchi@bellbird.com.py'
+SERVER_EMAIL = 'rauleburro@bellbird.com.py'
 
 
 # Static files (CSS, JavaScript, Images)

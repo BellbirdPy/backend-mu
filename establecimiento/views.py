@@ -8,6 +8,7 @@ from django.core import signing
 from django.core.mail import EmailMessage
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
+from rest_framework import status
 from rest_framework import viewsets, filters
 from rest_framework.views import Response
 from serializers import *
@@ -43,15 +44,20 @@ class EstablecimientoViewSet(viewsets.ModelViewSet):
             return Establecimiento.objects.all()
 
     def create(self, request, *args, **kwargs):
-        print request.user
-        est = Establecimiento(departamento_id=request.data['departamento'],
+        try:
+            est = Establecimiento(departamento_id=request.data['departamento'],
                               ciudad=request.data['ciudad'],
                               plan=request.data['plan'],
                               owner=request.user,
                               nombre=request.data['nombre'],
                               codigo=request.data['codigo'],
                               estado=request.data['estado'])
-        est.save()
+            est.save()
+            headers = self.get_success_headers(request.data)
+            return Response(request.data, status=status.HTTP_201_CREATED,
+                                 headers=headers)
+        except:
+            return Response(request.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 
