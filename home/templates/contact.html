@@ -51,36 +51,36 @@
             <div class="row">
                 <div class="col-md-offset-2 col-md-8">
                     <form data-toggle="validator" id="template-contactform" name="template-contactform"
-                          action="include/sendemail.php" method="post" role="form">
+                          method="post" role="form">{% csrf_token %}
 
                         <div class="form-process"></div>
 
                         <div class="col-md-4 form-group">
-                            <input type="text" id="template-contactform-name" name="template-contactform-name" value=""
+                            <input type="text" id="template-contactform-name" name="name" value=""
                                    class="form-control" placeholder="Nombre" required="">
                             <div class="help-block with-errors"></div>
                         </div>
 
                         <div class="col-md-4 form-group">
-                            <input type="email" id="template-contactform-email" name="template-contactform-email"
+                            <input type="email" id="template-contactform-email" name="email"
                                    value="" class="email form-control" placeholder="e-Mail" required="">
                             <div class="help-block with-errors"></div>
                         </div>
 
                         <div class="col-md-4 form-group">
-                            <input type="text" id="template-contactform-phone" name="template-contactform-phone"
+                            <input type="text" id="template-contactform-phone" name="phone"
                                    value="" placeholder="Telefono" class="form-control">
                             <div class="help-block with-errors"></div>
                         </div>
 
                         <div class="col-md-8 form-group">
-                            <input type="text" id="template-contactform-subject" name="template-contactform-subject"
+                            <input type="text" id="template-contactform-subject" name="subject"
                                    value="" class="form-control" placeholder="Asunto" required="">
                             <div class="help-block with-errors"></div>
                         </div>
 
                         <div class="col-md-4 form-group">
-                            <select id="template-contactform-service" name="template-contactform-service"
+                            <select id="template-contactform-service" name="plan"
                                     class="form-control">
                                 <option value="">Planes</option>
                                 <option value="Premium">Premium</option>
@@ -91,7 +91,7 @@
 
                         <div class="col-md-12 form-group">
                             <textarea class="form-control" id="template-contactform-message"
-                                      name="template-contactform-message" placeholder="Mensaje" rows="6" cols="30"
+                                      name="message" placeholder="Mensaje" rows="6" cols="30"
                                       required=""></textarea>
                             <div class="help-block with-errors"></div>
                         </div>
