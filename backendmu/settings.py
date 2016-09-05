@@ -114,7 +114,7 @@ DATABASES = {
      'ENGINE': 'django.db.backends.postgresql',
      'NAME': 'mu',
      'USER': 'muadmin',
-     'PASSWORD': 'sistemamu',
+     'PASSWORD': 'BellMu2016.,',
      'HOST': 'localhost',
      'PORT': '5432',
  }
