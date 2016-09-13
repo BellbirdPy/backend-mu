@@ -7,13 +7,17 @@
                 <div class="col-md-3">
                     <div class="logo">
                         <a href="/" title="">
-                            <img src="{% static 'demo/logo.png' %}" class="black-logo standard-logo middle-content"
+                            <img style="width:50px; height: 50px;" src="{% static 'demo/logo3.png' %}"
+                                 class="black-logo standard-logo middle-content"
                                  alt="">
-                            <img src="{% static 'demo/logo.png' %}" class="white-logo standard-logo middle-content"
+                            <img style="width:60px; height: 60px;" src="{% static 'demo/logo3.png' %}"
+                                 class="white-logo standard-logo middle-content"
                                  alt="">
-                            <img src="{% static 'demo/logo.png' %}" class="black-logo retina-logo middle-content"
+                            <img style="width:50px; height: 50px;" src="{% static 'demo/logo3.png' %}"
+                                 class="black-logo retina-logo middle-content"
                                  alt="">
-                            <img src="{% static 'demo/logo.png' %}" class="white-logo retina-logo middle-content"
+                            <img style="width:60px; height: 60px;" src="{% static 'demo/logo3.png' %}"
+                                 class="white-logo retina-logo middle-content"
                                  alt="">
                         </a>
                     </div>
@@ -49,7 +53,7 @@
     <section class="section big-padding active-section">
         <div class="container">
             <div class="row">
-                <div class="col-md-offset-2 col-md-8">
+                <div class="col-md-8">
                     <form data-toggle="validator" id="template-contactform" name="template-contactform"
                           method="post" role="form">{% csrf_token %}
 
@@ -135,6 +139,21 @@
                     </script>
 
                 </div><!-- /.col -->
+                <div class="col-md-3 col-md-offset-1">
+                    <div class="divider" style="margin-top: 0;"></div>
+                    <address>
+                        <strong>Contactecnos a</strong><br>
+                        <a href="mailto:info@mu.com.py">info@mu.com.py</a><br>
+                        <abbr title="Phone">Tel:</abbr> <a href="tel:+595994496122">(0994) 496-122</a>
+                    </address>
+                    <ul class="list-inline social-links">
+                        <li><a href="https://www.facebook.com/SistemaMU" target="_blank" title=""><i
+                                class="ti-facebook"></i></a></li>
+                        <li><a href="https://www.youtube.com/channel/UCRHQMqrLlRktB5y_9KhcTvw" target="_blank" title=""><i
+                                class="ti-youtube"></i></a></li>
+                    </ul>
+                    <div class="divider"></div>
+                </div><!--/.col-->
             </div><!-- /.row -->
         </div><!-- /.container -->
     </section><!-- /.section --><!-- Footer 2 -->
