@@ -8,13 +8,17 @@
                 <div class="col-md-3">
                     <div class="logo">
                         <a href="/" title="">
-                            <img src="{% static 'demo/logo.png' %}" class="black-logo standard-logo middle-content"
+                            <img style="width:50px; height: 50px;" src="{% static 'demo/logo3.png' %}"
+                                 class="black-logo standard-logo middle-content"
                                  alt="">
-                            <img src="{% static 'demo/logo.png' %}" class="white-logo standard-logo middle-content"
+                            <img style="width:60px; height: 60px;" src="{% static 'demo/logo3.png' %}"
+                                 class="white-logo standard-logo middle-content"
                                  alt="">
-                            <img src="{% static 'demo/logo.png' %}" class="black-logo retina-logo middle-content"
+                            <img style="width:50px; height: 50px;" src="{% static 'demo/logo3.png' %}"
+                                 class="black-logo retina-logo middle-content"
                                  alt="">
-                            <img src="{% static 'demo/logo.png' %}" class="white-logo retina-logo middle-content"
+                            <img style="width:60px; height: 60px;" src="{% static 'demo/logo3.png' %}"
+                                 class="white-logo retina-logo middle-content"
                                  alt="">
                         </a>
                     </div>
@@ -50,15 +54,14 @@
     <section id="inicio"
              class="big-hero section background-wrapper fullscreen with-overlay black-overlay active-section"
              style="height: 633px;">
-        <div class="background-image parallax-background" data-stellar-background-ratio="0.5"
-             style="background: url('/staticfiles/demo/img1.jpg') 0% 0px;">
+        <div class="background-image parallax-background home" style="background: url({% static 'demo/img1.jpg' %}) no-repeat center center fixed;">
 
         </div>
-        <div class="container middle-content">
+<div class="container middle-content">
             <div class="row">
                 <div class="col-md-8">
                     <div class="element">
-                        <h1 class="lighter"><strong>SISTEMA MU</strong> un proyecto <br>de ganadería inteligente en <br>Paraguay.
+                        <h1 class="lighter" style="text-align: justify; width: 70%"><strong>SISTEMA MU</strong> un proyecto de ganadería inteligente en Paraguay.
                         </h1>
                         <div class="space"></div>
                         <p><a class="btn btn-punch btn-white hover-primary hover-colors btn-md" role="button"
@@ -70,7 +73,6 @@
                 </div>
             </div>
         </div>
-        <a href="#" title="" class="scroll-down"><i class="fa animated infinite bounce ti-arrow-down"></i></a>
     </section>
     <!-- /.section -->
     <!-- CONTENT 1 -->
@@ -98,8 +100,10 @@
     <!-- /.section -->
 
     <section class="section background-wrapper with-overlay black-overlay big-padding active-section">
-        <div class="background-image parallax-background" data-stellar-background-ratio="0.5"
-             style="background: url('/staticfiles/demo/img3.jpg') 0% 1920px;"></div>
+
+        <div class="background-image parallax-background " style="background: url({% static 'demo/img3.jpg' %}) no-repeat center center fixed;">
+
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -121,9 +125,9 @@
                 </div>
                 <div class="col-md-3">
                     <div class="team-block">
-                        <a href="#" title="" class="team-image text-center">
+                        <div title="" class="team-image text-center">
                             <img src="{% static 'demo/pilar1manejo.jpg' %}" alt="">
-                        </a>
+                        </div>
                         <p class="position"></p>
                         <h3 style="text-align: center">Manejo</h3>
                         </ul>
@@ -131,27 +135,27 @@
                 </div><!-- /.col -->
                 <div class="col-md-3">
                     <div class="team-block">
-                        <a href="#" title="" class="team-image text-center">
+                        <div title="" class="team-image text-center">
                             <img src="{% static 'demo/pilar2sanidad.jpg' %}" alt="">
-                        </a>
+                        </div>
                         <p class="position"></p>
                         <h3 style="text-align: center">Sanidad</h3>
                     </div>
                 </div><!-- /.col -->
                 <div class="col-md-3">
                     <div class="team-block">
-                        <a href="#" title="" class="team-image text-center">
+                        <div title="" class="team-image text-center">
                             <img src="{% static 'demo/pilar3nutricion.jpg' %}" alt="">
-                        </a>
+                        </div>
                         <p class="position"></p>
                         <h3 style="text-align: center">Nutrición</h3>
                     </div>
                 </div><!-- /.col -->
                 <div class="col-md-3">
                     <div class="team-block">
-                        <a href="#" title="" class="team-image text-center">
+                        <div title="" class="team-image text-center">
                             <img src="{% static 'demo/pilar4genetica.jpg' %}" alt="">
-                        </a>
+                        </div>
                         <p class="position"></p>
                         <h3 style="text-align: center">Genética</h3>
                     </div>
@@ -161,8 +165,10 @@
     </section>
     <!--.section-->
     <section class="section background-wrapper with-overlay black-overlay big-padding active-section">
-        <div class="background-image parallax-background" data-stellar-background-ratio="0.5"
-             style="background: url('/staticfiles/demo/img2.jpg') 0% 800px;"></div>
+
+        <div class="background-image parallax-background" style="background: url({% static 'demo/img2.jpg' %}) no-repeat center center fixed;">
+
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -200,7 +206,7 @@
                     <img class="icon large" style="width: 60px;" src="{% static 'demo/sanidad.svg' %}">
                     <h3 class="lighter no-padding-top">Sanidad</h3>
                     <p>
-                        Calendario de Vacunación (SENACSA)
+                        Calendario de Vacunación
                         <br>Sanitación de Animales
                         <br>Vacunación de Animales</p>
                 </div>
@@ -234,8 +240,10 @@
         </div><!-- /.container -->
     </section>
     <section class="section background-wrapper with-overlay black-overlay big-padding active-section">
-        <div class="background-image parallax-background" data-stellar-background-ratio="0.5"
-             style="background: url('/staticfiles/demo/img4.jpg') 0% -200px;"></div>
+
+        <div class="background-image parallax-background" style="background: url({% static 'demo/img4.jpg' %}) no-repeat center center fixed;">
+
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
