@@ -81,12 +81,15 @@ class Miembro(models.Model):
     CHOICES_ESTADO = (
         ("A", "Administrador"),
         ("C", "Contador"),
-        ("P", "Propietario")
+        ("P", "Propietario"),
+        ("V", "Veterinario"),
+        ("I", "Ingeniero"),
+        ("S", "Secretario/a"),
     )
     establecimiento = models.ForeignKey(Establecimiento, related_name='miembros')
     user = models.ForeignKey(User, related_name='miembros')
     cargo = models.CharField(max_length=1,choices=CHOICES_ESTADO,default='A')
-
+    telefono = models.CharField(max_length=32,null=True,blank=True)
     def __unicode__(self):
         return unicode(self.user.username)
 

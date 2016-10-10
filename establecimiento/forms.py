@@ -12,4 +12,3 @@ class MiembroForm(forms.Form):
     mail = forms.EmailField()
 
 
-
