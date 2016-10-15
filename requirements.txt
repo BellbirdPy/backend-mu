@@ -12,7 +12,6 @@ django-rest-auth==0.7.0
 django-suit==0.2.18
 djangorestframework==3.3.3
 gunicorn==19.5.0
-Pillow==3.2.0
 psycopg2==2.6.1
 six==1.10.0
 static3==0.7.0
