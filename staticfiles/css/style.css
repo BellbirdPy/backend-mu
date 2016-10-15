@@ -4427,7 +4427,6 @@ ul.portfolio-list li span:first-child {
     height: 60px;
 }
 
-#header.sticky .logo a
 #header.sticky.white-header img.standard-logo.black-logo,
 #header.sticky.black-header img.standard-logo.black-logo {
     display: block;
@@ -5162,3 +5161,19 @@ html[xmlns] .flexslider .slides {
         margin: 0;
     }
 }
+
+ul.plan
+{
+   padding-left: 20px;
+   text-indent: 2px;
+   list-style: none;
+   list-style-position: outside;
+}
+
+ul.plan > li:before
+{
+    content: '✔';
+    margin-left: -1em;
+    margin-right: .100em;
+}
+
