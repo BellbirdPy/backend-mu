@@ -42,6 +42,7 @@ class Establecimiento(models.Model):
     ciudad = models.CharField(max_length=30, null=True, blank=True)
     estado = models.CharField(max_length=1, choices=CHOICES_ESTADO, default="A")
     plan = models.CharField(max_length=1, choices=CHOICES_PLAN, default="G")
+    fecha_creacion = models.DateTimeField(auto_now=True)
     fecha_expiracion = models.DateField(blank=True, null=True)
 
     def __unicode__(self):
