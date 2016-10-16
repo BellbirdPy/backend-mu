@@ -15,14 +15,27 @@ class CiudadesSerializer(serializers.ModelSerializer):
         models = Ciudad
         fields = ('id', 'nombre')
 
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('id','username')
+
 
 class EstablecimientoSerializer(serializers.ModelSerializer):
     departamento_nombre = serializers.CharField(source='departamento.nombre', read_only=True)
+    owner = UserSerializer()
+    current_user = serializers.SerializerMethodField('_user')
+
+    # Use this method for the custom field
+    def _user(self, obj):
+        user = self.context['request'].user
+        return user.id
 
     class Meta:
         model = Establecimiento
         fields = ('id', 'nombre', 'codigo', 'departamento', 'departamento_nombre', 'ciudad', 'owner',
-                  'miembros', 'lotes', 'potreros', 'estado', 'plan')
+                  'miembros', 'lotes', 'potreros', 'estado', 'plan','current_user')
 
 
 class TareaSerializer(serializers.ModelSerializer):
