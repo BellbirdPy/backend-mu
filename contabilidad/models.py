@@ -24,6 +24,8 @@ class Egreso(models.Model):
     rubro = models.CharField(max_length=2, choices=CHOICES_RUBRO, default='GD')
     monto = models.PositiveIntegerField()
     establecimiento = models.ForeignKey(Establecimiento, related_name='egreso')
+    fecha_creacion = models.DateTimeField(auto_now=True)
+
 
     def __unicode__(self):
         return unicode(self.descripcion)
@@ -37,6 +39,8 @@ class IngresoVario(models.Model):
     cantidad = models.PositiveIntegerField()
     precio_unitario = models.PositiveIntegerField()
     establecimiento = models.ForeignKey(Establecimiento, related_name='ingreso_vario')
+    fecha_creacion = models.DateTimeField(auto_now=True)
+
 
 
     def __unicode__(self):
@@ -53,6 +57,8 @@ class IngresoVenta(models.Model):
     peso_promedio = models.FloatField(blank=True, null=True)
     total = models.PositiveIntegerField()
     establecimiento = models.ForeignKey(Establecimiento, related_name='ingreso_venta')
+    fecha_creacion = models.DateTimeField(auto_now=True)
+
 
     def __unicode__(self):
         return unicode(self.comprador+''+self.fecha.strftime('%d-%m-%Y'))

@@ -12,6 +12,8 @@ class Mortandad(models.Model):
     fecha = models.DateField()
     razon = models.TextField()
     establecimiento = models.ForeignKey(Establecimiento,related_name='mortandades')
+    fecha_creacion = models.DateTimeField(auto_now=True)
+
 
     def __unicode__(self):
         return unicode(self.fecha) + ' - ' + unicode(self.razon)

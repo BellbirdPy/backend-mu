@@ -10,6 +10,7 @@ class Evento(models.Model):
     end = models.DateTimeField()
     color = models.CharField(max_length=7,default='')
     allDay = models.BooleanField(default=True)
+    fecha_creacion = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return unicode(self.title)
@@ -22,6 +23,8 @@ class EventoEstablecimiento(models.Model):
     veterinario = models.TextField()
     establecimiento = models.ForeignKey(Establecimiento,related_name='eventos')
     allDay = models.BooleanField(default=True)
+    fecha_creacion = models.DateTimeField(auto_now=True)
+
 
 
     def __unicode__(self):
@@ -35,6 +38,8 @@ class Vacunacion(models.Model):
     veterinario = models.CharField(max_length=40, default='')
     enfermedad = models.CharField(max_length=30,default='')
     codigo = models.CharField(max_length=20,default='',blank=True, null=True)
+    fecha_creacion = models.DateTimeField(auto_now=True)
+
 
     def __unicode__(self):
         return unicode(self.nombre)

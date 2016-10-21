@@ -23,6 +23,8 @@ class Lote(models.Model):
     vacunacion = models.ManyToManyField(Vacunacion, related_name='lotes', default=None, blank=True)
     cantidad = models.IntegerField(default=0,editable=False)
 
+    fecha_creacion = models.DateTimeField(auto_now=True)
+
     def count_animales(self):
         """
         Counts the total number of live changes of this type and saves the result to the `change_count` field.

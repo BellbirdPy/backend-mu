@@ -14,6 +14,7 @@ class Potrero(models.Model):
     superficie = models.PositiveIntegerField(blank=True)
     uso = models.TextField()
     establecimiento = models.ForeignKey(Establecimiento,related_name='potreros')
+    fecha_creacion = models.DateTimeField(auto_now=True)
 
 
     class Meta:

@@ -8,6 +8,8 @@ from django.db import models
 
 class Departamento(models.Model):
     nombre = models.CharField(max_length=30)
+    fecha_creacion = models.DateTimeField(auto_now=True)
+
 
     def __unicode__(self):
         return unicode(self.nombre)
@@ -16,6 +18,8 @@ class Departamento(models.Model):
 class Ciudad(models.Model):
     nombre = models.CharField(max_length=30)
     departamento = models.ForeignKey(Departamento, related_name='ciudad')
+    fecha_creacion = models.DateTimeField(auto_now=True)
+
 
     def __unicode__(self):
         return unicode(self.nombre)
@@ -70,6 +74,8 @@ class Tarea(models.Model):
     usuario_asignado = models.ForeignKey(User, related_name='tarea_asignada')
     usuario_creador = models.ForeignKey(User, related_name='tarea_creada', null=True)
     establecimiento = models.ForeignKey(Establecimiento, related_name='tarea')
+    fecha_creacion = models.DateTimeField(auto_now=True)
+
 
     def __unicode__(self):
         return unicode(self.fecha) + ', ' + unicode(self.descripcion)
@@ -91,6 +97,8 @@ class Miembro(models.Model):
     user = models.ForeignKey(User, related_name='miembros')
     cargo = models.CharField(max_length=1,choices=CHOICES_ESTADO,default='A')
     telefono = models.CharField(max_length=32,null=True,blank=True)
+    fecha_creacion = models.DateTimeField(auto_now=True)
+
     def __unicode__(self):
         return unicode(self.user.username)
 

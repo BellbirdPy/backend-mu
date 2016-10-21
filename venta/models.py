@@ -16,6 +16,7 @@ class Venta(models.Model):
     precio_total = models.BigIntegerField(blank=True, null=True, default=0)
     fecha_creacion = models.DateField(auto_now=True)
 
+
     def __unicode__(self):
         return unicode(self.cod_establecimiento_comprador + ' ' + self.nombre_comprador + ' '
                        + self.fecha_venta.strftime('%d-%m-%Y'))

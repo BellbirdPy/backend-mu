@@ -17,6 +17,8 @@ class Servicio(models.Model):
     lote = models.ForeignKey(Lote,related_name='servicios')
     cantidad_toros = models.IntegerField(default=0)
     palpado = models.BooleanField(default=False)
+    fecha_creacion = models.DateTimeField(auto_now=True)
+
 
 
     def __unicode__(self):

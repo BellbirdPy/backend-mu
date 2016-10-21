@@ -20,6 +20,8 @@ class Palpacion(models.Model):
     animales_prenados = models.ManyToManyField(Animal,related_name='palpaciones')
     lote = models.ForeignKey(Lote,related_name='palpaciones',null=True,default=None)
     terminado = models.BooleanField(default=False)
+    fecha_creacion = models.DateTimeField(auto_now=True)
+
 
     def get_animales_prenados(self):
         cant = self.animales_prenados.filter(prenada=True).count()
@@ -38,6 +40,8 @@ class DetallePalpacion(models.Model):
     animal = models.ForeignKey(Animal,related_name="detalle_palpaciones")
     resultado = models.BooleanField()
     gestacion = models.CharField(max_length=8,null=True,blank=True)
+    fecha_creacion = models.DateTimeField(auto_now=True)
+
 
     def __unicode__(self):
         return unicode(self.animal) + unicode(self.resultado)
