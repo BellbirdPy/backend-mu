@@ -7,6 +7,8 @@ class Registro(models.Model):
     fecha = models.DateTimeField()
     cantidad = models.FloatField()
     establecimiento = models.ForeignKey(Establecimiento,related_name='registros')
+    fecha_creacion = models.DateTimeField(auto_now=True)
+
 
     def __unicode__(self):
         return unicode(self.fecha)

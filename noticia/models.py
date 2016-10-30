@@ -9,6 +9,8 @@ class Noticia(models.Model):
     texto = RichTextField()
     fecha = models.DateField(db_index=True, auto_now_add=True)
     activo = models.BooleanField(default=False)
+    fecha_creacion = models.DateTimeField(auto_now=True)
+
 
     def __unicode__(self):
         return unicode(self.titulo)

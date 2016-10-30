@@ -23,6 +23,8 @@ class LoteGenetica(models.Model):
     descripcion = models.TextField()
     pedigree_padre = models.CharField(max_length=32)
 
+    fecha_creacion = models.DateTimeField(auto_now=True)
+
 
 class AnimalGenetica(models.Model):
     lote_genetica = models.ForeignKey(LoteGenetica, related_name="animal_genetica", null=True, blank=True,
@@ -39,3 +41,5 @@ class AnimalGenetica(models.Model):
     pedigree_padre = models.CharField(max_length=32, null=True, blank=True)
     pedigree_madre = models.CharField(max_length=32, null=True, blank=True)
     pedigree_abuelo = models.CharField(max_length=32, null=True, blank=True)
+
+    fecha_creacion = models.DateTimeField(auto_now=True)

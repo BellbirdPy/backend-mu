@@ -15,6 +15,8 @@ class Nutricion(models.Model):
     descripcion_comida = models.TextField(null=True,blank=True)
     kilos = models.FloatField()
     establecimiento = models.ForeignKey(Establecimiento,related_name='nutriciones')
+    fecha_creacion = models.DateTimeField(auto_now=True)
+
 
     def __unicode__(self):
         return unicode(self.tipo_nutricion)

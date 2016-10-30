@@ -15,6 +15,8 @@ class Paricion(models.Model):
     hijo = models.OneToOneField(Animal,related_name='nacimiento',null=True,blank=True)
     aborto = models.BooleanField(default=False)
     lote = models.ForeignKey(Lote,related_name='pariciones',null=True,blank=True)
+    fecha_creacion = models.DateTimeField(auto_now=True)
+
 
     def __unicode__(self):
         return unicode(self.fecha) + unicode(self.madre)

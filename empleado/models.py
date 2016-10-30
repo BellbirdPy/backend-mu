@@ -25,6 +25,8 @@ class Empleado(models.Model):
     mail = models.EmailField(blank=True,null=True)
     escaneo_cedula = models.ImageField(blank=True,null=True)
     establecimiento = models.ForeignKey(Establecimiento,related_name='empleados')
+    fecha_creacion = models.DateTimeField(auto_now=True)
+
 
 
 
@@ -40,6 +42,8 @@ class Contratista(models.Model):
     actividad = models.CharField(max_length=40)
     jornal = models.IntegerField()
     establecimiento = models.ForeignKey(Establecimiento,related_name='contratistas')
+    fecha_creacion = models.DateTimeField(auto_now=True)
+
 
 
 

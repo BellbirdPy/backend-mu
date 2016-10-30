@@ -1,147 +1,273 @@
 {% extends "base.html" %}
 {% block content %}{% load staticfiles %}
-    <header id="header" class="section transparent white-header header active-section sticky">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="logo">
-                        <a href="/" title="">
-                            <img style="width:50px; height: 50px;" src="{% static 'demo/logo3.png' %}"
-                                 class="black-logo standard-logo middle-content"
-                                 alt="">
-                            <img style="width:60px; height: 60px;" src="{% static 'demo/logo3.png' %}"
-                                 class="white-logo standard-logo middle-content"
-                                 alt="">
-                            <img style="width:50px; height: 50px;" src="{% static 'demo/logo3.png' %}"
-                                 class="black-logo retina-logo middle-content"
-                                 alt="">
-                            <img style="width:60px; height: 60px;" src="{% static 'demo/logo3.png' %}"
-                                 class="white-logo retina-logo middle-content"
-                                 alt="">
-                        </a>
-                    </div>
-                </div><!-- /.col-->
-                <div class="col-md-9 menu-col text-right">
-                    <div class="menu">
-                        <ul class="list-inline">
-                            <li class=""><a href="/">Inicio</a>
-                            </li>
-                            <li class=""><a href="/#que_es">Que es?</a>
-                            </li>
-                            <li class=""><a href="/#pilares" class="">Pilares</a>
-                            </li>
-                            <li class=""><a href="/#funciones">Funciones</a>
-                            </li>
-                            <li class=""><a href="/pricing">Precios</a>
-                            </li>
-                            <li class=""><a href="/contact">Contactos</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div><!-- /.col-->
-                <div class="header-line">
-                    <div class="line"></div><!--/.line-->
-                </div><!-- /.header-line -->
-                <div class="menu-toggle">
-                    <i class="ti-menu"></i>
-                </div>
-            </div>
-        </div><!-- /.container -->
-    </header><!-- /header -->
-    <div class="section page-title background-wrapper big-padding with-overlay black-overlay active-section">
-        
-        <div class="background-image parallax-background" style="background: url({% static 'demo/img6.jpg' %}) no-repeat center center fixed;">
-
+  <header id="header" class="section transparent white-header header active-section sticky">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="logo">
+            <a href="/" title="">
+              <img style="width:50px; height: 50px;" src="{% static 'demo/logo3.png' %}"
+                   class="black-logo standard-logo middle-content"
+                   alt="">
+              <img style="width:60px; height: 60px;" src="{% static 'demo/logo3.png' %}"
+                   class="white-logo standard-logo middle-content"
+                   alt="">
+              <img style="width:50px; height: 50px;" src="{% static 'demo/logo3.png' %}"
+                   class="black-logo retina-logo middle-content"
+                   alt="">
+              <img style="width:60px; height: 60px;" src="{% static 'demo/logo3.png' %}"
+                   class="white-logo retina-logo middle-content"
+                   alt="">
+            </a>
+          </div>
+        </div><!-- /.col-->
+        <div class="col-md-9 menu-col text-right">
+          <div class="menu">
+            <ul class="list-inline">
+              <li class=""><a href="/">Inicio</a>
+              </li>
+              <li class=""><a href="/#que_es">Que es?</a>
+              </li>
+              <li class=""><a href="/#pilares" class="">Pilares</a>
+              </li>
+              <li class=""><a href="/#funciones">Funciones</a>
+              </li>
+              <li class=""><a href="/pricing">Precios</a>
+              </li>
+              <li class=""><a href="/contact">Contactos</a>
+              </li>
+            </ul>
+          </div>
+        </div><!-- /.col-->
+        <div class="header-line">
+          <div class="line"></div><!--/.line-->
+        </div><!-- /.header-line -->
+        <div class="menu-toggle">
+          <i class="ti-menu"></i>
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12" style=""><h1>Precios Mensuales</h1>
-                    <p class="">
-                    </p>
+      </div>
+    </div><!-- /.container -->
+  </header><!-- /header -->
+  <div class="section page-title background-wrapper big-padding with-overlay black-overlay active-section">
+
+    <div class="background-image parallax-background"
+         style="background: url({% static 'demo/img6.jpg' %}) no-repeat center center fixed;">
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12" style=""><h1>Precios Mensuales</h1>
+          <p class="">
+          </p>
+        </div><!--/.col-->
+      </div><!--/.row-->
+    </div><!--/.container-->
+  </div><!-- /.section --><!-- CONTENT 1 -->
+  <!-- Description  -->
+  <section class="section active-section">
+    <div class="container">
+      <div class="row" style="margin-bottom: 50px;">
+        <div class="col-md-12">
+          <div class="promo-block grey-background" data-animate="fadeInRight">
+            <h3 style="color: white;padding:30px 60px;margin-bottom: 1px;" class="col-md-8 success-background">Plan
+              Premium</h3>
+            <h3 style="color: white;padding:30px 60px;margin-bottom: 1px; text-align: right"
+                class="col-md-4 success-background">299mil</h3>
+            <div class="pb-content success-background clearfix">
+              <div class="row">
+                <h4 style="text-align: center;margin-bottom: 60px;color: white;">Funciones</h4>
+              </div>
+              <div class="row">
+                <div class="col-md-offset-1 col-md-2 text-center">
+                  <img class="svg icon large" style="width: 60px;" src="{% static 'demo/manejo.svg' %}">
+                  <h3 class="lighter no-padding-top" style="color: white;">Manejo</h3>
+                  <p>
+                    Inventario
+                    <br>Manejo de Lotes
+                    <br>Compra de Animales
+                    <br>Venta de Animales
+                    <br>Servicio
+                    <br>Palpación
+                    <br>Parición
+                    <br>Desmamantar
+                  </p>
+                </div>
+                <div class="col-md-2 text-center">
+                  <img class="svg icon large" style="width: 60px; color: white;" src="{% static 'demo/sanidad.svg' %}">
+                  <h3 class="lighter no-padding-top" style="color: white;">Sanidad</h3>
+                  <p>
+                    Calendario de Vacunación
+                    <br>Sanitación de Animales
+                    <br>Vacunación de Animales</p>
+                </div>
+                <!--/.col-->
+                <div class="col-md-2 text-center">
+                  <img class="svg icon large" style="width: 60px;" src="{% static 'demo/nutricion.svg' %}">
+                  <h3 class="lighter no-padding-top" style="color: white;">Nutrición</h3>
+                  <p>Plan Nutricional
+                    <br>Dietas y Raciones</p>
                 </div><!--/.col-->
-            </div><!--/.row-->
-        </div><!--/.container-->
-    </div><!-- /.section --><!-- CONTENT 1 -->
-    <!-- Description  -->
-    <section class="section active-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="promo-block grey-background" data-animate="fadeInRight">
-                        <div class="pb-header success-background" style="font-size: 20px"><strong>Plan Premium</strong></div>
-                        <div class="pb-content success-background clearfix">
-                            <i class="icon-background large icon-lightbulb"></i>
-                            <span class="price"><span>299mil</span> <span
-                                    class="dollar"></span></span>
-                            <span class="date">Mensual</span>
-                            <ul class="plan" style="font-size: 15px">
-                                <li>Todas las Funciones de Manejo, Sanitación, Nutrición y Genética</li>
-                                <li>Software Administrativo Premium</li>
-                                <li>Sin Límites de Carga de Animales</li>
-                                <li>Habilitado para 10 Usuarios</li>
-                            </ul>
-                            <p><a href="contact.html" title="" class="btn btn-punch btn-white btn-sm btn-link">Solicitar
-                                Plan</a></p>
-                        </div>
-                    </div>
+                <div class="col-md-2 text-center">
+                  <img class="svg icon large" style="width: 60px;" src="{% static 'demo/genetica.svg' %}">
+                  <h3 class="lighter no-padding-top" style="color: white;">Genética</h3>
+                  <p>
+                    Genética por Lotes
+                    <br>Genética por Animal</p>
+                </div><!--/.col-->
+                <div class="col-md-2 text-center">
+                  <img class="svg icon large" style="width: 60px;" src="{% static 'demo/establecimiento-white.svg' %}">
+                  <h3 class="lighter no-padding-top" style="color: white;">Establecimiento</h3>
+                  <p> Potreros
+                    <br>Meteorología
+                    <br>Resultados Físicos
+                    <br>Portal de Noticias
+                    <br>Calendario General
+                    <br>Empleados y Contratistas
+                    <br>Contabilidad General
+                  </p>
+                </div><!--/.col-->
+              </div><!-- /.row -->
 
-                </div><!-- /.col -->
+              <div style="text-align: center"><a href="/contact" class="btn btn-punch btn-white btn-sm btn-link">Solicitar
+                Plan</a></div>
+            </div>
+          </div>
+        </div><!-- /.col -->
+      </div>
+      <div class="row" style="margin-bottom: 50px;">
+        <div class="col-md-12">
+          <div class="promo-block grey-background" data-animate="fadeInRight">
+            <h3 style="color: white;padding:30px 60px;margin-bottom: 1px;" class="col-md-8 primary-background">Plan
+              Estandar</h3>
+            <h3 style="color: white;padding:30px 60px;margin-bottom: 1px; text-align: right"
+                class="col-md-4 primary-background">249mil</h3>
+            <div class="pb-content primary-background clearfix">
+              <i class="icon-background large icon-flag"></i>
+              <div class="row">
+                <h4 style="text-align: center;margin-bottom: 60px;color: white;">Funciones</h4>
+              </div>
+              <div class="row">
+                <div class="col-md-offset-0 col-md-3 text-center">
+                  <img class="svg icon large" style="width: 60px;" src="{% static 'demo/manejo.svg' %}">
+                  <h3 class="lighter no-padding-top" style="color: white;">Manejo</h3>
+                  <p>
+                    Inventario
+                    <br>Manejo de Lotes
+                    <br>Compra de Animales
+                    <br>Venta de Animales
+                    <br>Servicio
+                    <br>Palpación
+                    <br>Parición
+                  </p>
+                </div>
+                <div class="col-md-3 text-center">
+                  <img class="svg icon large" style="width: 60px;" src="{% static 'demo/sanidad.svg' %}">
+                  <h3 class="lighter no-padding-top" style="color: white;">Sanidad</h3>
+                  <p>
+                    Calendario de Vacunación
+                    <br>Sanitación de Animales
+                    <br>Vacunación de Animales</p>
+                </div>
+                <!--/.col-->
+                <div class="col-md-3 text-center">
+                  <img class="svg icon large" style="width: 60px;" src="{% static 'demo/nutricion.svg' %}">
+                  <h3 class="lighter no-padding-top" style="color: white;">Nutrición</h3>
+                  <p>Plan Nutricional
+                    <br>Dietas y Raciones</p>
+                </div><!--/.col-->
+                <div class="col-md-3 text-center">
+                  <img class="svg icon large" style="width: 60px;"
+                       src="{% static 'demo/establecimiento-white.svg' %}">
+                  <h3 class="lighter no-padding-top" style="color: white;">Establecimiento</h3>
+                  <p> Potreros
+                    <br>Meteorología
+                    <br>Portal de Noticias
+                    <br>Calendario General
+                  </p>
+                </div><!--/.col-->
+              </div><!-- /.row -->
+              <div style="text-align: center"><a href="/contact" class="btn btn-punch btn-white btn-sm btn-link">Solicitar
+                Plan</a></div>
+            </div>
+          </div>
 
-                <div class="col-md-4">
-                    <div class="promo-block grey-background" data-animate="fadeInRight">
-                        <div class="pb-header primary-background" style="font-size: 20px"><strong>Plan Estándar</strong></div>
-                        <div class="pb-content primary-background clearfix">
-                            <i class="icon-background large icon-flag"></i>
-                            <span class="price">249mil <span class="dollar"></span></span>
-                            <span class="date">Mensual</span>
-                            <ul class="plan" style="font-size: 15px">
-                                <li>Funciones de Manejo, Sanitación, Nutrición y Genética</li>
-                                <li>Software Administrativo Básico</li>
-                                <li>Sin Límites de Carga de Animales</li>
-                                <li>Habilitado para 6 Usuarios</li>
-                            </ul>
-                            <p><a href="contact.html" title="" class="btn btn-punch btn-white btn-sm btn-link">Solicitar
-                                Plan</a></p>
-                        </div>
-                    </div>
+        </div><!-- /.col -->
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="promo-block white-background" data-animate="fadeInRight">
+            <h3 style="padding:30px 60px;margin-bottom: 1px;" class="col-md-8 grey-background">Plan
+              Gratuito</h3>
+            <h3 style="padding:30px 60px;margin-bottom: 1px; text-align: right"
+                class="col-md-4 grey-background">Primer mes gratis</h3>
+            <div class="pb-content grey-background clearfix">
+              <i class="icon-background large icon-strategy"></i>
+              <div class="row">
+                <h4 style="text-align: center;margin-bottom: 60px;">Funciones</h4>
+              </div>
+              <div class="row">
+                <div class="col-md-offset-0 col-md-3 text-center">
+                  <img class="icon large" style="width: 60px;" height="60px;"src="{% static 'demo/manejo.svg' %}">
+                  <h3 class="lighter no-padding-top">Manejo</h3>
+                  <p>
+                    Inventario
+                    <br>Manejo de Lotes
+                    <br>Compra de Animales
+                    <br>Venta de Animales
+                    <br>Servicio
+                    <br>Palpación
+                    <br>Parición
+                  </p>
+                </div>
+                <div class="col-md-3 text-center">
+                  <img class=" icon large" style="width: 60px;" height="60px;"src="{% static 'demo/sanidad.svg' %}">
+                  <h3 class="lighter no-padding-top">Sanidad</h3>
+                  <p>
+                    Calendario de Vacunación
+                    <br>Sanitación de Animales
+                    <br>Vacunación de Animales</p>
+                </div>
+                <!--/.col-->
+                <div class="col-md-3 text-center">
+                  <img class=" icon large" style="width: 60px;" height="60px;"src="{% static 'demo/nutricion.svg' %}">
+                  <h3 class="lighter no-padding-top">Nutrición</h3>
+                  <p>Plan Nutricional
+                    <br>Dietas y Raciones</p>
+                </div><!--/.col-->
+                <div class="col-md-3 text-center">
+                  <img class=" icon large" style="width: 60px;" height="60px;"
+                       src="{% static 'demo/establecimiento.svg' %}">
+                  <h3 class="lighter no-padding-top">Establecimiento</h3>
+                  <p> Potreros
+                    <br>Meteorología
+                    <br>Portal de Noticias
+                    <br>Calendario General
+                  </p>
+                </div><!--/.col-->
+              </div><!-- /.row -->
 
-                </div><!-- /.col -->
-                <div class="col-md-4">
-                    <div class="promo-block grey-background" data-animate="fadeInRight">
-                        <div class="pb-header grey-background" style="font-size: 20px"><strong>Plataforma Educativa</strong></div>
-                        <div class="pb-content grey-background clearfix">
-                            <i class="icon-background large icon-strategy"></i>
-                            <span class="price"><span class="text-primary">Gratis</span> <span
-                                    class="dollar"></span></span>
-                            <span class="date"><br></span>
-                            <ul class="plan" style="font-size: 15px">
-                                <li>Funciones Limitadas de Manejo, Sanitación, Nutrición y Genética</li>
-                                <li>Software Administrativo Limitado</li>
-                                <li>Hasta 100 Animales</li>
-                                <li>Habilitado para 1 Usuarios</li>
-                            </ul>
-                            <p><a href="contact.html" title="" class="btn btn-punch btn-primary btn-sm btn-link">Proximamente</a>
-                            </p>
-                        </div>
-                    </div>
+              <div style="text-align: center"><a href="/register"
+                                                 class="btn btn-punch btn-primary btn-sm btn-link">Comenzar ahora</a></div>
+              </p>
+            </div>
+          </div>
 
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container -->
-    </section><!-- /.section --><!-- CONTENT 2 -->
-    <!-- Centered large lead text -->
-    <section class="section primary-background big-padding active-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <p class="larger-lead text-center">
-                        Gracias a su Modelo de Suscripción Mensual, podrás acceder al Software Administrativo y a la
-                        Plataforma Educativa con una <strong>Baja Inversión Mensual</strong>, y así, ser parte de la
-                        Comunidad de
-                        Ganaderos Inteligentes del Paraguay.
-                    </p>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container -->
-    </section><!-- /.section --><!-- Footer 2 -->
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container -->
+  </section><!-- /.section --><!-- CONTENT 2 -->
+  <!-- Centered large lead text -->
+  <section class="section primary-background big-padding active-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <p class="larger-lead text-center">
+            Gracias a su Modelo de Suscripción Mensual, podrás acceder al Software Administrativo y a la
+            Plataforma Educativa con una <strong>Baja Inversión Mensual</strong>, y así, ser parte de la
+            Comunidad de
+            Ganaderos Inteligentes del Paraguay.
+          </p>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container -->
+  </section><!-- /.section --><!-- Footer 2 -->
 {% endblock %}
