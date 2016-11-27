@@ -71,7 +71,7 @@ class Tarea(models.Model):
     fecha = models.DateField()
     descripcion = models.CharField(max_length=50, default='')
     leido = models.BooleanField(default=False)
-    usuario_asignado = models.ForeignKey(User, related_name='tarea_asignada')
+    usuario_asignado = models.ForeignKey(User, related_name='tarea_asignada', null=True, blank=True)
     usuario_creador = models.ForeignKey(User, related_name='tarea_creada', null=True)
     establecimiento = models.ForeignKey(Establecimiento, related_name='tarea')
     fecha_creacion = models.DateTimeField(auto_now=True)
@@ -81,7 +81,12 @@ class Tarea(models.Model):
         return unicode(self.fecha) + ', ' + unicode(self.descripcion)
 
     def get_usuario_asignado_display(self):
-        return self.usuario_asignado.username
+        if self.usuario_asignado:
+            return self.usuario_asignado.username
+        else:
+            self.leido = True
+            self.save()
+            return 'Ninguno'
 
 
 class Miembro(models.Model):
