@@ -84,7 +84,7 @@ class Tarea(models.Model):
         if self.usuario_asignado:
             return self.usuario_asignado.username
         else:
-            return 'Ninguno'
+            return 'Todos'
 
 
 class Miembro(models.Model):
