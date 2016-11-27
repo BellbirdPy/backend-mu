@@ -114,7 +114,7 @@ DATABASES = {
      'ENGINE': 'django.db.backends.postgresql',
      'NAME': 'mu',
      'USER': 'muadmin',
-     'PASSWORD': 'BellMu2016.,',
+     'PASSWORD': 'sistemamu',
      'HOST': 'localhost',
      'PORT': '5432',
  }
@@ -166,7 +166,7 @@ SERVER_EMAIL = 'info@mu.com.py'
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 # Allow all host headers
-ALLOWED_HOSTS = ['mu.com.py','www.mu.com.py','67.205.156.130']
+ALLOWED_HOSTS = ['mu.com.py','www.mu.com.py','67.205.156.130', 'localhost']
 
 STATIC_URL = '/staticfiles/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
