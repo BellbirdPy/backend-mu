@@ -3,3 +3,4 @@ env/
 *.pyc
 .idea/
 media/
+.DS_Store
