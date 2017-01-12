@@ -2,31 +2,36 @@ from rest_framework import serializers
 from models import *
 from lote.serializers import LoteSerializer
 
-class EventoSerializer(serializers.ModelSerializer):
 
+class EventoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Evento
 
-class EventoEstablecimientoSerializer(serializers.ModelSerializer):
-    title = serializers.SerializerMethodField('get_tit',read_only=True)
-    start2 = serializers.DateTimeField(source='start',read_only=True)
-    end2 = serializers.DateTimeField(source='end',read_only=True)
 
+class EventoEstablecimientoSerializer(serializers.ModelSerializer):
+    title = serializers.SerializerMethodField('get_tit', read_only=True)
+    start2 = serializers.DateTimeField(source='start', read_only=True)
+    end2 = serializers.DateTimeField(source='end', read_only=True)
 
     class Meta:
         model = EventoEstablecimiento
-        fields = ['id','color','start','end','title','nombre','establecimiento','veterinario','allDay','start2','end2']
+        fields = ['id', 'color', 'start', 'end', 'title', 'nombre', 'establecimiento', 'veterinario', 'allDay',
+                  'start2', 'end2']
 
     def get_tit(self, obj):
-        return obj.nombre + ' - Veterinario: ' + obj.veterinario
-    
+        if obj.veterinario:
+            return obj.nombre + ' - Veterinario: ' + obj.veterinario
+        else:
+            return obj.nombre
+
+
 class VacunacionSerializer(serializers.ModelSerializer):
     lotes_completo = LoteSerializer(source='lotes', many=True, read_only=True)
 
     class Meta:
         model = Vacunacion
-        fields = ['id', 'establecimiento','fecha_vacunacion', 'nombre', 'nombre_cientifico',
-                  'veterinario','enfermedad','codigo', 'lotes','lotes_completo']
+        fields = ['id', 'establecimiento', 'fecha_vacunacion', 'nombre', 'nombre_cientifico',
+                  'veterinario', 'enfermedad', 'codigo', 'lotes', 'lotes_completo']
 
     def create(self, validated_data):
         try:

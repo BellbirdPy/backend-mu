@@ -20,7 +20,7 @@ class EventoEstablecimiento(models.Model):
     start = models.DateTimeField()
     end = models.DateTimeField()
     color = models.CharField(max_length=7, default='#CDDC39')
-    veterinario = models.TextField()
+    veterinario = models.TextField(null=True,blank=True)
     establecimiento = models.ForeignKey(Establecimiento,related_name='eventos')
     allDay = models.BooleanField(default=True)
     fecha_creacion = models.DateTimeField(auto_now=True)
