@@ -1,83 +1,90 @@
 {% extends "base2.html" %}
 {% block content %}
-    {% load staticfiles %}
-    <div class="row intro">
-        <div class="container">
-            <!--   Icon Section   -->
-            <div class="row" style="padding-top:5%;padding-bottom:5%;">
-                <div class="col s12 m10 l8 offset-l2 offset-m1">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="icon-block">
-                                <h2 class="center light-green-text"><i class="material-icons">person</i></h2>
-                                <h5 class="center black-text">Registro</h5>
-                                <br>
-                                <form style="padding: 20px;" role="form" method="post">{% csrf_token %}
-                                    <div class="input-field">
-                                        <label for="id_username">Nombre de Usuario</label>
-                                        <input type="text" name="username" id="id_username"
-                                               value="{{ form.username.value | default:'' }}" required>
-                                        <div class="red-text">{{ form.username.errors }}</div>
-                                    </div>
-                                    <div class="input-field">
-                                        <label for="id_email">Email</label>
-                                        <input type="email" class="form-control" name="email" id="id_email"
-                                               value="{{ form.email.value | default:'' }}" required>
-                                        <div class="red-text">{{ form.email.errors }}</div>
-                                    </div>
-                                    <div class="input-field">
-                                        <label for="id_nombre">Nombre</label>
-                                        <input type="text" class="form-control" id="id_nombre" name="nombre"
-                                               value="{{ form.nombre.value | default:'' }}" required>
-                                        <div class="red-text">{{ form.nombre.errors }}</div>
-                                    </div>
-                                    <div class="input-field">
-                                        <label for="id_apellido">Apellido</label>
-                                        <input type="text" class="form-control" id="id_apellido" name="apellido"
-                                               value="{{ form.apellido.value | default:'' }}" required>
-                                        <div class="red-text">{{ form.apellido.errors }}</div>
-                                    </div>
-                                    <div class="input-field">
-                                        <label for="id_password1">Contraseña</label>
-                                        <input type="password" class="form-control" id="id_password1" name="password1"
-                                               required>
-                                        <div class="red-text">{{ form.password1.errors }}</div>
-                                    </div>
-                                    <div class="input-field">
-                                        <label for="id_password2">Confirmar contraseña</label>
-                                        <input type="password" class="form-control" id="id_password2" name="password2"
-                                               required>
-                                        <div class="red-text">{{ form.password2.errors }}</div>
-                                    </div>
-                                    <br>
-                                    <div class="col s12">
-                                        <button class="btn light-white-text green waves-effect waves-light-grey waves-light right"
-                                                type="submit">Crear una cuenta
-                                        </button>
-                                    </div>
-                                </form>
-                                <br>
-                                <br>
-                                <br>
-                                <div class="center">
-                                    <figure class="note">
-                                        Al hacer clic en el botón "Crear una cuenta" está de acuerdo con nuestros <a
-                                            href="{% static 'terms.pdf' %}" class="link">Terminos y condiciones</a></figure>
-                                </div>
-                                <br>
-                                <div class="card-action">
-                                    </p>
-                                    <p>Ya tienes una cuenta?<a href="/password/recover/"><span><a href="/login">Loguéate aquí</a></span></a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+  {% load staticfiles %}
+  <div class="row intro">
+    <div class="container">
+      <!--   Icon Section   -->
+      <div class="row" style="padding-top:5%;padding-bottom:5%;">
+        <div class="col s12 m10 l8 offset-l2 offset-m1">
+          <div class="card">
+            <div class="card-content">
+              <div class="icon-block">
+                <h2 class="center light-green-text"><i class="material-icons">person</i></h2>
+                <h5 class="center black-text">Registro</h5>
+                <br>
+                <form style="padding: 20px;" role="form" method="post">{% csrf_token %}
+                  <div class="input-field">
+                    <label for="id_username">Nombre de Usuario</label>
+                    <input type="text" name="username" id="id_username"
+                           value="{{ form.username.value | default:'' }}" required>
+                    <div class="red-text">{{ form.username.errors }}</div>
+                  </div>
+                  <div class="input-field">
+                    <label for="id_email">Email</label>
+                    <input type="email" class="form-control" name="email" id="id_email"
+                           value="{{ form.email.value | default:'' }}" required>
+                    <div class="red-text">{{ form.email.errors }}</div>
+                  </div>
+                  <div class="input-field">
+                    <label for="id_nombre">Nombre</label>
+                    <input type="text" class="form-control" id="id_nombre" name="nombre"
+                           value="{{ form.nombre.value | default:'' }}" required>
+                    <div class="red-text">{{ form.nombre.errors }}</div>
+                  </div>
+                  <div class="input-field">
+                    <label for="id_apellido">Apellido</label>
+                    <input type="text" class="form-control" id="id_apellido" name="apellido"
+                           value="{{ form.apellido.value | default:'' }}" required>
+                    <div class="red-text">{{ form.apellido.errors }}</div>
+                  </div>
+                  <div class="input-field">
+                    <label for="id_telefono">Telefono</label>
+                    <input type="telefono" class="form-control" name="telefono" id="id_telefono"
+                           value="{{ form.telefono.value | default:'' }}" required>
+                    <div class="red-text">{{ form.telefono.errors }}</div>
+                  </div>
+                  <div class="input-field">
+                    <label for="id_password1">Contraseña</label>
+                    <input type="password" class="form-control" id="id_password1" name="password1"
+                           required>
+                    <div class="red-text">{{ form.password1.errors }}</div>
+                  </div>
+                  <div class="input-field">
+                    <label for="id_password2">Confirmar contraseña</label>
+                    <input type="password" class="form-control" id="id_password2" name="password2"
+                           required>
+                    <div class="red-text">{{ form.password2.errors }}</div>
+                  </div>
+                  <br>
+                  <div class="col s12">
+                    <button class="btn light-white-text green waves-effect waves-light-grey waves-light right"
+                            type="submit">Crear una cuenta
+                    </button>
+                  </div>
+                </form>
+                <br>
+                <br>
+                <br>
+                <div class="center">
+                  <figure class="note">
+                    Al hacer clic en el botón "Crear una cuenta" está de acuerdo con nuestros <a
+                      href="{% static 'terms.pdf' %}" class="link">Terminos y condiciones</a></figure>
                 </div>
-
+                <br>
+                <div class="card-action">
+                  </p>
+                  <p>Ya tienes una cuenta?<a href="/password/recover/"><span><a
+                      href="/login">Loguéate aquí</a></span></a>
+                  </p>
+                </div>
+              </div>
             </div>
+
+          </div>
         </div>
+
+      </div>
     </div>
+  </div>
 
 {% endblock %}

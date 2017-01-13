@@ -3,18 +3,21 @@
 from django import forms
 from django.contrib.auth.models import User
 
+
 class RegistrationForm(forms.Form):
-    username = forms.CharField(max_length=100,required=True)
+    username = forms.CharField(max_length=100, required=True)
     email = forms.EmailField(required=True)
+    telefono = forms.CharField(max_length=100, required=True)
     nombre = forms.CharField(max_length=100, required=True)
     apellido = forms.CharField(max_length=100, required=True)
-    password1 = forms.CharField(max_length=100,required=True)
-    password2 = forms.CharField(max_length=100,required=True)
+    password1 = forms.CharField(max_length=100, required=True)
+    password2 = forms.CharField(max_length=100, required=True)
 
     def clean(self):
         cleaned_data = super(RegistrationForm, self).clean()
         username = cleaned_data.get("username")
         email = cleaned_data.get("email")
+        telefono = cleaned_data.get("telefono")
         password1 = cleaned_data.get("password1")
         password2 = cleaned_data.get("password2")
         if username and email and password1 and password2:
@@ -29,13 +32,10 @@ class RegistrationForm(forms.Form):
                 msg = "El nombre de usuario no debe contener espacios."
                 self.add_error('username', msg)
 
-
             try:
                 user = User.objects.get(email=email)
             except:
                 user = None
-
-
 
             if user != None:
                 msg = "Este email ya se ha utilizado."
@@ -56,10 +56,20 @@ class RegistrationForm(forms.Form):
                 self.add_error('password2', msg)
 
 
+            try:
+                user = User.objects.get(telefono=telefono)
+            except:
+                user = None
+
+            if user != None:
+                msg = "Este telefono ya se ha utilizado."
+                self.add_error('telefono', msg)
+
+
 class ContactForm(forms.Form):
-    name = forms.CharField(max_length=100,required=True)
-    email = forms.CharField(max_length=100,required=True)
-    phone = forms.CharField(max_length=100,required=True)
-    subject = forms.CharField(max_length=100,required=False)
-    plan = forms.CharField(max_length=30,required=False)
-    message = forms.CharField(max_length=1024,required=True)
+    name = forms.CharField(max_length=100, required=True)
+    email = forms.CharField(max_length=100, required=True)
+    phone = forms.CharField(max_length=100, required=True)
+    subject = forms.CharField(max_length=100, required=False)
+    plan = forms.CharField(max_length=30, required=False)
+    message = forms.CharField(max_length=1024, required=True)

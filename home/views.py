@@ -54,6 +54,9 @@ def register_view(request):
             new_user.first_name = form.cleaned_data['nombre']
             new_user.last_name = form.cleaned_data['apellido']
             new_user.save()
+            uinfo = new_user.perfil
+            uinfo.telefono = form.cleaned_data['telefono']
+            uinfo.save()
             return redirect('/login/')
         else:
             return render(request, 'register_page.html', {'form': form})
