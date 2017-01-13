@@ -57,6 +57,14 @@ def register_view(request):
             uinfo = new_user.perfil
             uinfo.telefono = form.cleaned_data['telefono']
             uinfo.save()
+            mensaje = 'Telefono: ', form.cleaned_data['telefono'], \
+                      ' email: ', form.cleaned_data['email'], \
+                      ' nombre: ', form.cleaned_data['nombre'], \
+                      ' apellido: ', form.cleaned_data['apellido'], \
+                      ' username: ', form.cleaned_data['apellido']
+            mensaje = unicode(mensaje)
+            send_mail('Nuevo registro en el sistema', mensaje, form.cleaned_data['email'], ['info@mu.com.py'],
+                      fail_silently=False)
             return redirect('/login/')
         else:
             return render(request, 'register_page.html', {'form': form})
