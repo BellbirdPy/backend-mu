@@ -8,6 +8,8 @@ class CompraViewSet(viewsets.ModelViewSet):
     queryset = Compra.objects.all()
     filter_backends = (filters.DjangoFilterBackend,)
     filter_fields = ('establecimiento','carga_masiva',)
+    ordering_fields = '__all__'
+    ordering = ('fecha_compra',)
 
 class DetalleCompraViewSet(viewsets.ModelViewSet):
     serializer_class = DetalleCompraSerialzer

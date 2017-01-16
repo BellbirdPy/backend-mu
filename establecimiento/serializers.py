@@ -24,8 +24,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 class EstablecimientoSerializer(serializers.ModelSerializer):
     departamento_nombre = serializers.CharField(source='departamento.nombre', read_only=True)
-    owner = UserSerializer()
-    current_user = serializers.SerializerMethodField('_user')
+    owner = UserSerializer(read_only=True)
+    current_user = serializers.SerializerMethodField('_user',read_only=True)
 
     # Use this method for the custom field
     def _user(self, obj):
@@ -43,7 +43,7 @@ class TareaSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tarea
-        fields = ('id', 'fecha', 'descripcion', 'usuario_asignado', 'usuario_asignado_display',
+        fields = ('id', 'fecha','fecha_fin', 'descripcion', 'usuario_asignado', 'usuario_asignado_display',
                   'leido', 'establecimiento', 'usuario_creador')
 
 

@@ -11,8 +11,9 @@ from django.db.models import Max
 class Potrero(models.Model):
     codigo = models.PositiveIntegerField(null=True,default=None)
     nombre = models.CharField(max_length=100)
-    superficie = models.PositiveIntegerField(blank=True)
-    uso = models.TextField()
+    superficie = models.PositiveIntegerField(blank=True,null=True)
+    descripcion = models.CharField(max_length=200,blank=True,null=True)
+    uso = models.TextField(null=True,blank=True)
     establecimiento = models.ForeignKey(Establecimiento,related_name='potreros')
     fecha_creacion = models.DateTimeField(auto_now=True)
 

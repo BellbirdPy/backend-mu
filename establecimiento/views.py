@@ -59,6 +59,21 @@ class EstablecimientoViewSet(viewsets.ModelViewSet):
         except:
             return Response(request.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def update(self, request, *args, **kwargs):
+        establecimiento = get_object_or_404(Establecimiento,pk=kwargs['pk'])
+        try:
+            establecimiento.departamento_id=request.data['departamento']
+            establecimiento.ciudad=request.data['ciudad']
+            establecimiento.plan=request.data['plan']
+            establecimiento.nombre=request.data['nombre']
+            establecimiento.codigo=request.data['codigo']
+            establecimiento.save()
+            headers = self.get_success_headers(request.data)
+            return Response(request.data, status=status.HTTP_200_OK,
+                                 headers=headers)
+        except:
+            return Response(request.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 @login_required(None,'login','/login/')

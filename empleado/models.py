@@ -26,6 +26,8 @@ class Empleado(models.Model):
     escaneo_cedula = models.ImageField(blank=True,null=True)
     establecimiento = models.ForeignKey(Establecimiento,related_name='empleados')
     fecha_creacion = models.DateTimeField(auto_now=True)
+    salida_empresa = models.DateTimeField(null=True,blank=True)
+    actualidad = models.BooleanField(default=False)
 
 
 

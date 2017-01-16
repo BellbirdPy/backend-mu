@@ -14,6 +14,9 @@ class Departamento(models.Model):
     def __unicode__(self):
         return unicode(self.nombre)
 
+    class Meta:
+        ordering = ('nombre',)
+
 
 class Ciudad(models.Model):
     nombre = models.CharField(max_length=30)
@@ -69,6 +72,7 @@ class Establecimiento(models.Model):
 
 class Tarea(models.Model):
     fecha = models.DateField()
+    fecha_fin = models.DateField(null=True,blank=True)
     descripcion = models.CharField(max_length=50, default='')
     leido = models.BooleanField(default=False)
     usuario_asignado = models.ForeignKey(User, related_name='tarea_asignada', null=True, blank=True)

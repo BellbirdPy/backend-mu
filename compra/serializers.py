@@ -6,10 +6,12 @@ from rest_framework import serializers
 
 
 class DetalleCompraSerialzer(serializers.ModelSerializer):
+    nombre_categoria = serializers.CharField(source='categoria.nombre', read_only=True)
+    nombre_raza = serializers.CharField(source='raza.nombre', read_only=True)
 
     class Meta:
         model = DetalleCompra
-        fields = ['id', 'categoria', 'carimbo', 'raza', 'cantidad', 'caravana_inicial', 'lote']
+        fields = ['id', 'categoria', 'carimbo', 'raza', 'cantidad', 'caravana_inicial', 'lote','nombre_categoria','nombre_raza']
 
 
 class CompraSerializer(serializers.ModelSerializer):
@@ -30,15 +32,26 @@ class CompraSerializer(serializers.ModelSerializer):
                 lote = new_detalle_compra.lote
             else:
                 lote = None
-            for i in range(new_detalle_compra.cantidad):
-                a = Animal(caravana=new_detalle_compra.caravana_inicial + i,
-                           carimbo=new_detalle_compra.carimbo,
-                           categoria=Categoria.objects.get(id=new_detalle_compra.categoria_id),
-                           raza=Raza.objects.get(id=new_detalle_compra.raza_id),
-                           lote=lote,
-                           establecimiento=Establecimiento.objects.get(id=compra.establecimiento_id),
-                           detalle_compra=new_detalle_compra)
-                lista.append(a)
+            if new_detalle_compra.caravana_inicial:
+                for i in range(new_detalle_compra.cantidad):
+                    a = Animal(caravana=new_detalle_compra.caravana_inicial + i,
+                               carimbo=new_detalle_compra.carimbo,
+                               categoria=Categoria.objects.get(id=new_detalle_compra.categoria_id),
+                               raza=Raza.objects.get(id=new_detalle_compra.raza_id),
+                               lote=lote,
+                               establecimiento=Establecimiento.objects.get(id=compra.establecimiento_id),
+                               detalle_compra=new_detalle_compra)
+                    lista.append(a)
+            else:
+                for i in range(new_detalle_compra.cantidad):
+                    a = Animal(caravana='',
+                               carimbo=new_detalle_compra.carimbo,
+                               categoria=Categoria.objects.get(id=new_detalle_compra.categoria_id),
+                               raza=Raza.objects.get(id=new_detalle_compra.raza_id),
+                               lote=lote,
+                               establecimiento=Establecimiento.objects.get(id=compra.establecimiento_id),
+                               detalle_compra=new_detalle_compra)
+                    lista.append(a)
 
             Animal.objects.bulk_create(lista)
             if new_detalle_compra.lote:
